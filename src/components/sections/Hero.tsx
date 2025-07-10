@@ -4,6 +4,7 @@ import { ChevronDown, Github, Mail, Linkedin, MapPin } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { personalInfo } from '../../data/portfolio';
 
+
 const Hero: React.FC = () => {
   const { t } = useLanguage();
   const [displayText, setDisplayText] = useState('');
@@ -12,7 +13,7 @@ const Hero: React.FC = () => {
 
   const texts = [
     'Full Stack Developer',
-    'VibeCoder'
+    'Game Scripter'
   ];
 
   useEffect(() => {
@@ -194,10 +195,10 @@ const Hero: React.FC = () => {
               />
               <div className="relative w-80 h-80 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full p-1">
                 <div className="w-full h-full bg-white dark:bg-gray-900 rounded-full flex items-center justify-center overflow-hidden">
-                  <img 
-                    src={personalInfo.avatar} 
-                    alt="Pablo Blanco Navarro"
-                    className="w-64 h-64 rounded-full object-cover"
+                  <img
+                    src={personalInfo.avatar}
+                    alt={personalInfo.name}
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </div>

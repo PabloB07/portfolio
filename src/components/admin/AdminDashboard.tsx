@@ -1,38 +1,133 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BarChart3, FileText, Bot, Plus, Edit, Trash2, Eye, EyeOff } from 'lucide-react';
+import { BarChart3, FileText, Bot, Plus, Edit, Trash2, Eye, EyeOff, User, LogOut } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { projects, blogPosts } from '../../data/portfolio';
+import Login from './Login';
+import ProfileSettings from './ProfileSettings';
+import ProjectForm from './ProjectForm';
+import BlogForm from './BlogForm';
+import { projects as initialProjects, blogPosts as initialBlogPosts } from '../../data/portfolio';
 import { Project, BlogPost } from '../../types';
+
+interface AdminUser {
+  username: string;
+  email: string;
+  fullName: string;
+  avatar?: string;
+}
 
 const AdminDashboard: React.FC = () => {
   const { t } = useLanguage();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loginError, setLoginError] = useState('');
   const [activeTab, setActiveTab] = useState('projects');
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
+  const [projects, setProjects] = useState<Project[]>(initialProjects);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(initialBlogPosts);
+  const [currentUser, setCurrentUser] = useState<AdminUser>({
+    username: 'admin',
+    email: 'admin@portfolio.com',
+    fullName: 'Administrador',
+    avatar: 'https://avatars.githubusercontent.com/u/36685434?v=4&size=64'
+  });
 
   const tabs = [
-    { id: 'projects', label: t('admin.projects'), icon: BarChart3 },
-    { id: 'blog', label: t('admin.blog'), icon: FileText },
-    { id: 'ai', label: t('admin.ai'), icon: Bot },
+    { id: 'projects', label: t('admin.tabs.projects'), icon: BarChart3 },
+    { id: 'blog', label: t('admin.tabs.blog'), icon: FileText },
+    { id: 'ai', label: t('admin.tabs.ai'), icon: Bot },
+    { id: 'profile', label: t('admin.tabs.profile'), icon: User },
   ];
 
-  const handleToggleFeatured = (id: string, type: 'project' | 'post') => {
-    // Aquí implementarías la lógica para actualizar el estado
-    console.log(`Toggle featured for ${type} ${id}`);
-  };
-
-  const handleTogglePublished = (id: string, type: 'project' | 'post') => {
-    // Aquí implementarías la lógica para actualizar el estado
-    console.log(`Toggle published for ${type} ${id}`);
-  };
-
-  const handleDelete = (id: string, type: 'project' | 'post') => {
-    if (confirm('¿Estás seguro de que quieres eliminar este elemento?')) {
-      // Aquí implementarías la lógica para eliminar
-      console.log(`Delete ${type} ${id}`);
+  // Funciones de autenticación
+  const handleLogin = (credentials: { username: string; password: string }) => {
+    // Simulación de autenticación (en producción usar API real)
+    if (credentials.username === 'admin' && credentials.password === 'admin123') {
+      setIsAuthenticated(true);
+      setLoginError('');
+    } else {
+      setLoginError(t('admin.login.invalidCredentials'));
     }
   };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setActiveTab('projects');
+  };
+
+  const handleUpdateProfile = (profile: AdminUser) => {
+    setCurrentUser(profile);
+  };
+
+  const handleChangePassword = (oldPassword: string, newPassword: string) => {
+    // Aquí iría la lógica para cambiar la contraseña
+    console.log('Cambiar contraseña:', { oldPassword, newPassword });
+  };
+
+  // Funciones CRUD para proyectos
+  const handleSaveProject = (project: Project) => {
+    if (projects.find(p => p.id === project.id)) {
+      // Actualizar proyecto existente
+      setProjects(prev => prev.map(p => p.id === project.id ? project : p));
+    } else {
+      // Crear nuevo proyecto
+      setProjects(prev => [...prev, project]);
+    }
+    setEditingProject(null);
+  };
+
+  const handleDeleteProject = (id: string) => {
+    if (confirm('¿Estás seguro de que quieres eliminar este proyecto?')) {
+      setProjects(prev => prev.filter(p => p.id !== id));
+    }
+  };
+
+  const handleToggleProjectFeatured = (id: string) => {
+    setProjects(prev => prev.map(p => 
+      p.id === id ? { ...p, featured: !p.featured } : p
+    ));
+  };
+
+  const handleToggleProjectPublished = (id: string) => {
+    setProjects(prev => prev.map(p => 
+      p.id === id ? { ...p, published: !p.published } : p
+    ));
+  };
+
+  // Funciones CRUD para blog posts
+  const handleSaveBlogPost = (post: BlogPost) => {
+    if (blogPosts.find(p => p.id === post.id)) {
+      // Actualizar post existente
+      setBlogPosts(prev => prev.map(p => p.id === post.id ? post : p));
+    } else {
+      // Crear nuevo post
+      setBlogPosts(prev => [...prev, post]);
+    }
+    setEditingPost(null);
+  };
+
+  const handleDeleteBlogPost = (id: string) => {
+    if (confirm('¿Estás seguro de que quieres eliminar este post?')) {
+      setBlogPosts(prev => prev.filter(p => p.id !== id));
+    }
+  };
+
+  const handleToggleBlogPostFeatured = (id: string) => {
+    setBlogPosts(prev => prev.map(p => 
+      p.id === id ? { ...p, featured: !p.featured } : p
+    ));
+  };
+
+  const handleToggleBlogPostPublished = (id: string) => {
+    setBlogPosts(prev => prev.map(p => 
+      p.id === id ? { ...p, published: !p.published } : p
+    ));
+  };
+
+  // Si no está autenticado, mostrar login
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} error={loginError} />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20">
@@ -42,12 +137,42 @@ const AdminDashboard: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            {t('admin.title')}
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Gestiona tu contenido y configuraciones
-          </p>
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                {t('admin.title')}
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400">
+                Gestiona tu contenido y configuraciones
+              </p>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center">
+                  {currentUser.avatar ? (
+                    <img
+                      src={currentUser.avatar}
+                      alt={currentUser.fullName}
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  ) : (
+                    <User size={20} className="text-primary-600 dark:text-primary-400" />
+                  )}
+                </div>
+                <div className="text-sm">
+                  <p className="font-medium text-gray-900 dark:text-white">{currentUser.fullName}</p>
+                  <p className="text-gray-600 dark:text-gray-400">{currentUser.email}</p>
+                </div>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                title={t('admin.logout')}
+              >
+                <LogOut size={18} className="text-gray-600 dark:text-gray-400" />
+              </button>
+            </div>
+          </div>
         </motion.div>
 
         {/* Tabs */}
@@ -123,7 +248,7 @@ const AdminDashboard: React.FC = () => {
                       <div className="flex items-center space-x-2 ml-4">
                         <motion.button
                           whileHover={{ scale: 1.1 }}
-                          onClick={() => handleToggleFeatured(project.id, 'project')}
+                          onClick={() => handleToggleProjectFeatured(project.id)}
                           className={`p-2 rounded ${
                             project.featured
                               ? 'bg-yellow-100 text-yellow-600'
@@ -136,7 +261,7 @@ const AdminDashboard: React.FC = () => {
                         
                         <motion.button
                           whileHover={{ scale: 1.1 }}
-                          onClick={() => handleTogglePublished(project.id, 'project')}
+                          onClick={() => handleToggleProjectPublished(project.id)}
                           className={`p-2 rounded ${
                             project.published
                               ? 'bg-green-100 text-green-600'
@@ -158,7 +283,7 @@ const AdminDashboard: React.FC = () => {
                         
                         <motion.button
                           whileHover={{ scale: 1.1 }}
-                          onClick={() => handleDelete(project.id, 'project')}
+                          onClick={() => handleDeleteProject(project.id)}
                           className="p-2 bg-red-100 text-red-600 rounded"
                           title="Eliminar"
                         >
@@ -212,7 +337,7 @@ const AdminDashboard: React.FC = () => {
                       <div className="flex items-center space-x-2 ml-4">
                         <motion.button
                           whileHover={{ scale: 1.1 }}
-                          onClick={() => handleToggleFeatured(post.id, 'post')}
+                          onClick={() => handleToggleBlogPostFeatured(post.id)}
                           className={`p-2 rounded ${
                             post.featured
                               ? 'bg-yellow-100 text-yellow-600'
@@ -225,7 +350,7 @@ const AdminDashboard: React.FC = () => {
                         
                         <motion.button
                           whileHover={{ scale: 1.1 }}
-                          onClick={() => handleTogglePublished(post.id, 'post')}
+                          onClick={() => handleToggleBlogPostPublished(post.id)}
                           className={`p-2 rounded ${
                             post.published
                               ? 'bg-green-100 text-green-600'
@@ -247,7 +372,7 @@ const AdminDashboard: React.FC = () => {
                         
                         <motion.button
                           whileHover={{ scale: 1.1 }}
-                          onClick={() => handleDelete(post.id, 'post')}
+                          onClick={() => handleDeleteBlogPost(post.id)}
                           className="p-2 bg-red-100 text-red-600 rounded"
                           title="Eliminar"
                         >
@@ -279,8 +404,33 @@ const AdminDashboard: React.FC = () => {
               </div>
             </div>
           )}
+
+          {activeTab === 'profile' && (
+            <ProfileSettings
+              profile={currentUser}
+              onUpdateProfile={handleUpdateProfile}
+              onChangePassword={handleChangePassword}
+            />
+          )}
         </motion.div>
       </div>
+
+      {/* Modales de formularios */}
+      {editingProject && (
+        <ProjectForm
+          project={editingProject.id ? editingProject : undefined}
+          onSave={handleSaveProject}
+          onCancel={() => setEditingProject(null)}
+        />
+      )}
+
+      {editingPost && (
+        <BlogForm
+          post={editingPost.id ? editingPost : undefined}
+          onSave={handleSaveBlogPost}
+          onCancel={() => setEditingPost(null)}
+        />
+      )}
     </div>
   );
 };

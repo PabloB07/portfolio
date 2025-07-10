@@ -90,9 +90,9 @@ export const blogPosts: BlogPost[] = [
 
 export const personalInfo = {
   name: 'Pablo Blanco Navarro',
-  title: 'Full Stack Developer',
-  email: 'pablo@vibecoding.com',
-  github: 'https://github.com/pabloblanco/',
+  title: 'Full Stack Developer & Game Scripter',
+  email: 'pablob0798@gmail.com',
+  github: 'https://github.com/PabloB07',
   linkedin: 'https://www.linkedin.com/in/pabloblanco/',
   location: 'Chile',
   avatar: 'https://avatars.githubusercontent.com/u/pabloblanco'
