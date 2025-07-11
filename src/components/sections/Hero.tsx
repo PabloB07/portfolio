@@ -93,7 +93,7 @@ const Hero: React.FC = () => {
             >
               {t('hero.subtitle')}
             </motion.p>
-
+            </motion.div>
             {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -141,16 +141,6 @@ const Hero: React.FC = () => {
                 className="px-8 py-4 border-2 border-primary-500 text-primary-500 dark:text-primary-400 font-semibold rounded-lg hover:bg-primary-500 hover:text-white dark:hover:text-white transition-all duration-300"
               >
                 {t('hero.downloadCV')}
-              </motion.button>
-            </motion.div>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 border-2 border-primary-500 text-primary-500 dark:text-primary-400 font-semibold rounded-lg hover:bg-primary-500 hover:text-white dark:hover:text-white transition-all duration-300"
-              >
-                {t('hero.contact')}
               </motion.button>
             </motion.div>
 
