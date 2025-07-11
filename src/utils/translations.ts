@@ -15,6 +15,7 @@ export const translations = {
       title: 'Full Stack Developer & Game Scripter',
       subtitle: 'Desarrollador Full Stack y Scripter de videojuegos apasionado por crear experiencias digitales excepcionales',
       cta: 'Ver mi trabajo',
+      contact: 'Contacto',
       downloadCV: 'Descargar CV'
     },
     about: {
@@ -31,7 +32,14 @@ export const translations = {
       title: 'Proyectos destacados',
       viewDemo: 'Ver demo',
       viewCode: 'Ver código',
-      technologies: 'Tecnologías'
+      technologies: 'Tecnologías',
+      loading: 'Cargando proyectos...',
+      error: 'Error al cargar proyectos',
+      noProjects: 'No hay proyectos disponibles',
+      addProject: 'Agregar Proyecto',
+      editProject: 'Editar Proyecto',
+      deleteProject: 'Eliminar Proyecto',
+      confirmDelete: '¿Estás seguro de que quieres eliminar este proyecto?'
     },
     blog: {
       title: 'Blog',
@@ -39,7 +47,14 @@ export const translations = {
       backToBlog: 'Volver al blog',
       publishedOn: 'Publicado el',
       by: 'por',
-      tags: 'Etiquetas'
+      tags: 'Etiquetas',
+      loading: 'Cargando posts...',
+      error: 'Error al cargar posts',
+      noPosts: 'No hay posts disponibles',
+      addPost: 'Agregar Post',
+      editPost: 'Editar Post',
+      deletePost: 'Eliminar Post',
+      confirmDelete: '¿Estás seguro de que quieres eliminar este post?'
     },
     experience: {
       title: 'Experiencia profesional'
@@ -56,15 +71,53 @@ export const translations = {
       success: '¡Mensaje enviado exitosamente!',
       error: 'Error al enviar el mensaje'
     },
+    auth: {
+      signIn: 'Iniciar Sesión',
+      signUp: 'Crear Cuenta',
+      signOut: 'Cerrar Sesión',
+      email: 'Correo Electrónico',
+      password: 'Contraseña',
+      confirmPassword: 'Confirmar Contraseña',
+      fullName: 'Nombre Completo',
+      forgotPassword: '¿Olvidaste tu contraseña?',
+      resetPassword: 'Restablecer Contraseña',
+      backToLogin: 'Volver al inicio de sesión',
+      createAccount: '¿No tienes cuenta? Crear una',
+      alreadyHaveAccount: '¿Ya tienes cuenta? Iniciar sesión',
+      emailPlaceholder: 'tu@email.com',
+      passwordPlaceholder: '••••••••',
+      fullNamePlaceholder: 'Tu nombre completo',
+      processing: 'Procesando...',
+      checkEmail: 'Revisa tu email para confirmar tu cuenta',
+      passwordResetSent: 'Se ha enviado un enlace de restablecimiento a tu email',
+      invalidCredentials: 'Credenciales inválidas',
+      emailAlreadyExists: 'Este email ya está registrado',
+      passwordTooShort: 'La contraseña debe tener al menos 6 caracteres',
+      passwordsDoNotMatch: 'Las contraseñas no coinciden',
+      networkError: 'Error de conexión. Inténtalo de nuevo.',
+      unknownError: 'Ha ocurrido un error inesperado'
+    },
     admin: {
       title: 'Panel de Administración',
       subtitle: 'Gestiona tu contenido y configuraciones',
+      welcome: 'Bienvenido de vuelta',
       logout: 'Cerrar Sesión',
       tabs: {
+        dashboard: 'Dashboard',
         projects: 'Proyectos',
         blog: 'Blog',
+        users: 'Usuarios',
         ai: 'IA',
-        profile: 'Perfil'
+        profile: 'Perfil',
+        settings: 'Configuración'
+      },
+      dashboard: {
+        title: 'Dashboard',
+        totalProjects: 'Total de Proyectos',
+        totalPosts: 'Total de Posts',
+        totalUsers: 'Total de Usuarios',
+        recentActivity: 'Actividad Reciente',
+        quickActions: 'Acciones Rápidas'
       },
       login: {
         title: 'Acceso Administrativo',
@@ -76,13 +129,17 @@ export const translations = {
         loginButton: 'Iniciar Sesión',
         loggingIn: 'Iniciando sesión...',
         secureAccess: 'Acceso seguro al panel de administración',
-        invalidCredentials: 'Credenciales inválidas. Inténtalo de nuevo.'
+        invalidCredentials: 'Credenciales inválidas. Inténtalo de nuevo.',
+        forgotPassword: '¿Olvidaste tu contraseña?',
+        rememberMe: 'Recordarme'
       },
       profile: {
         title: 'Configuración de Perfil',
         subtitle: 'Gestiona tu información personal y configuraciones',
         profileTab: 'Perfil',
         passwordTab: 'Contraseña',
+        securityTab: 'Seguridad',
+        preferencesTab: 'Preferencias',
         cvTab: 'CV',
         changeAvatar: 'Cambiar Avatar',
         avatarHint: 'Haz clic para subir una nueva imagen',
@@ -96,6 +153,9 @@ export const translations = {
         fullName: 'Nombre Completo',
         username: 'Usuario',
         email: 'Correo Electrónico',
+        bio: 'Biografía',
+        website: 'Sitio Web',
+        location: 'Ubicación',
         currentPassword: 'Contraseña Actual',
         newPassword: 'Nueva Contraseña',
         confirmPassword: 'Confirmar Contraseña',
@@ -107,7 +167,28 @@ export const translations = {
         updateError: 'Error al actualizar el perfil',
         passwordSuccess: 'Contraseña actualizada correctamente',
         passwordError: 'Error al actualizar la contraseña',
-        passwordMismatch: 'Las contraseñas no coinciden'
+        passwordMismatch: 'Las contraseñas no coinciden',
+        twoFactorAuth: 'Autenticación de Dos Factores',
+        enableTwoFactor: 'Habilitar 2FA',
+        disableTwoFactor: 'Deshabilitar 2FA',
+        language: 'Idioma',
+        theme: 'Tema',
+        notifications: 'Notificaciones',
+        emailNotifications: 'Notificaciones por Email'
+      },
+      users: {
+        title: 'Gestión de Usuarios',
+        addUser: 'Agregar Usuario',
+        editUser: 'Editar Usuario',
+        deleteUser: 'Eliminar Usuario',
+        userRole: 'Rol de Usuario',
+        lastLogin: 'Último Acceso',
+        status: 'Estado',
+        active: 'Activo',
+        inactive: 'Inactivo',
+        admin: 'Administrador',
+        user: 'Usuario',
+        confirmDelete: '¿Estás seguro de que quieres eliminar este usuario?'
       },
       projects: 'Gestión de Proyectos',
       blog: 'Gestión de Blog',
@@ -119,14 +200,42 @@ export const translations = {
       save: 'Guardar',
       cancel: 'Cancelar',
       delete: 'Eliminar',
+      edit: 'Editar',
+      view: 'Ver',
       featured: 'Destacado',
-      published: 'Publicado'
+      published: 'Publicado',
+      draft: 'Borrador',
+      loading: 'Cargando...',
+      noData: 'No hay datos disponibles',
+      search: 'Buscar...',
+      filter: 'Filtrar',
+      sort: 'Ordenar',
+      actions: 'Acciones'
     },
     ai: {
       title: 'Asistente IA',
       placeholder: 'Pregúntame sobre mi experiencia...',
       send: 'Enviar',
-      thinking: 'Pensando...'
+      thinking: 'Pensando...',
+      error: 'Error al procesar tu mensaje',
+      retry: 'Reintentar',
+      clear: 'Limpiar conversación'
+    },
+    database: {
+      connected: 'Conectado a la base de datos',
+      disconnected: 'Desconectado de la base de datos',
+      error: 'Error de conexión a la base de datos',
+      syncing: 'Sincronizando...',
+      syncComplete: 'Sincronización completa',
+      backup: 'Crear respaldo',
+      restore: 'Restaurar respaldo'
+    },
+    notifications: {
+      success: 'Operación exitosa',
+      error: 'Ha ocurrido un error',
+      warning: 'Advertencia',
+      info: 'Información',
+      dismiss: 'Descartar'
     },
     footer: {
       rights: 'Todos los derechos reservados',
@@ -150,6 +259,7 @@ export const translations = {
       title: 'Full Stack Developer & Game Scripter',
       subtitle: 'Full Stack Developer and Game Scripter passionate about creating exceptional digital experiences',
       cta: 'View my work',
+      contact: 'Contact',
       downloadCV: 'Download CV'
     },
     about: {
@@ -166,7 +276,14 @@ export const translations = {
       title: 'Featured projects',
       viewDemo: 'View demo',
       viewCode: 'View code',
-      technologies: 'Technologies'
+      technologies: 'Technologies',
+      loading: 'Loading projects...',
+      error: 'Error loading projects',
+      noProjects: 'No projects available',
+      addProject: 'Add Project',
+      editProject: 'Edit Project',
+      deleteProject: 'Delete Project',
+      confirmDelete: 'Are you sure you want to delete this project?'
     },
     blog: {
       title: 'Blog',
@@ -174,7 +291,14 @@ export const translations = {
       backToBlog: 'Back to blog',
       publishedOn: 'Published on',
       by: 'by',
-      tags: 'Tags'
+      tags: 'Tags',
+      loading: 'Loading posts...',
+      error: 'Error loading posts',
+      noPosts: 'No posts available',
+      addPost: 'Add Post',
+      editPost: 'Edit Post',
+      deletePost: 'Delete Post',
+      confirmDelete: 'Are you sure you want to delete this post?'
     },
     experience: {
       title: 'Professional experience'
@@ -191,15 +315,53 @@ export const translations = {
       success: 'Message sent successfully!',
       error: 'Error sending message'
     },
+    auth: {
+      signIn: 'Sign In',
+      signUp: 'Sign Up',
+      signOut: 'Sign Out',
+      email: 'Email',
+      password: 'Password',
+      confirmPassword: 'Confirm Password',
+      fullName: 'Full Name',
+      forgotPassword: 'Forgot your password?',
+      resetPassword: 'Reset Password',
+      backToLogin: 'Back to login',
+      createAccount: 'Don\'t have an account? Create one',
+      alreadyHaveAccount: 'Already have an account? Sign in',
+      emailPlaceholder: 'your@email.com',
+      passwordPlaceholder: '••••••••',
+      fullNamePlaceholder: 'Your full name',
+      processing: 'Processing...',
+      checkEmail: 'Check your email to confirm your account',
+      passwordResetSent: 'A reset link has been sent to your email',
+      invalidCredentials: 'Invalid credentials',
+      emailAlreadyExists: 'This email is already registered',
+      passwordTooShort: 'Password must be at least 6 characters',
+      passwordsDoNotMatch: 'Passwords do not match',
+      networkError: 'Network error. Please try again.',
+      unknownError: 'An unexpected error occurred'
+    },
     admin: {
       title: 'Admin Panel',
       subtitle: 'Manage your content and settings',
+      welcome: 'Welcome back',
       logout: 'Logout',
       tabs: {
+        dashboard: 'Dashboard',
         projects: 'Projects',
         blog: 'Blog',
+        users: 'Users',
         ai: 'AI',
-        profile: 'Profile'
+        profile: 'Profile',
+        settings: 'Settings'
+      },
+      dashboard: {
+        title: 'Dashboard',
+        totalProjects: 'Total Projects',
+        totalPosts: 'Total Posts',
+        totalUsers: 'Total Users',
+        recentActivity: 'Recent Activity',
+        quickActions: 'Quick Actions'
       },
       login: {
         title: 'Administrative Access',
@@ -211,18 +373,54 @@ export const translations = {
         loginButton: 'Sign In',
         loggingIn: 'Signing in...',
         secureAccess: 'Secure access to administration panel',
-        invalidCredentials: 'Invalid credentials. Please try again.'
+        invalidCredentials: 'Invalid credentials. Please try again.',
+        forgotPassword: 'Forgot your password?',
+        rememberMe: 'Remember me'
       },
       profile: {
         title: 'Profile Settings',
         subtitle: 'Manage your personal information and settings',
         profileTab: 'Profile',
         passwordTab: 'Password',
+        settings: {
+          title: 'System Settings',
+          subtitle: 'Manage general application settings',
+          authenticationTab: 'Authentication',
+          generalTab: 'General',
+          securityTab: 'Security',
+          enableRegistration: 'Enable Registration',
+          enableRegistrationDesc: 'Allow new users to register in the application',
+          requireEmailVerification: 'Require Email Verification',
+          requireEmailVerificationDesc: 'Users must verify their email before accessing',
+          enablePasswordReset: 'Enable Password Reset',
+          enablePasswordResetDesc: 'Allow users to reset their passwords',
+          enableSocialLogin: 'Enable Social Login',
+          enableSocialLoginDesc: 'Allow login with Google, GitHub, etc.',
+          authProvider: 'Authentication Provider',
+          supabaseSettings: 'Supabase Settings',
+          testConnection: 'Test Connection',
+          connectionStatus: 'Connection Status',
+          connected: 'Connected',
+          disconnected: 'Disconnected',
+          saveSettings: 'Save Settings',
+          settingsSaved: 'Settings saved successfully',
+          settingsError: 'Error saving settings'
+        },
         changeAvatar: 'Change Avatar',
         avatarHint: 'Click to upload a new image',
+        uploadCV: 'Upload CV',
+        cvHint: 'Click to upload your CV (PDF)',
+        currentCV: 'Current CV',
+        downloadCV: 'Download CV',
+        removeCV: 'Remove CV',
+        cvUploadSuccess: 'CV uploaded successfully',
+        cvUploadError: 'Error uploading CV',
         fullName: 'Full Name',
         username: 'Username',
         email: 'Email Address',
+        bio: 'Biography',
+        website: 'Website',
+        location: 'Location',
         currentPassword: 'Current Password',
         newPassword: 'New Password',
         confirmPassword: 'Confirm Password',
@@ -234,7 +432,28 @@ export const translations = {
         updateError: 'Error updating profile',
         passwordSuccess: 'Password updated successfully',
         passwordError: 'Error updating password',
-        passwordMismatch: 'Passwords do not match'
+        passwordMismatch: 'Passwords do not match',
+        twoFactorAuth: 'Two-Factor Authentication',
+        enableTwoFactor: 'Enable 2FA',
+        disableTwoFactor: 'Disable 2FA',
+        language: 'Language',
+        theme: 'Theme',
+        notifications: 'Notifications',
+        emailNotifications: 'Email Notifications'
+      },
+      users: {
+        title: 'User Management',
+        addUser: 'Add User',
+        editUser: 'Edit User',
+        deleteUser: 'Delete User',
+        userRole: 'User Role',
+        lastLogin: 'Last Login',
+        status: 'Status',
+        active: 'Active',
+        inactive: 'Inactive',
+        admin: 'Administrator',
+        user: 'User',
+        confirmDelete: 'Are you sure you want to delete this user?'
       },
       projects: 'Project Management',
       blog: 'Blog Management',
@@ -246,14 +465,42 @@ export const translations = {
       save: 'Save',
       cancel: 'Cancel',
       delete: 'Delete',
+      edit: 'Edit',
+      view: 'View',
       featured: 'Featured',
-      published: 'Published'
+      published: 'Published',
+      draft: 'Draft',
+      loading: 'Loading...',
+      noData: 'No data available',
+      search: 'Search...',
+      filter: 'Filter',
+      sort: 'Sort',
+      actions: 'Actions'
     },
     ai: {
       title: 'AI Assistant',
       placeholder: 'Ask me about my experience...',
       send: 'Send',
-      thinking: 'Thinking...'
+      thinking: 'Thinking...',
+      error: 'Error processing your message',
+      retry: 'Retry',
+      clear: 'Clear conversation'
+    },
+    database: {
+      connected: 'Connected to database',
+      disconnected: 'Disconnected from database',
+      error: 'Database connection error',
+      syncing: 'Syncing...',
+      syncComplete: 'Sync complete',
+      backup: 'Create backup',
+      restore: 'Restore backup'
+    },
+    notifications: {
+      success: 'Operation successful',
+      error: 'An error occurred',
+      warning: 'Warning',
+      info: 'Information',
+      dismiss: 'Dismiss'
     },
     footer: {
       rights: 'All rights reserved',
@@ -277,6 +524,7 @@ export const translations = {
       title: 'Full Stack Developer & Game Scripter',
       subtitle: 'Desenvolvedor Full Stack e Scripter de jogos apaixonado por criar experiências digitais excepcionais',
       cta: 'Ver meu trabalho',
+      contact: 'Contato',
       downloadCV: 'Baixar CV'
     },
     about: {
@@ -293,7 +541,14 @@ export const translations = {
       title: 'Projetos em destaque',
       viewDemo: 'Ver demo',
       viewCode: 'Ver código',
-      technologies: 'Tecnologias'
+      technologies: 'Tecnologias',
+      loading: 'Carregando projetos...',
+      error: 'Erro ao carregar projetos',
+      noProjects: 'Nenhum projeto disponível',
+      addProject: 'Adicionar Projeto',
+      editProject: 'Editar Projeto',
+      deleteProject: 'Excluir Projeto',
+      confirmDelete: 'Tem certeza de que deseja excluir este projeto?'
     },
     blog: {
       title: 'Blog',
@@ -301,7 +556,14 @@ export const translations = {
       backToBlog: 'Voltar ao blog',
       publishedOn: 'Publicado em',
       by: 'por',
-      tags: 'Tags'
+      tags: 'Tags',
+      loading: 'Carregando posts...',
+      error: 'Erro ao carregar posts',
+      noPosts: 'Nenhum post disponível',
+      addPost: 'Adicionar Post',
+      editPost: 'Editar Post',
+      deletePost: 'Excluir Post',
+      confirmDelete: 'Tem certeza de que deseja excluir este post?'
     },
     experience: {
       title: 'Experiência profissional'
@@ -318,15 +580,53 @@ export const translations = {
       success: 'Mensagem enviada com sucesso!',
       error: 'Erro ao enviar mensagem'
     },
+    auth: {
+      signIn: 'Entrar',
+      signUp: 'Criar Conta',
+      signOut: 'Sair',
+      email: 'Email',
+      password: 'Senha',
+      confirmPassword: 'Confirmar Senha',
+      fullName: 'Nome Completo',
+      forgotPassword: 'Esqueceu sua senha?',
+      resetPassword: 'Redefinir Senha',
+      backToLogin: 'Voltar ao login',
+      createAccount: 'Não tem conta? Criar uma',
+      alreadyHaveAccount: 'Já tem conta? Entrar',
+      emailPlaceholder: 'seu@email.com',
+      passwordPlaceholder: '••••••••',
+      fullNamePlaceholder: 'Seu nome completo',
+      processing: 'Processando...',
+      checkEmail: 'Verifique seu email para confirmar sua conta',
+      passwordResetSent: 'Um link de redefinição foi enviado para seu email',
+      invalidCredentials: 'Credenciais inválidas',
+      emailAlreadyExists: 'Este email já está registrado',
+      passwordTooShort: 'A senha deve ter pelo menos 6 caracteres',
+      passwordsDoNotMatch: 'As senhas não coincidem',
+      networkError: 'Erro de rede. Tente novamente.',
+      unknownError: 'Ocorreu um erro inesperado'
+    },
     admin: {
       title: 'Painel Admin',
       subtitle: 'Gerencie seu conteúdo e configurações',
+      welcome: 'Bem-vindo de volta',
       logout: 'Sair',
       tabs: {
+        dashboard: 'Dashboard',
         projects: 'Projetos',
         blog: 'Blog',
+        users: 'Usuários',
         ai: 'IA',
-        profile: 'Perfil'
+        profile: 'Perfil',
+        settings: 'Configurações'
+      },
+      dashboard: {
+        title: 'Dashboard',
+        totalProjects: 'Total de Projetos',
+        totalPosts: 'Total de Posts',
+        totalUsers: 'Total de Usuários',
+        recentActivity: 'Atividade Recente',
+        quickActions: 'Ações Rápidas'
       },
       login: {
         title: 'Acesso Administrativo',
@@ -338,18 +638,33 @@ export const translations = {
         loginButton: 'Entrar',
         loggingIn: 'Entrando...',
         secureAccess: 'Acesso seguro ao painel de administração',
-        invalidCredentials: 'Credenciais inválidas. Tente novamente.'
+        invalidCredentials: 'Credenciais inválidas. Tente novamente.',
+        forgotPassword: 'Esqueceu sua senha?',
+        rememberMe: 'Lembrar de mim'
       },
       profile: {
         title: 'Configurações de Perfil',
         subtitle: 'Gerencie suas informações pessoais e configurações',
         profileTab: 'Perfil',
         passwordTab: 'Senha',
+        securityTab: 'Segurança',
+        preferencesTab: 'Preferências',
+        cvTab: 'CV',
         changeAvatar: 'Alterar Avatar',
         avatarHint: 'Clique para enviar uma nova imagem',
+        uploadCV: 'Enviar CV',
+        cvHint: 'Clique para enviar seu CV (PDF)',
+        currentCV: 'CV Atual',
+        downloadCV: 'Baixar CV',
+        removeCV: 'Remover CV',
+        cvUploadSuccess: 'CV enviado com sucesso',
+        cvUploadError: 'Erro ao enviar CV',
         fullName: 'Nome Completo',
         username: 'Usuário',
         email: 'Endereço de Email',
+        bio: 'Biografia',
+        website: 'Site',
+        location: 'Ubicación',
         currentPassword: 'Senha Atual',
         newPassword: 'Nova Senha',
         confirmPassword: 'Confirmar Senha',
@@ -361,7 +676,28 @@ export const translations = {
         updateError: 'Erro ao atualizar perfil',
         passwordSuccess: 'Senha atualizada com sucesso',
         passwordError: 'Erro ao atualizar senha',
-        passwordMismatch: 'As senhas não coincidem'
+        passwordMismatch: 'As senhas não coincidem',
+        twoFactorAuth: 'Autenticação de Dois Fatores',
+        enableTwoFactor: 'Habilitar 2FA',
+        disableTwoFactor: 'Desabilitar 2FA',
+        language: 'Idioma',
+        theme: 'Tema',
+        notifications: 'Notificações',
+        emailNotifications: 'Notificações por Email'
+      },
+      users: {
+        title: 'Gerenciamento de Usuários',
+        addUser: 'Adicionar Usuário',
+        editUser: 'Editar Usuário',
+        deleteUser: 'Excluir Usuário',
+        userRole: 'Função do Usuário',
+        lastLogin: 'Último Acesso',
+        status: 'Status',
+        active: 'Ativo',
+        inactive: 'Inativo',
+        admin: 'Administrador',
+        user: 'Usuário',
+        confirmDelete: 'Tem certeza de que deseja excluir este usuário?'
       },
       projects: 'Gestão de Projetos',
       blog: 'Gestão de Blog',
@@ -373,14 +709,42 @@ export const translations = {
       save: 'Salvar',
       cancel: 'Cancelar',
       delete: 'Excluir',
+      edit: 'Editar',
+      view: 'Ver',
       featured: 'Destacado',
-      published: 'Publicado'
+      published: 'Publicado',
+      draft: 'Rascunho',
+      loading: 'Carregando...',
+      noData: 'Nenhum dado disponível',
+      search: 'Pesquisar...',
+      filter: 'Filtrar',
+      sort: 'Ordenar',
+      actions: 'Ações'
     },
     ai: {
       title: 'Assistente IA',
       placeholder: 'Pergunte sobre minha experiência...',
       send: 'Enviar',
-      thinking: 'Pensando...'
+      thinking: 'Pensando...',
+      error: 'Erro ao processar sua mensagem',
+      retry: 'Tentar novamente',
+      clear: 'Limpar conversa'
+    },
+    database: {
+      connected: 'Conectado ao banco de dados',
+      disconnected: 'Desconectado do banco de dados',
+      error: 'Erro de conexão com o banco de dados',
+      syncing: 'Sincronizando...',
+      syncComplete: 'Sincronizão completa',
+      backup: 'Criar backup',
+      restore: 'Restaurar backup'
+    },
+    notifications: {
+      success: 'Operação bem-sucedida',
+      error: 'Ocorreu um erro',
+      warning: 'Aviso',
+      info: 'Informação',
+      dismiss: 'Despensar'
     },
     footer: {
       rights: 'Todos os direitos reservados',
@@ -420,7 +784,14 @@ export const translations = {
       title: 'Ausgewählte Projekte',
       viewDemo: 'Demo ansehen',
       viewCode: 'Code ansehen',
-      technologies: 'Technologien'
+      technologies: 'Technologien',
+      loading: 'Projekte laden...',
+      error: 'Fehler beim Laden der Projekte',
+      noProjects: 'Keine Projekte verfügbar',
+      addProject: 'Projekt hinzufügen',
+      editProject: 'Projekt bearbeiten',
+      deleteProject: 'Projekt löschen',
+      confirmDelete: 'Sind Sie sicher, dass Sie dieses Projekt löschen möchten?'
     },
     blog: {
       title: 'Blog',
@@ -428,7 +799,14 @@ export const translations = {
       backToBlog: 'Zurück zum Blog',
       publishedOn: 'Veröffentlicht am',
       by: 'von',
-      tags: 'Tags'
+      tags: 'Tags',
+      loading: 'Posts laden...',
+      error: 'Fehler beim Laden der Posts',
+      noPosts: 'Keine Posts verfügbar',
+      addPost: 'Post hinzufügen',
+      editPost: 'Post bearbeiten',
+      deletePost: 'Post löschen',
+      confirmDelete: 'Sind Sie sicher, dass Sie diesen Post löschen möchten?'
     },
     experience: {
       title: 'Berufserfahrung'
@@ -445,15 +823,53 @@ export const translations = {
       success: 'Nachricht erfolgreich gesendet!',
       error: 'Fehler beim Senden der Nachricht'
     },
+    auth: {
+      signIn: 'Anmelden',
+      signUp: 'Registrieren',
+      signOut: 'Abmelden',
+      email: 'E-Mail',
+      password: 'Passwort',
+      confirmPassword: 'Passwort bestätigen',
+      fullName: 'Vollständiger Name',
+      forgotPassword: 'Passwort vergessen?',
+      resetPassword: 'Passwort zurücksetzen',
+      backToLogin: 'Zurück zur Anmeldung',
+      createAccount: 'Kein Konto? Erstellen Sie eines',
+      alreadyHaveAccount: 'Bereits ein Konto? Anmelden',
+      emailPlaceholder: 'ihre@email.com',
+      passwordPlaceholder: '••••••••',
+      fullNamePlaceholder: 'Ihr vollständiger Name',
+      processing: 'Verarbeitung...',
+      checkEmail: 'Überprüfen Sie Ihre E-Mail, um Ihr Konto zu bestätigen',
+      passwordResetSent: 'Ein Reset-Link wurde an Ihre E-Mail gesendet',
+      invalidCredentials: 'Ungültige Anmeldedaten',
+      emailAlreadyExists: 'Diese E-Mail ist bereits registriert',
+      passwordTooShort: 'Das Passwort muss mindestens 6 Zeichen haben',
+      passwordsDoNotMatch: 'Passwörter stimmen nicht überein',
+      networkError: 'Netzwerkfehler. Bitte versuchen Sie es erneut.',
+      unknownError: 'Ein unerwarteter Fehler ist aufgetreten'
+    },
     admin: {
       title: 'Admin Panel',
       subtitle: 'Verwalten Sie Ihre Inhalte und Einstellungen',
+      welcome: 'Willkommen zurück',
       logout: 'Abmelden',
       tabs: {
+        dashboard: 'Dashboard',
         projects: 'Projekte',
         blog: 'Blog',
+        users: 'Benutzer',
         ai: 'KI',
-        profile: 'Profil'
+        profile: 'Profil',
+        settings: 'Einstellungen'
+      },
+      dashboard: {
+        title: 'Dashboard',
+        totalProjects: 'Gesamte Projekte',
+        totalPosts: 'Gesamte Posts',
+        totalUsers: 'Gesamte Benutzer',
+        recentActivity: 'Letzte Aktivität',
+        quickActions: 'Schnellaktionen'
       },
       login: {
         title: 'Administrativer Zugang',
@@ -465,18 +881,33 @@ export const translations = {
         loginButton: 'Anmelden',
         loggingIn: 'Anmeldung...',
         secureAccess: 'Sicherer Zugang zum Verwaltungspanel',
-        invalidCredentials: 'Ungültige Anmeldedaten. Bitte versuchen Sie es erneut.'
+        invalidCredentials: 'Ungültige Anmeldedaten. Bitte versuchen Sie es erneut.',
+        forgotPassword: 'Passwort vergessen?',
+        rememberMe: 'Angemeldet bleiben'
       },
       profile: {
         title: 'Profil-Einstellungen',
         subtitle: 'Verwalten Sie Ihre persönlichen Informationen und Einstellungen',
         profileTab: 'Profil',
         passwordTab: 'Passwort',
+        securityTab: 'Sicherheit',
+        preferencesTab: 'Einstellungen',
+        cvTab: 'Lebenslauf',
         changeAvatar: 'Avatar ändern',
         avatarHint: 'Klicken Sie, um ein neues Bild hochzuladen',
+        uploadCV: 'Lebenslauf hochladen',
+        cvHint: 'Klicken Sie, um Ihren Lebenslauf hochzuladen (PDF)',
+        currentCV: 'Aktueller Lebenslauf',
+        downloadCV: 'Lebenslauf herunterladen',
+        removeCV: 'Lebenslauf entfernen',
+        cvUploadSuccess: 'Lebenslauf erfolgreich hochgeladen',
+        cvUploadError: 'Fehler beim Hochladen des Lebenslaufs',
         fullName: 'Vollständiger Name',
         username: 'Benutzername',
         email: 'E-Mail-Adresse',
+        bio: 'Biografie',
+        website: 'Website',
+        location: 'Standort',
         currentPassword: 'Aktuelles Passwort',
         newPassword: 'Neues Passwort',
         confirmPassword: 'Passwort bestätigen',
@@ -488,7 +919,28 @@ export const translations = {
         updateError: 'Fehler beim Aktualisieren des Profils',
         passwordSuccess: 'Passwort erfolgreich aktualisiert',
         passwordError: 'Fehler beim Aktualisieren des Passworts',
-        passwordMismatch: 'Passwörter stimmen nicht überein'
+        passwordMismatch: 'Passwörter stimmen nicht überein',
+        twoFactorAuth: 'Zwei-Faktor-Authentifizierung',
+        enableTwoFactor: '2FA aktivieren',
+        disableTwoFactor: '2FA deaktivieren',
+        language: 'Sprache',
+        theme: 'Design',
+        notifications: 'Benachrichtigungen',
+        emailNotifications: 'E-Mail-Benachrichtigungen'
+      },
+      users: {
+        title: 'Benutzerverwaltung',
+        addUser: 'Benutzer hinzufügen',
+        editUser: 'Benutzer bearbeiten',
+        deleteUser: 'Benutzer löschen',
+        userRole: 'Benutzerrolle',
+        lastLogin: 'Letzte Anmeldung',
+        status: 'Status',
+        active: 'Aktiv',
+        inactive: 'Inaktiv',
+        admin: 'Administrator',
+        user: 'Benutzer',
+        confirmDelete: 'Sind Sie sicher, dass Sie diesen Benutzer löschen möchten?'
       },
       projects: 'Projektverwaltung',
       blog: 'Blog-Verwaltung',
@@ -500,14 +952,42 @@ export const translations = {
       save: 'Speichern',
       cancel: 'Abbrechen',
       delete: 'Löschen',
+      edit: 'Bearbeiten',
+      view: 'Ansehen',
       featured: 'Hervorgehoben',
-      published: 'Veröffentlicht'
+      published: 'Veröffentlicht',
+      draft: 'Entwurf',
+      loading: 'Laden...',
+      noData: 'Keine Daten verfügbar',
+      search: 'Suchen...',
+      filter: 'Filtern',
+      sort: 'Sortieren',
+      actions: 'Aktionen'
     },
     ai: {
       title: 'KI-Assistent',
       placeholder: 'Frag mich nach meiner Erfahrung...',
       send: 'Senden',
-      thinking: 'Denke...'
+      thinking: 'Denke...',
+      error: 'Fehler beim Verarbeiten Ihrer Nachricht',
+      retry: 'Wiederholen',
+      clear: 'Unterhaltung löschen'
+    },
+    database: {
+      connected: 'Mit Datenbank verbunden',
+      disconnected: 'Von Datenbank getrennt',
+      error: 'Datenbankverbindungsfehler',
+      syncing: 'Synchronisierung...',
+      syncComplete: 'Synchronisierung abgeschlossen',
+      backup: 'Backup erstellen',
+      restore: 'Backup wiederherstellen'
+    },
+    notifications: {
+      success: 'Operation erfolgreich',
+      error: 'Ein Fehler ist aufgetreten',
+      warning: 'Warnung',
+      info: 'Information',
+      dismiss: 'Verwerfen'
     },
     footer: {
       rights: 'Alle Rechte vorbehalten',

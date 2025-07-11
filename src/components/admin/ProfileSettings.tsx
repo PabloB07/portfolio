@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { User, Mail, Lock, Save, Camera, Eye, EyeOff, FileText, Download, Trash2 } from 'lucide-react';
+import { User, Mail, Lock, Save, Camera, Eye, EyeOff, FileText, Download, Trash2, Settings } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import SystemSettings from './SystemSettings';
 
 interface ProfileData {
   username: string;
@@ -24,7 +25,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
   onChangePassword
 }) => {
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState<'profile' | 'password' | 'cv'>('profile');
+  const [activeTab, setActiveTab] = useState<'profile' | 'password' | 'cv' | 'settings'>('profile');
   const [profileData, setProfileData] = useState<ProfileData>(profile);
   const [passwordData, setPasswordData] = useState({
     oldPassword: '',
@@ -140,11 +141,12 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
             {[
               { id: 'profile', label: t('admin.profile.profileTab'), icon: User },
               { id: 'password', label: t('admin.profile.passwordTab'), icon: Lock },
-              { id: 'cv', label: t('admin.profile.cvTab'), icon: FileText }
+              { id: 'cv', label: t('admin.profile.cvTab'), icon: FileText },
+              { id: 'settings', label: t('admin.tabs.settings'), icon: Settings }
             ].map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
-                onClick={() => setActiveTab(id as 'profile' | 'password' | 'cv')}
+                onClick={() => setActiveTab(id as 'profile' | 'password' | 'cv' | 'settings')}
                 className={`flex items-center space-x-2 py-4 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === id
                     ? 'border-primary-500 text-primary-600 dark:text-primary-400'
