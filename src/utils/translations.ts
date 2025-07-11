@@ -15,7 +15,7 @@ export const translations = {
       title: 'Full Stack Developer & Game Scripter',
       subtitle: 'Desarrollador Full Stack y Scripter de videojuegos apasionado por crear experiencias digitales excepcionales',
       cta: 'Ver mi trabajo',
-      contact: 'Contactar'
+      downloadCV: 'Descargar CV'
     },
     about: {
       title: 'Acerca de mí',
@@ -83,8 +83,16 @@ export const translations = {
         subtitle: 'Gestiona tu información personal y configuraciones',
         profileTab: 'Perfil',
         passwordTab: 'Contraseña',
+        cvTab: 'CV',
         changeAvatar: 'Cambiar Avatar',
         avatarHint: 'Haz clic para subir una nueva imagen',
+        uploadCV: 'Subir CV',
+        cvHint: 'Haz clic para subir tu CV (PDF)',
+        currentCV: 'CV Actual',
+        downloadCV: 'Descargar CV',
+        removeCV: 'Eliminar CV',
+        cvUploadSuccess: 'CV subido correctamente',
+        cvUploadError: 'Error al subir el CV',
         fullName: 'Nombre Completo',
         username: 'Usuario',
         email: 'Correo Electrónico',
@@ -142,7 +150,7 @@ export const translations = {
       title: 'Full Stack Developer & Game Scripter',
       subtitle: 'Full Stack Developer and Game Scripter passionate about creating exceptional digital experiences',
       cta: 'View my work',
-      contact: 'Get in touch'
+      downloadCV: 'Download CV'
     },
     about: {
       title: 'About me',
@@ -269,7 +277,7 @@ export const translations = {
       title: 'Full Stack Developer & Game Scripter',
       subtitle: 'Desenvolvedor Full Stack e Scripter de jogos apaixonado por criar experiências digitais excepcionais',
       cta: 'Ver meu trabalho',
-      contact: 'Entre em contato'
+      downloadCV: 'Baixar CV'
     },
     about: {
       title: 'Sobre mim',
@@ -396,7 +404,7 @@ export const translations = {
       title: 'Full Stack Developer & Game Scripter',
       subtitle: 'Full Stack Entwickler und Game Scripter mit Leidenschaft für außergewöhnliche digitale Erfahrungen',
       cta: 'Meine Arbeit ansehen',
-      contact: 'Kontakt aufnehmen'
+      downloadCV: 'Lebenslauf herunterladen'
     },
     about: {
       title: 'Über mich',

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { User, Mail, Lock, Save, Camera, Eye, EyeOff } from 'lucide-react';
+import { User, Mail, Lock, Save, Camera, Eye, EyeOff, FileText, Download, Trash2 } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 interface ProfileData {
@@ -8,6 +8,8 @@ interface ProfileData {
   email: string;
   fullName: string;
   avatar?: string;
+  cv?: string; // URL del CV
+  cvFileName?: string;
 }
 
 interface ProfileSettingsProps {
@@ -22,7 +24,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
   onChangePassword
 }) => {
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState<'profile' | 'password'>('profile');
+  const [activeTab, setActiveTab] = useState<'profile' | 'password' | 'cv'>('profile');
   const [profileData, setProfileData] = useState<ProfileData>(profile);
   const [passwordData, setPasswordData] = useState({
     oldPassword: '',
@@ -85,6 +87,44 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
     }
   };
 
+  const handleCVUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && file.type === 'application/pdf') {
+      const formData = new FormData();
+      formData.append('cv', file);
+      
+      // Simular upload del CV
+      setIsLoading(true);
+      setTimeout(() => {
+        setProfileData({ 
+          ...profileData, 
+          cv: URL.createObjectURL(file),
+          cvFileName: file.name
+        });
+        setMessage({ type: 'success', text: t('admin.profile.cvUploadSuccess') });
+        setIsLoading(false);
+      }, 1000);
+    } else {
+      setMessage({ type: 'error', text: 'Solo se permiten archivos PDF' });
+    }
+  };
+
+  const handleCVRemove = () => {
+    setProfileData({ ...profileData, cv: undefined, cvFileName: undefined });
+    setMessage({ type: 'success', text: 'CV eliminado correctamente' });
+  };
+
+  const handleCVDownload = () => {
+    if (profileData.cv) {
+      const link = document.createElement('a');
+      link.href = profileData.cv;
+      link.download = profileData.cvFileName || 'CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
@@ -99,11 +139,12 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
           <nav className="flex space-x-8 px-6">
             {[
               { id: 'profile', label: t('admin.profile.profileTab'), icon: User },
-              { id: 'password', label: t('admin.profile.passwordTab'), icon: Lock }
+              { id: 'password', label: t('admin.profile.passwordTab'), icon: Lock },
+              { id: 'cv', label: t('admin.profile.cvTab'), icon: FileText }
             ].map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
-                onClick={() => setActiveTab(id as 'profile' | 'password')}
+                onClick={() => setActiveTab(id as 'profile' | 'password' | 'cv')}
                 className={`flex items-center space-x-2 py-4 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === id
                     ? 'border-primary-500 text-primary-600 dark:text-primary-400'
@@ -283,6 +324,74 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
                 </motion.button>
               </div>
             </motion.form>
+          )}
+
+          {activeTab === 'cv' && (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="space-y-6"
+            >
+              <div className="text-center">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                  {t('admin.profile.uploadCV')}
+                </h3>
+                
+                {profileData.cv ? (
+                  <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                    <div className="flex items-center justify-center space-x-4 mb-4">
+                      <FileText className="text-red-500" size={48} />
+                      <div>
+                        <p className="font-medium text-gray-900 dark:text-white">
+                          {t('admin.profile.currentCV')}
+                        </p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {profileData.cvFileName}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-center space-x-4">
+                      <button
+                        onClick={handleCVDownload}
+                        className="flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                      >
+                        <Download size={16} />
+                        <span>{t('admin.profile.downloadCV')}</span>
+                      </button>
+                      
+                      <button
+                        onClick={handleCVRemove}
+                        className="flex items-center space-x-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                      >
+                        <Trash2 size={16} />
+                        <span>{t('admin.profile.removeCV')}</span>
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8">
+                    <label className="cursor-pointer">
+                      <div className="text-center">
+                        <FileText className="mx-auto text-gray-400 mb-4" size={48} />
+                        <p className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                          {t('admin.profile.uploadCV')}
+                        </p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {t('admin.profile.cvHint')}
+                        </p>
+                      </div>
+                      <input
+                        type="file"
+                        accept=".pdf"
+                        onChange={handleCVUpload}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+                )}
+              </div>
+            </motion.div>
           )}
         </div>
       </div>

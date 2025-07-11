@@ -22,7 +22,7 @@ const Navigation: React.FC = () => {
   }, []);
 
   const navItems = [
-    { href: '#home', label: t('nav.home') },
+    { href: '/', label: t('nav.home') },
     { href: '#about', label: t('nav.about') },
     { href: '#projects', label: t('nav.projects') },
     { href: '/blog', label: t('nav.blog'), isRoute: true },
@@ -32,7 +32,7 @@ const Navigation: React.FC = () => {
 
   const handleNavClick = (href: string, isRoute?: boolean) => {
     setIsOpen(false);
-    if (isRoute) {
+    if (isRoute || href === '/') {
       window.location.href = href;
     } else {
       const element = document.querySelector(href);
@@ -57,11 +57,6 @@ const Navigation: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             className="flex items-center space-x-2"
           >
-            <img 
-              src={personalInfo.avatar} 
-              alt="Pablo Blanco Navarro"
-              className="w-8 h-8 rounded-full"
-            />
             <span className="font-bold text-xl text-gray-900 dark:text-white">
               Pablo
             </span>

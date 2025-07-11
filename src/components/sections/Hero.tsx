@@ -4,7 +4,6 @@ import { ChevronDown, Github, Mail, Linkedin, MapPin } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { personalInfo } from '../../data/portfolio';
 
-
 const Hero: React.FC = () => {
   const { t } = useLanguage();
   const [displayText, setDisplayText] = useState('');
@@ -131,6 +130,23 @@ const Hero: React.FC = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = '/api/download-cv';
+                  link.download = 'Pablo_Blanco_Navarro_CV.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+                className="px-8 py-4 border-2 border-primary-500 text-primary-500 dark:text-primary-400 font-semibold rounded-lg hover:bg-primary-500 hover:text-white dark:hover:text-white transition-all duration-300"
+              >
+                {t('hero.downloadCV')}
+              </motion.button>
+            </motion.div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-4 border-2 border-primary-500 text-primary-500 dark:text-primary-400 font-semibold rounded-lg hover:bg-primary-500 hover:text-white dark:hover:text-white transition-all duration-300"
               >
@@ -183,16 +199,6 @@ const Hero: React.FC = () => {
             className="flex justify-center lg:justify-end"
           >
             <div className="relative">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 w-80 h-80 border-4 border-dashed border-primary-500/30 rounded-full"
-              />
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-4 w-72 h-72 border-2 border-dotted border-secondary-500/30 rounded-full"
-              />
               <div className="relative w-80 h-80 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full p-1">
                 <div className="w-full h-full bg-white dark:bg-gray-900 rounded-full flex items-center justify-center overflow-hidden">
                   <img
@@ -205,8 +211,7 @@ const Hero: React.FC = () => {
             </div>
           </motion.div>
         </div>
-
-        {/* Scroll Indicator */}
+        
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
