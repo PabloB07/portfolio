@@ -19,7 +19,7 @@ interface AdminUser {
 const AdminDashboard: React.FC = () => {
   const { t } = useLanguage();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loginError, setLoginError] = useState('');
+  // Remove this line: const [loginError, setLoginError] = useState('');
   const [activeTab, setActiveTab] = useState('projects');
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
@@ -40,15 +40,7 @@ const AdminDashboard: React.FC = () => {
   ];
 
   // Funciones de autenticación
-  const handleLogin = (credentials: { username: string; password: string }) => {
-    // Simulación de autenticación (en producción usar API real)
-    if (credentials.username === 'admin' && credentials.password === 'admin123') {
-      setIsAuthenticated(true);
-      setLoginError('');
-    } else {
-      setLoginError(t('admin.login.invalidCredentials'));
-    }
-  };
+  // Remove the handleLogin function entirely
 
   const handleLogout = () => {
     setIsAuthenticated(false);
@@ -126,7 +118,7 @@ const AdminDashboard: React.FC = () => {
 
   // Si no está autenticado, mostrar login
   if (!isAuthenticated) {
-    return <Login onLogin={handleLogin} error={loginError} />;
+    return <Login onSuccess={() => setIsAuthenticated(true)} />;
   }
 
   return (
@@ -328,56 +320,51 @@ const AdminDashboard: React.FC = () => {
                         <p className="text-gray-600 dark:text-gray-400 mb-3">
                           {post.excerpt}
                         </p>
-                        <div className="flex items-center space-x-4 text-sm text-gray-500">
-                          <span>Por {post.author}</span>
-                          <span>{post.publishedAt.toLocaleDateString()}</span>
+                        <div className="flex items-center space-x-2 ml-4">
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            onClick={() => handleToggleBlogPostFeatured(post.id)}
+                            className={`p-2 rounded ${
+                              post.featured
+                                ? 'bg-yellow-100 text-yellow-600'
+                                : 'bg-gray-100 text-gray-400'
+                            }`}
+                            title="Destacar"
+                          >
+                            ⭐
+                          </motion.button>
+                          
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            onClick={() => handleToggleBlogPostPublished(post.id)}
+                            className={`p-2 rounded ${
+                              post.published
+                                ? 'bg-green-100 text-green-600'
+                                : 'bg-gray-100 text-gray-400'
+                            }`}
+                            title="Publicar/Despublicar"
+                          >
+                            {post.published ? <Eye size={16} /> : <EyeOff size={16} />}
+                          </motion.button>
+                          
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            onClick={() => setEditingPost(post)}
+                            className="p-2 bg-blue-100 text-blue-600 rounded"
+                            title="Editar"
+                          >
+                            <Edit size={16} />
+                          </motion.button>
+                          
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            onClick={() => handleDeleteBlogPost(post.id)}
+                            className="p-2 bg-red-100 text-red-600 rounded"
+                            title="Eliminar"
+                          >
+                            <Trash2 size={16} />
+                          </motion.button>
                         </div>
-                      </div>
-                      
-                      <div className="flex items-center space-x-2 ml-4">
-                        <motion.button
-                          whileHover={{ scale: 1.1 }}
-                          onClick={() => handleToggleBlogPostFeatured(post.id)}
-                          className={`p-2 rounded ${
-                            post.featured
-                              ? 'bg-yellow-100 text-yellow-600'
-                              : 'bg-gray-100 text-gray-400'
-                          }`}
-                          title="Destacar"
-                        >
-                          ⭐
-                        </motion.button>
-                        
-                        <motion.button
-                          whileHover={{ scale: 1.1 }}
-                          onClick={() => handleToggleBlogPostPublished(post.id)}
-                          className={`p-2 rounded ${
-                            post.published
-                              ? 'bg-green-100 text-green-600'
-                              : 'bg-gray-100 text-gray-400'
-                          }`}
-                          title="Publicar/Despublicar"
-                        >
-                          {post.published ? <Eye size={16} /> : <EyeOff size={16} />}
-                        </motion.button>
-                        
-                        <motion.button
-                          whileHover={{ scale: 1.1 }}
-                          onClick={() => setEditingPost(post)}
-                          className="p-2 bg-blue-100 text-blue-600 rounded"
-                          title="Editar"
-                        >
-                          <Edit size={16} />
-                        </motion.button>
-                        
-                        <motion.button
-                          whileHover={{ scale: 1.1 }}
-                          onClick={() => handleDeleteBlogPost(post.id)}
-                          className="p-2 bg-red-100 text-red-600 rounded"
-                          title="Eliminar"
-                        >
-                          <Trash2 size={16} />
-                        </motion.button>
                       </div>
                     </div>
                   </motion.div>
