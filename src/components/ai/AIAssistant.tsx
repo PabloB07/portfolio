@@ -43,7 +43,7 @@ const AIAssistant: React.FC = () => {
     for (const [key, response] of Object.entries(responses)) {
       if (lowerMessage.includes(key) || 
           (key === 'experiencia' && (lowerMessage.includes('experience') || lowerMessage.includes('años'))) ||
-          (key === 'habilidades' && (lowerMessage.includes('skills') || lowerMessage.includes('tecnolog'))) ||
+          (key === 'habilidades' && lowerMessage.includes('tecnolog')) ||
           (key === 'proyectos' && (lowerMessage.includes('projects') || lowerMessage.includes('trabajo'))) ||
           (key === 'contacto' && (lowerMessage.includes('contact') || lowerMessage.includes('email'))) ||
           (key === 'colaboracion' && (lowerMessage.includes('trabajo') || lowerMessage.includes('colabor'))) ||
