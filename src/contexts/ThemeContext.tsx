@@ -21,15 +21,22 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return {
-      mode: savedTheme ? (savedTheme as 'light' | 'dark') : (prefersDark ? 'dark' : 'light')
-    };
-  });
+  const [theme, setTheme] = useState<Theme>({ mode: 'light' });
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    setTheme({
+      mode: savedTheme ? (savedTheme as 'light' | 'dark') : (prefersDark ? 'dark' : 'light')
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    
     const root = window.document.documentElement;
     if (theme.mode === 'dark') {
       root.classList.add('dark');
@@ -37,7 +44,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       root.classList.remove('dark');
     }
     localStorage.setItem('theme', theme.mode);
-  }, [theme]);
+  }, [theme, mounted]);
 
   const toggleTheme = () => {
     setTheme(prev => ({
