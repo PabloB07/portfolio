@@ -189,7 +189,6 @@ const Hero: React.FC = () => {
                 <Mail size={20} />
               </motion.a>
             </motion.div>
-          </motion.div>
 
           {/* Avatar/Image */}
           <motion.div
