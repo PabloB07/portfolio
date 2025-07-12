@@ -179,26 +179,6 @@ const Hero: React.FC = () => {
                 <Mail size={20} />
               </motion.a>
             </motion.div>
-
-          {/* Avatar/Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex justify-center lg:justify-end"
-          >
-            <div className="relative">
-              <div className="relative w-80 h-80 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full p-1">
-                <div className="w-full h-full bg-white dark:bg-gray-900 rounded-full flex items-center justify-center overflow-hidden">
-                  <img
-                    src={personalInfo.avatar}
-                    alt={personalInfo.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
         
         <motion.div
