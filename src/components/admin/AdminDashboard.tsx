@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { BarChart3, FileText, Bot, Plus, Edit, Trash2, Eye, EyeOff, User, LogOut } from 'lucide-react';
+import { BarChart3, FileText, Bot, Plus, Edit, Trash2, Eye, EyeOff, User, LogOut, Settings } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { useAuth } from '../../contexts/AuthContext';
 import Login from './Login';
 import ProfileSettings from './ProfileSettings';
 import ProjectForm from './ProjectForm';
 import BlogForm from './BlogForm';
+import SystemSettings from './SystemSettings';
 import { projects as initialProjects, blogPosts as initialBlogPosts } from '../../data/portfolio';
 import { Project, BlogPost } from '../../types';
+import { supabase } from '../../lib/supabase';
 
 interface AdminUser {
   username: string;
@@ -18,13 +21,13 @@ interface AdminUser {
 
 const AdminDashboard: React.FC = () => {
   const { t } = useLanguage();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // Remove this line: const [loginError, setLoginError] = useState('');
+  const { user, isAuthenticated, userRole, signOut } = useAuth();
   const [activeTab, setActiveTab] = useState('projects');
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
   const [projects, setProjects] = useState<Project[]>(initialProjects);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>(initialBlogPosts);
+  const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState<AdminUser>({
     username: 'admin',
     email: 'admin@portfolio.com',
@@ -37,88 +40,157 @@ const AdminDashboard: React.FC = () => {
     { id: 'blog', label: t('admin.tabs.blog'), icon: FileText },
     { id: 'ai', label: t('admin.tabs.ai'), icon: Bot },
     { id: 'profile', label: t('admin.tabs.profile'), icon: User },
+    ...(userRole === 'admin' ? [{ id: 'settings', label: 'Configuración', icon: Settings }] : [])
   ];
 
-  // Funciones de autenticación
-  // Remove the handleLogin function entirely
-
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    setActiveTab('projects');
-  };
-
-  const handleUpdateProfile = (profile: AdminUser) => {
-    setCurrentUser(profile);
-  };
-
-  const handleChangePassword = (oldPassword: string, newPassword: string) => {
-    // Aquí iría la lógica para cambiar la contraseña
-    console.log('Cambiar contraseña:', { oldPassword, newPassword });
-  };
-
-  // Funciones CRUD para proyectos
-  const handleSaveProject = (project: Project) => {
-    if (projects.find(p => p.id === project.id)) {
-      // Actualizar proyecto existente
-      setProjects(prev => prev.map(p => p.id === project.id ? project : p));
-    } else {
-      // Crear nuevo proyecto
-      setProjects(prev => [...prev, project]);
+  // Cargar datos desde Supabase
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadProjects();
+      loadBlogPosts();
     }
-    setEditingProject(null);
+  }, [isAuthenticated]);
+
+  const loadProjects = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      setProjects(data || []);
+    } catch (error) {
+      console.error('Error loading projects:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleDeleteProject = (id: string) => {
+  const loadBlogPosts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      setBlogPosts(data || []);
+    } catch (error) {
+      console.error('Error loading blog posts:', error);
+    }
+  };
+
+  // CRUD para proyectos
+  const handleSaveProject = async (project: Project) => {
+    try {
+      if (project.id && projects.find(p => p.id === project.id)) {
+        // Actualizar
+        const { error } = await supabase
+          .from('projects')
+          .update(project)
+          .eq('id', project.id);
+        
+        if (error) throw error;
+        setProjects(prev => prev.map(p => p.id === project.id ? project : p));
+      } else {
+        // Crear
+        const { data, error } = await supabase
+          .from('projects')
+          .insert([{ ...project, user_id: user?.id }])
+          .select()
+          .single();
+        
+        if (error) throw error;
+        setProjects(prev => [data, ...prev]);
+      }
+      setEditingProject(null);
+    } catch (error) {
+      console.error('Error saving project:', error);
+    }
+  };
+
+  const handleDeleteProject = async (id: string) => {
     if (confirm('¿Estás seguro de que quieres eliminar este proyecto?')) {
-      setProjects(prev => prev.filter(p => p.id !== id));
+      try {
+        const { error } = await supabase
+          .from('projects')
+          .delete()
+          .eq('id', id);
+        
+        if (error) throw error;
+        setProjects(prev => prev.filter(p => p.id !== id));
+      } catch (error) {
+        console.error('Error deleting project:', error);
+      }
     }
   };
 
-  const handleToggleProjectFeatured = (id: string) => {
-    setProjects(prev => prev.map(p => 
-      p.id === id ? { ...p, featured: !p.featured } : p
-    ));
-  };
-
-  const handleToggleProjectPublished = (id: string) => {
-    setProjects(prev => prev.map(p => 
-      p.id === id ? { ...p, published: !p.published } : p
-    ));
-  };
-
-  // Funciones CRUD para blog posts
-  const handleSaveBlogPost = (post: BlogPost) => {
-    if (blogPosts.find(p => p.id === post.id)) {
-      // Actualizar post existente
-      setBlogPosts(prev => prev.map(p => p.id === post.id ? post : p));
-    } else {
-      // Crear nuevo post
-      setBlogPosts(prev => [...prev, post]);
+  // CRUD para blog posts
+  const handleSaveBlogPost = async (post: BlogPost) => {
+    try {
+      if (post.id && blogPosts.find(p => p.id === post.id)) {
+        // Actualizar
+        const { error } = await supabase
+          .from('blog_posts')
+          .update(post)
+          .eq('id', post.id);
+        
+        if (error) throw error;
+        setBlogPosts(prev => prev.map(p => p.id === post.id ? post : p));
+      } else {
+        // Crear
+        const { data, error } = await supabase
+          .from('blog_posts')
+          .insert([{ ...post, author_id: user?.id }])
+          .select()
+          .single();
+        
+        if (error) throw error;
+        setBlogPosts(prev => [data, ...prev]);
+      }
+      setEditingPost(null);
+    } catch (error) {
+      console.error('Error saving blog post:', error);
     }
-    setEditingPost(null);
   };
 
-  const handleDeleteBlogPost = (id: string) => {
+  const handleDeleteBlogPost = async (id: string) => {
     if (confirm('¿Estás seguro de que quieres eliminar este post?')) {
-      setBlogPosts(prev => prev.filter(p => p.id !== id));
+      try {
+        const { error } = await supabase
+          .from('blog_posts')
+          .delete()
+          .eq('id', id);
+        
+        if (error) throw error;
+        setBlogPosts(prev => prev.filter(p => p.id !== id));
+      } catch (error) {
+        console.error('Error deleting blog post:', error);
+      }
     }
   };
 
-  const handleToggleBlogPostFeatured = (id: string) => {
-    setBlogPosts(prev => prev.map(p => 
-      p.id === id ? { ...p, featured: !p.featured } : p
-    ));
-  };
-
-  const handleToggleBlogPostPublished = (id: string) => {
-    setBlogPosts(prev => prev.map(p => 
-      p.id === id ? { ...p, published: !p.published } : p
-    ));
+  const handleLogout = async () => {
+    await signOut();
   };
 
   // Si no está autenticado, mostrar login
   if (!isAuthenticated) {
-    return <Login onSuccess={() => setIsAuthenticated(true)} />;
+    return <Login />;
+  }
+
+  // Mostrar loading mientras cargan los datos
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Cargando...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -141,10 +213,10 @@ const AdminDashboard: React.FC = () => {
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center">
-                  {currentUser.avatar ? (
+                  {user?.user_metadata?.avatar_url ? (
                     <img
-                      src={currentUser.avatar}
-                      alt={currentUser.fullName}
+                      src={user.user_metadata.avatar_url}
+                      alt={user.user_metadata?.full_name || user.email}
                       className="w-full h-full rounded-full object-cover"
                     />
                   ) : (
@@ -152,8 +224,12 @@ const AdminDashboard: React.FC = () => {
                   )}
                 </div>
                 <div className="text-sm">
-                  <p className="font-medium text-gray-900 dark:text-white">{currentUser.fullName}</p>
-                  <p className="text-gray-600 dark:text-gray-400">{currentUser.email}</p>
+                  <p className="font-medium text-gray-900 dark:text-white">
+                    {user?.user_metadata?.full_name || user?.email}
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    {userRole || 'user'}
+                  </p>
                 </div>
               </div>
               <button
@@ -198,94 +274,79 @@ const AdminDashboard: React.FC = () => {
             <div>
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Gestión de Proyectos
+                  Proyectos ({projects.length})
                 </h2>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  onClick={() => setEditingProject({} as Project)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors duration-200"
+                <button
+                  onClick={() => setEditingProject({
+                    id: '',
+                    title: '',
+                    description: '',
+                    technologies: [],
+                    featured: false,
+                    published: true,
+                    image_url: '',
+                    github_url: '',
+                    image: '',
+                    live_url: '',
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString(),
+                    user_id: user?.id
+                  } as Project)}
+                  className="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
                 >
                   <Plus size={18} />
-                  <span>{t('admin.createProject')}</span>
-                </motion.button>
+                  <span>Nuevo Proyecto</span>
+                </button>
               </div>
-
-              <div className="grid gap-6">
-                {projects.map((project) => (
-                  <motion.div
-                    key={project.id}
-                    whileHover={{ scale: 1.01 }}
-                    className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                          {project.title}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-400 mb-3">
-                          {project.description}
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {project.technologies.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm"
-                            >
-                              {tech}
-                            </span>
-                          ))}
+              
+              {editingProject ? (
+                <ProjectForm
+                  project={editingProject}
+                  onSave={handleSaveProject}
+                  onCancel={() => setEditingProject(null)}
+                />
+              ) : (
+                <div className="grid gap-6">
+                  {projects.map((project) => (
+                    <div key={project.id} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                            {project.title}
+                          </h3>
+                          <p className="text-gray-600 dark:text-gray-400 mb-4">
+                            {project.description}
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {project.technologies?.map((tech, index) => (
+                              <span
+                                key={index}
+                                className="px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded text-sm"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2 ml-4">
+                          <button
+                            onClick={() => setEditingProject(project)}
+                            className="p-2 text-gray-500 hover:text-primary-500"
+                          >
+                            <Edit size={16} />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteProject(project.id)}
+                            className="p-2 text-gray-500 hover:text-red-500"
+                          >
+                            <Trash2 size={16} />
+                          </button>
                         </div>
                       </div>
-                      
-                      <div className="flex items-center space-x-2 ml-4">
-                        <motion.button
-                          whileHover={{ scale: 1.1 }}
-                          onClick={() => handleToggleProjectFeatured(project.id)}
-                          className={`p-2 rounded ${
-                            project.featured
-                              ? 'bg-yellow-100 text-yellow-600'
-                              : 'bg-gray-100 text-gray-400'
-                          }`}
-                          title="Destacar"
-                        >
-                          ⭐
-                        </motion.button>
-                        
-                        <motion.button
-                          whileHover={{ scale: 1.1 }}
-                          onClick={() => handleToggleProjectPublished(project.id)}
-                          className={`p-2 rounded ${
-                            project.published
-                              ? 'bg-green-100 text-green-600'
-                              : 'bg-gray-100 text-gray-400'
-                          }`}
-                          title="Publicar/Despublicar"
-                        >
-                          {project.published ? <Eye size={16} /> : <EyeOff size={16} />}
-                        </motion.button>
-                        
-                        <motion.button
-                          whileHover={{ scale: 1.1 }}
-                          onClick={() => setEditingProject(project)}
-                          className="p-2 bg-blue-100 text-blue-600 rounded"
-                          title="Editar"
-                        >
-                          <Edit size={16} />
-                        </motion.button>
-                        
-                        <motion.button
-                          whileHover={{ scale: 1.1 }}
-                          onClick={() => handleDeleteProject(project.id)}
-                          className="p-2 bg-red-100 text-red-600 rounded"
-                          title="Eliminar"
-                        >
-                          <Trash2 size={16} />
-                        </motion.button>
-                      </div>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
@@ -293,131 +354,113 @@ const AdminDashboard: React.FC = () => {
             <div>
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Gestión de Blog
+                  Blog Posts ({blogPosts.length})
                 </h2>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  onClick={() => setEditingPost({} as BlogPost)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors duration-200"
+                <button
+                  onClick={() => setEditingPost({ 
+                    id: '', 
+                    title: '', 
+                    content: '',
+                    excerpt: '',
+                    author: user?.user_metadata?.full_name || user?.email || '',
+                    publishedAt: new Date(),
+                    tags: [],
+                    featured: false,
+                    published: true,
+                    image: ''
+                  } as BlogPost)}
+                  className="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
                 >
                   <Plus size={18} />
-                  <span>{t('admin.createPost')}</span>
-                </motion.button>
+                  <span>Nuevo Post</span>
+                </button>
               </div>
-
-              <div className="grid gap-6">
-                {blogPosts.map((post) => (
-                  <motion.div
-                    key={post.id}
-                    whileHover={{ scale: 1.01 }}
-                    className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                          {post.title}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-400 mb-3">
-                          {post.excerpt}
-                        </p>
+              
+              {editingPost ? (
+                <BlogForm
+                  post={editingPost}
+                  onSave={handleSaveBlogPost}
+                  onCancel={() => setEditingPost(null)}
+                />
+              ) : (
+                <div className="grid gap-6">
+                  {blogPosts.map((post) => (
+                    <div key={post.id} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                            {post.title}
+                          </h3>
+                          <p className="text-gray-600 dark:text-gray-400 mb-4">
+                            {post.excerpt}
+                          </p>
+                        </div>
                         <div className="flex items-center space-x-2 ml-4">
-                          <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            onClick={() => handleToggleBlogPostFeatured(post.id)}
-                            className={`p-2 rounded ${
-                              post.featured
-                                ? 'bg-yellow-100 text-yellow-600'
-                                : 'bg-gray-100 text-gray-400'
-                            }`}
-                            title="Destacar"
-                          >
-                            ⭐
-                          </motion.button>
-                          
-                          <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            onClick={() => handleToggleBlogPostPublished(post.id)}
-                            className={`p-2 rounded ${
-                              post.published
-                                ? 'bg-green-100 text-green-600'
-                                : 'bg-gray-100 text-gray-400'
-                            }`}
-                            title="Publicar/Despublicar"
-                          >
-                            {post.published ? <Eye size={16} /> : <EyeOff size={16} />}
-                          </motion.button>
-                          
-                          <motion.button
-                            whileHover={{ scale: 1.1 }}
+                          <button
                             onClick={() => setEditingPost(post)}
-                            className="p-2 bg-blue-100 text-blue-600 rounded"
-                            title="Editar"
+                            className="p-2 text-gray-500 hover:text-primary-500"
                           >
                             <Edit size={16} />
-                          </motion.button>
-                          
-                          <motion.button
-                            whileHover={{ scale: 1.1 }}
+                          </button>
+                          <button
                             onClick={() => handleDeleteBlogPost(post.id)}
-                            className="p-2 bg-red-100 text-red-600 rounded"
-                            title="Eliminar"
+                            className="p-2 text-gray-500 hover:text-red-500"
                           >
                             <Trash2 size={16} />
-                          </motion.button>
+                          </button>
                         </div>
                       </div>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'ai' && (
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Configuración del Asistente IA
-              </h2>
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-                <p className="text-gray-600 dark:text-gray-400">
-                  Aquí puedes configurar las respuestas del asistente IA, entrenar nuevos modelos
-                  y gestionar las interacciones con los usuarios.
-                </p>
-                <div className="mt-4">
-                  <button className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors duration-200">
-                    Configurar IA
-                  </button>
+                  ))}
                 </div>
-              </div>
+              )}
             </div>
           )}
 
           {activeTab === 'profile' && (
-            <ProfileSettings
-              profile={currentUser}
-              onUpdateProfile={handleUpdateProfile}
-              onChangePassword={handleChangePassword}
+            <ProfileSettings 
+              profile={{
+                username: currentUser.username,
+                email: currentUser.email,
+                fullName: currentUser.fullName,
+                avatar: currentUser.avatar
+              }}
+              onUpdateProfile={async (updatedProfile) => {
+                // Handle profile update
+                setCurrentUser(prev => ({
+                  ...prev,
+                  ...updatedProfile
+                }));
+              }}
+              onChangePassword={async (oldPassword, newPassword) => {
+                // Handle password change
+                try {
+                  // Implement password change logic here
+                  console.log('Password change requested');
+                } catch (error) {
+                  console.error('Error changing password:', error);
+                }
+              }}
             />
+          )}
+
+          {activeTab === 'settings' && userRole === 'admin' && (
+            <SystemSettings />
+          )}
+
+          {activeTab === 'ai' && (
+            <div className="text-center py-12">
+              <Bot size={48} className="mx-auto text-gray-400 mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                Asistente AI
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Funcionalidad en desarrollo
+              </p>
+            </div>
           )}
         </motion.div>
       </div>
-
-      {/* Modales de formularios */}
-      {editingProject && (
-        <ProjectForm
-          project={editingProject.id ? editingProject : undefined}
-          onSave={handleSaveProject}
-          onCancel={() => setEditingProject(null)}
-        />
-      )}
-
-      {editingPost && (
-        <BlogForm
-          post={editingPost.id ? editingPost : undefined}
-          onSave={handleSaveBlogPost}
-          onCancel={() => setEditingPost(null)}
-        />
-      )}
     </div>
   );
 };

@@ -2,15 +2,19 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 import { useAuthSettings } from '../hooks/useAuthSettings';
+import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<{ error: any }>;
+  isAuthenticated: boolean;
+  userRole: string | null;
+  signIn: (email: string, password: string, rememberMe?: boolean) => Promise<{ error: any }>;
   signUp: (email: string, password: string, fullName?: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: any }>;
+  authSettings: any;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -27,12 +31,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userRole, setUserRole] = useState<string | null>(null);
+  const { settings: authSettings } = useAuthSettings();
+  const router = useRouter();
 
   useEffect(() => {
+    // Recuperar sesión guardada
+    const savedSession = localStorage.getItem('supabase-session');
+    if (savedSession) {
+      try {
+        const parsedSession = JSON.parse(savedSession);
+        setSession(parsedSession);
+        setUser(parsedSession?.user ?? null);
+      } catch (error) {
+        console.error('Error parsing saved session:', error);
+        localStorage.removeItem('supabase-session');
+      }
+    }
+
     // Obtener sesión inicial
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
+      if (session) {
+        localStorage.setItem('supabase-session', JSON.stringify(session));
+        fetchUserRole(session.user.id);
+      }
       setLoading(false);
     });
 
@@ -44,14 +68,45 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null);
       setLoading(false);
 
-      // Crear/actualizar perfil de usuario en nuestra base de datos
-      if (event === 'SIGNED_IN' && session?.user) {
+      if (session) {
+        localStorage.setItem('supabase-session', JSON.stringify(session));
         await createOrUpdateUserProfile(session.user);
+        await fetchUserRole(session.user.id);
+      } else {
+        localStorage.removeItem('supabase-session');
+        setUserRole(null);
+      }
+
+      // Navegación mejorada después del login
+      if (event === 'SIGNED_IN' && session?.user) {
+        const redirectTo = localStorage.getItem('auth-redirect') || '/admin';
+        localStorage.removeItem('auth-redirect');
+        router.push(redirectTo);
+      }
+
+      if (event === 'SIGNED_OUT') {
+        router.push('/');
       }
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [router]);
+
+  const fetchUserRole = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select('role')
+        .eq('id', userId)
+        .single();
+      
+      if (!error && data) {
+        setUserRole(data.role);
+      }
+    } catch (error) {
+      console.error('Error fetching user role:', error);
+    }
+  };
 
   const createOrUpdateUserProfile = async (user: User) => {
     try {
@@ -62,6 +117,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           email: user.email,
           full_name: user.user_metadata?.full_name || '',
           avatar: user.user_metadata?.avatar_url || '',
+          role: 'user', // Por defecto, se puede cambiar desde admin
           updated_at: new Date().toISOString()
         });
       
@@ -75,42 +131,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (typeof window !== 'undefined') {
       const isProduction = window.location.hostname !== 'localhost';
       return isProduction 
-        ? 'https://blancocl.vercel.app/admin'
-        : 'http://localhost:3000/admin';
+        ? 'https://blancocl.vercel.app/auth/callback'
+        : 'http://localhost:3000/auth/callback';
     }
-    return 'http://localhost:3000/admin';
+    return 'http://localhost:3000/auth/callback';
   };
 
-  const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
+  const signIn = async (email: string, password: string, rememberMe: boolean = false) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
     
-    // Redirigir al admin después del login exitoso
-    if (!error && typeof window !== 'undefined') {
-      window.location.href = getRedirectURL();
+    if (!error && data.session) {
+      if (rememberMe) {
+        localStorage.setItem('supabase-session', JSON.stringify(data.session));
+        localStorage.setItem('remember-credentials', JSON.stringify({ email }));
+      }
     }
     
     return { error };
   };
 
   const resetPassword = async (email: string) => {
-    // Verificar si el restablecimiento está habilitado
     if (!authSettings.enablePasswordReset) {
       return { error: { message: 'Password reset is currently disabled' } };
     }
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email.toString(), {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: getRedirectURL(),
     });
     return { error };
   };
 
-  const { settings: authSettings } = useAuthSettings();
-
   const signUp = async (email: string, password: string, fullName?: string) => {
-    // Verificar si el registro está habilitado
     if (!authSettings.enableRegistration) {
       return { error: { message: 'Registration is currently disabled' } };
     }
@@ -123,25 +177,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           full_name: fullName,
         },
         emailRedirectTo: authSettings.requireEmailVerification ? 
-          `${window.location.origin}/auth/callback` : undefined
+          getRedirectURL() : undefined
       },
     });
     return { error };
   };
 
   const signOut = async () => {
+    localStorage.removeItem('supabase-session');
+    localStorage.removeItem('remember-credentials');
     await supabase.auth.signOut();
   };
 
   const value = {
     user,
+    session,
     loading,
+    isAuthenticated: !!user,
+    userRole,
     signIn,
     signUp,
     signOut,
     resetPassword,
-    authSettings // Exponer las configuraciones
+    authSettings
   };
 
-  return <AuthContext.Provider value={{ ...value, session }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
