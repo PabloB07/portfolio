@@ -100,28 +100,68 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .eq('id', userId)
         .single();
       
-      if (!error && data) {
-        setUserRole(data.role);
+      if (error) {
+        if (error.code === 'PGRST116') {
+          // Usuario no encontrado, crear perfil
+          console.log('User not found in users table, will be created on next auth event');
+          return 'user';
+        }
+        console.error('Error fetching user role:', error);
+        return 'user';
       }
+      
+      return data?.role || 'user';
     } catch (error) {
-      console.error('Error fetching user role:', error);
+      console.error('Error in fetchUserRole:', error);
+      return 'user';
     }
   };
 
   const createOrUpdateUserProfile = async (user: User) => {
     try {
-      const { error } = await supabase
+      // Primero verificar si el usuario ya existe
+      const { data: existingUser, error: fetchError } = await supabase
         .from('users')
-        .upsert({
-          id: user.id,
-          email: user.email,
-          full_name: user.user_metadata?.full_name || '',
-          avatar: user.user_metadata?.avatar_url || '',
-          role: 'user', // Por defecto, se puede cambiar desde admin
-          updated_at: new Date().toISOString()
-        });
-      
-      if (error) console.error('Error updating user profile:', error);
+        .select('id')
+        .eq('id', user.id)
+        .single();
+  
+      if (fetchError && fetchError.code !== 'PGRST116') {
+        console.error('Error checking existing user:', fetchError);
+        return;
+      }
+  
+      if (existingUser) {
+        // Usuario existe, actualizar
+        const { error } = await supabase
+          .from('users')
+          .update({
+            email: user.email,
+            full_name: user.user_metadata?.full_name || '',
+            avatar: user.user_metadata?.avatar_url || '',
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', user.id);
+        
+        if (error) console.error('Error updating user profile:', error);
+      } else {
+        // Usuario no existe, crear
+        const { error } = await supabase
+          .from('users')
+          .insert({
+            id: user.id,
+            email: user.email,
+            full_name: user.user_metadata?.full_name || '',
+            avatar: user.user_metadata?.avatar_url || '',
+            role: 'user',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          });
+        
+        if (error && error.code !== '23505') {
+          console.error('Error creating user profile:', error);
+        }
+      }
     } catch (error) {
       console.error('Error in createOrUpdateUserProfile:', error);
     }
