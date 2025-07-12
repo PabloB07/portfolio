@@ -71,10 +71,38 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const getRedirectURL = () => {
+    if (typeof window !== 'undefined') {
+      const isProduction = window.location.hostname !== 'localhost';
+      return isProduction 
+        ? 'https://blancocl.vercel.app/admin'
+        : 'http://localhost:3000/admin';
+    }
+    return 'http://localhost:3000/admin';
+  };
+
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
+    });
+    
+    // Redirigir al admin después del login exitoso
+    if (!error && typeof window !== 'undefined') {
+      window.location.href = getRedirectURL();
+    }
+    
+    return { error };
+  };
+
+  const resetPassword = async (email: string) => {
+    // Verificar si el restablecimiento está habilitado
+    if (!authSettings.enablePasswordReset) {
+      return { error: { message: 'Password reset is currently disabled' } };
+    }
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email.toString(), {
+      redirectTo: getRedirectURL(),
     });
     return { error };
   };
@@ -97,18 +125,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         emailRedirectTo: authSettings.requireEmailVerification ? 
           `${window.location.origin}/auth/callback` : undefined
       },
-    });
-    return { error };
-  };
-
-  const resetPassword = async (email: string) => {
-    // Verificar si el restablecimiento está habilitado
-    if (!authSettings.enablePasswordReset) {
-      return { error: { message: 'Password reset is currently disabled' } };
-    }
-
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/reset-password`,
     });
     return { error };
   };

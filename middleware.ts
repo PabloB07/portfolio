@@ -1,29 +1,36 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { supabase } from './src/lib/supabase'
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 
 export async function middleware(request: NextRequest) {
+  const res = NextResponse.next()
+  const supabase = createMiddlewareClient({ req: request, res })
+  
   // Proteger rutas de admin
   if (request.nextUrl.pathname.startsWith('/admin')) {
-    const token = request.cookies.get('sb-access-token')?.value;
+    const { data: { session } } = await supabase.auth.getSession()
     
-    if (!token) {
-      return NextResponse.redirect(new URL('/login', request.url));
+    if (!session) {
+      const redirectUrl = new URL('/login', request.url)
+      redirectUrl.searchParams.set('redirectTo', request.nextUrl.pathname)
+      return NextResponse.redirect(redirectUrl)
     }
     
-    try {
-      const { data: { user }, error } = await supabase.auth.getUser(token);
-      if (error || !user) {
-        return NextResponse.redirect(new URL('/login', request.url));
-      }
-    } catch {
-      return NextResponse.redirect(new URL('/login', request.url));
+    // Verificar si el usuario tiene rol de admin
+    const { data: user } = await supabase
+      .from('users')
+      .select('role')
+      .eq('id', session.user.id)
+      .single()
+    
+    if (!user || user.role !== 'admin') {
+      return NextResponse.redirect(new URL('/', request.url))
     }
   }
   
-  return NextResponse.next()
+  return res
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/api/:path*']
+  matcher: ['/admin/:path*']
 }
