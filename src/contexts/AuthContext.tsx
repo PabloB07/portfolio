@@ -104,15 +104,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (error.code === 'PGRST116') {
           // Usuario no encontrado, crear perfil
           console.log('User not found in users table, will be created on next auth event');
+          setUserRole('user');
           return 'user';
         }
         console.error('Error fetching user role:', error);
+        setUserRole('user');
         return 'user';
       }
       
-      return data?.role || 'user';
+      const role = data?.role || 'user';
+      setUserRole(role);
+      return role;
     } catch (error) {
       console.error('Error in fetchUserRole:', error);
+      setUserRole('user');
       return 'user';
     }
   };
