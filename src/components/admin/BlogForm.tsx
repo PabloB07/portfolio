@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { X, Save, Plus, Trash2 } from 'lucide-react';
 import { BlogPost } from '../../types';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { Upload, Image as ImageIcon } from 'lucide-react';
 
 interface BlogFormProps {
   post?: BlogPost;
@@ -26,6 +27,8 @@ const BlogForm: React.FC<BlogFormProps> = ({ post, onSave, onCancel }) => {
   });
   const [newTag, setNewTag] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   useEffect(() => {
     if (post && post.id) {
@@ -116,6 +119,36 @@ const BlogForm: React.FC<BlogFormProps> = ({ post, onSave, onCancel }) => {
   const handleDateChange = (dateString: string) => {
     const date = new Date(dateString);
     handleInputChange('publishedAt', date);
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.type.startsWith('image/')) {
+        setIsUploadingImage(true);
+        
+        // Create preview
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const result = e.target?.result as string;
+          setImagePreview(result);
+          handleInputChange('image', result);
+        };
+        reader.readAsDataURL(file);
+        
+        // Simulate upload delay
+        setTimeout(() => {
+          setIsUploadingImage(false);
+        }, 1000);
+      } else {
+        alert('Por favor selecciona un archivo de imagen válido');
+      }
+    }
+  };
+
+  const removeImage = () => {
+    setImagePreview('');
+    handleInputChange('image', '');
   };
 
   return (
@@ -235,18 +268,90 @@ const BlogForm: React.FC<BlogFormProps> = ({ post, onSave, onCancel }) => {
             </div>
           </div>
 
-          {/* Imagen */}
+          {/* Imagen mejorada */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              URL de Imagen (opcional)
+              Imagen del Post
             </label>
-            <input
-              type="url"
-              value={formData.image || ''}
-              onChange={(e) => handleInputChange('image', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              placeholder="https://ejemplo.com/imagen.jpg"
-            />
+            
+            {imagePreview || formData.image ? (
+              <div className="space-y-4">
+                <div className="relative group">
+                  <img
+                    src={imagePreview || formData.image}
+                    alt="Preview"
+                    className="w-full h-48 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                    <button
+                      type="button"
+                      onClick={removeImage}
+                      className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                    >
+                      Eliminar Imagen
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="flex gap-2">
+                  <input
+                    type="url"
+                    value={formData.image || ''}
+                    onChange={(e) => {
+                      handleInputChange('image', e.target.value);
+                      setImagePreview(e.target.value);
+                    }}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    placeholder="O pega una URL de imagen"
+                  />
+                  <label className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors cursor-pointer flex items-center gap-2">
+                    <Upload size={16} />
+                    Cambiar
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              </div>
+            ) : (
+              <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8">
+                <label className="cursor-pointer">
+                  <div className="text-center">
+                    <ImageIcon className="mx-auto text-gray-400 mb-4" size={48} />
+                    <p className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                      {isUploadingImage ? 'Subiendo imagen...' : 'Subir imagen del post'}
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Arrastra una imagen aquí o haz clic para seleccionar
+                    </p>
+                  </div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                    disabled={isUploadingImage}
+                  />
+                </label>
+                
+                <div className="mt-4">
+                  <div className="text-center text-gray-500 text-sm mb-2">O</div>
+                  <input
+                    type="url"
+                    value={formData.image || ''}
+                    onChange={(e) => {
+                      handleInputChange('image', e.target.value);
+                      setImagePreview(e.target.value);
+                    }}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    placeholder="Pega una URL de imagen"
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Etiquetas */}

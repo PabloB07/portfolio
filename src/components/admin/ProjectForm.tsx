@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { X, Save, Plus, Trash2 } from 'lucide-react';
 import { Project } from '../../types';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { Upload, Image as ImageIcon } from 'lucide-react';
 
 interface ProjectFormProps {
   project?: Project;
@@ -25,6 +26,8 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
   });
   const [newTechnology, setNewTechnology] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   useEffect(() => {
     if (project && project.id) {
@@ -100,6 +103,29 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
     if (e.key === 'Enter') {
       e.preventDefault();
       addTechnology();
+    }
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.type.startsWith('image/')) {
+        setIsUploadingImage(true);
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const result = e.target?.result as string;
+          setImagePreview(result);
+          handleInputChange('image', result);
+        };
+        reader.readAsDataURL(file);
+        
+        setTimeout(() => {
+          setIsUploadingImage(false);
+        }, 1000);
+      } else {
+        alert('Por favor selecciona un archivo de imagen válido');
+      }
     }
   };
 
