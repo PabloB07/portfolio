@@ -13,20 +13,30 @@ const Projects: React.FC = () => {
   });
   const [filter, setFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [projectsList, setProjectsList] = useState(projects);
 
-  const filters = [
-    { key: 'all', label: 'Todos' },
-    { key: 'featured', label: 'Destacados' },
-    { key: 'rails', label: 'Ruby on Rails' },
-    { key: 'laravel', label: 'Laravel' },
-  ];
+  // Escuchar actualizaciones de proyectos
+  React.useEffect(() => {
+    const handleProjectsUpdate = (event: CustomEvent) => {
+      setProjectsList(event.detail);
+    };
 
-  const filteredProjects = projects.filter(project => {
+    window.addEventListener('projectsUpdated', handleProjectsUpdate as EventListener);
+    return () => {
+      window.removeEventListener('projectsUpdated', handleProjectsUpdate as EventListener);
+    };
+  }, []);
+
+  const filteredProjects = projectsList.filter(project => {
     if (!project.published) return false;
     if (filter === 'all') return true;
     if (filter === 'featured') return project.featured;
     if (filter === 'rails') return project.technologies.some(tech => tech.toLowerCase().includes('rails'));
     if (filter === 'laravel') return project.technologies.some(tech => tech.toLowerCase().includes('laravel'));
+    if (filter === 'java') return project.technologies.some(tech => tech.toLowerCase().includes('java') || tech.toLowerCase().includes('minecraft') || tech.toLowerCase().includes('paper'));
+    if (filter === 'nextjs') return project.technologies.some(tech => tech.toLowerCase().includes('next') || tech.toLowerCase().includes('react'));
+    if (filter === 'ruby') return project.technologies.some(tech => tech.toLowerCase().includes('ruby'));
+    if (filter === 'crystal') return project.technologies.some(tech => tech.toLowerCase().includes('crystal'));
     return true;
   });
 
@@ -47,7 +57,16 @@ const Projects: React.FC = () => {
           
           {/* Filter Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {filters.map((filterOption) => (
+            {[
+              { key: 'all', label: t('projects.filters.all') },
+              { key: 'featured', label: t('projects.filters.featured') },
+              { key: 'rails', label: t('projects.filters.rails') },
+              { key: 'laravel', label: t('projects.filters.laravel') },
+              { key: 'java', label: t('projects.filters.java') },
+              { key: 'nextjs', label: t('projects.filters.nextjs') },
+              { key: 'ruby', label: t('projects.filters.ruby') },
+              { key: 'crystal', label: t('projects.filters.crystal') }
+            ].map((filterOption) => (
               <motion.button
                 key={filterOption.key}
                 whileHover={{ scale: 1.05 }}
@@ -68,113 +87,51 @@ const Projects: React.FC = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence>
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 group"
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  
-                  {project.featured && (
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                        Destacado
-                      </span>
-                    </div>
-                  )}
-                  
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      onClick={() => setSelectedProject(project.id)}
-                      className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors duration-200"
-                    >
-                      <Eye size={20} />
-                    </motion.button>
+            {filteredProjects.length === 0 ? (
+              <div className="col-span-full text-center py-16">
+                <div className="text-6xl mb-4">🚀</div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  {t('projects.emptyState')}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {t('projects.emptyStateDesc')}
+                </p>
+              </div>
+            ) : (
+              filteredProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -10 }}
+                  className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 group"
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
                     
-                    {project.github && (
-                      <motion.a
+                    {project.featured && (
+                      <div className="absolute top-4 left-4">
+                        <span className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                          Destacado
+                        </span>
+                      </div>
+                    )}
+                    
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+                      <motion.button
                         whileHover={{ scale: 1.1 }}
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        onClick={() => setSelectedProject(project.id)}
                         className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors duration-200"
                       >
-                        <Github size={20} />
-                      </motion.a>
-                    )}
-                    
-                    {project.demo && (
-                      <motion.a
-                        whileHover={{ scale: 1.1 }}
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors duration-200"
-                      >
-                        <ExternalLink size={20} />
-                      </motion.a>
-                    )}
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
-                    {project.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-xs font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <span className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-full text-xs font-medium">
-                        +{project.technologies.length - 3}
-                      </span>
-                    )}
-                  </div>
-                  
-                  <div className="flex justify-between items-center">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      onClick={() => setSelectedProject(project.id)}
-                      className="text-primary-500 hover:text-primary-600 font-medium text-sm"
-                    >
-                      Ver detalles
-                    </motion.button>
-                    
-                    <div className="flex space-x-2">
-                      {project.demo && (
-                        <motion.a
-                          whileHover={{ scale: 1.1 }}
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors duration-200"
-                        >
-                          <ExternalLink size={16} />
-                        </motion.a>
-                      )}
+                        <Eye size={20} />
+                      </motion.button>
                       
                       {project.github && (
                         <motion.a
@@ -182,16 +139,89 @@ const Projects: React.FC = () => {
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors duration-200"
+                          className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors duration-200"
                         >
-                          <Github size={16} />
+                          <Github size={20} />
+                        </motion.a>
+                      )}
+                      
+                      {project.demo && (
+                        <motion.a
+                          whileHover={{ scale: 1.1 }}
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors duration-200"
+                        >
+                          <ExternalLink size={20} />
                         </motion.a>
                       )}
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                  
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                      {project.title}
+                    </h3>
+                    
+                    <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                      {project.description}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.slice(0, 3).map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-xs font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.technologies.length > 3 && (
+                        <span className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-full text-xs font-medium">
+                          +{project.technologies.length - 3}
+                        </span>
+                      )}
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        onClick={() => setSelectedProject(project.id)}
+                        className="text-primary-500 hover:text-primary-600 font-medium text-sm"
+                      >
+                        Ver detalles
+                      </motion.button>
+                      
+                      <div className="flex space-x-2">
+                        {project.demo && (
+                          <motion.a
+                            whileHover={{ scale: 1.1 }}
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors duration-200"
+                          >
+                            <ExternalLink size={16} />
+                          </motion.a>
+                        )}
+                        
+                        {project.github && (
+                          <motion.a
+                            whileHover={{ scale: 1.1 }}
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors duration-200"
+                          >
+                            <Github size={16} />
+                          </motion.a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )))}
           </AnimatePresence>
         </div>
 

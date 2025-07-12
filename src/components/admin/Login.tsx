@@ -16,14 +16,12 @@ const Login: React.FC = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Redirigir si ya está autenticado
   useEffect(() => {
     if (user) {
       router.push('/admin');
     }
   }, [user, router]);
 
-  // Autocompletado de credenciales guardadas
   useEffect(() => {
     const savedCredentials = localStorage.getItem('remember-credentials');
     if (savedCredentials) {
@@ -36,24 +34,6 @@ const Login: React.FC = () => {
     }
   }, []);
 
-  // Manejo de teclas
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === 'Enter' && !isLoading) {
-        const form = document.querySelector('form');
-        if (form) {
-          form.requestSubmit();
-        }
-      }
-      if (e.key === 'Escape') {
-        setError('');
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyPress);
-    return () => document.removeEventListener('keydown', handleKeyPress);
-  }, [isLoading]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -63,8 +43,6 @@ const Login: React.FC = () => {
       const { error } = await signIn(formData.email, formData.password, formData.rememberMe);
       if (error) {
         setError(error.message);
-      } else {
-        // El useEffect se encargará de la redirección
       }
     } catch (err: any) {
       setError(err.message || 'Error al iniciar sesión');
@@ -89,7 +67,7 @@ const Login: React.FC = () => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6" autoComplete="on">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Email
@@ -102,7 +80,6 @@ const Login: React.FC = () => {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 placeholder="tu@email.com"
-                autoComplete="email"
                 required
               />
             </div>
@@ -120,7 +97,6 @@ const Login: React.FC = () => {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 className="w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 placeholder="••••••••"
-                autoComplete="current-password"
                 required
               />
               <button
@@ -164,10 +140,6 @@ const Login: React.FC = () => {
             {isLoading ? 'Procesando...' : 'Iniciar Sesión'}
           </button>
         </form>
-
-        <div className="mt-4 text-xs text-gray-500 text-center">
-          Presiona Enter para enviar • Escape para limpiar errores
-        </div>
       </motion.div>
     </div>
   );

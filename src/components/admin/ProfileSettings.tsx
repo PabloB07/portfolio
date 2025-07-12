@@ -79,14 +79,30 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
     }
   };
 
-  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setProfileData({ ...profileData, avatar: e.target?.result as string });
+        const newAvatar = e.target?.result as string;
+        setProfileData({ ...profileData, avatar: newAvatar });
+        // Sincronizar avatar globalmente
+        window.dispatchEvent(new CustomEvent('avatarUpdated', { detail: newAvatar }));
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCVDownload = () => {
+    if (profileData.cv) {
+      const link = document.createElement('a');
+      link.href = profileData.cv;
+      link.download = profileData.cvFileName || 'CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      // Sincronizar CV al homepage
+      window.dispatchEvent(new CustomEvent('cvUpdated', { detail: profileData.cv }));
     }
   };
 
@@ -117,17 +133,6 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
     setMessage({ type: 'success', text: 'CV eliminado correctamente' });
   };
 
-  const handleCVDownload = () => {
-    if (profileData.cv) {
-      const link = document.createElement('a');
-      link.href = profileData.cv;
-      link.download = profileData.cvFileName || 'CV.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
-
   const handleRegistrationToggle = () => {
     updateSettings({ enableRegistration: !settings.enableRegistration });
   };
@@ -148,8 +153,8 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
               { id: 'profile', label: t('admin.profile.profileTab'), icon: User },
               { id: 'password', label: t('admin.profile.passwordTab'), icon: Lock },
               { id: 'cv', label: t('admin.profile.cvTab'), icon: FileText },
-              { id: 'registration', label: 'Registro de Usuarios', icon: UserPlus },
-              { id: 'settings', label: t('admin.tabs.settings'), icon: Settings }
+              { id: 'settings', label: 'Configuración', icon: Settings },
+              { id: 'registration', label: 'Registro de Usuarios', icon: UserPlus }
             ].map(({ id, label, icon: Icon }) => (
               <button
                 key={id}

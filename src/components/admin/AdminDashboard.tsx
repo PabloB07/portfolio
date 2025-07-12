@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { BarChart3, FileText, Bot, Plus, Edit, Trash2, Eye, EyeOff, User, LogOut, Settings } from 'lucide-react';
+import { BarChart3, FileText, Bot, Plus, Edit, Trash2, Eye, EyeOff, User, LogOut, Settings, Filter } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAuth } from '../../contexts/AuthContext';
 import Login from './Login';
@@ -29,10 +29,10 @@ const AdminDashboard: React.FC = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>(initialBlogPosts);
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState<AdminUser>({
-    username: 'admin',
-    email: 'admin@portfolio.com',
-    fullName: 'Administrador',
-    avatar: 'https://avatars.githubusercontent.com/u/36685434?v=4&size=64'
+    username: '',
+    email: '',
+    fullName: '',
+    avatar: undefined
   });
 
   const tabs = [
@@ -40,6 +40,7 @@ const AdminDashboard: React.FC = () => {
     { id: 'blog', label: t('admin.tabs.blog'), icon: FileText },
     { id: 'ai', label: t('admin.tabs.ai'), icon: Bot },
     { id: 'profile', label: t('admin.tabs.profile'), icon: User },
+    { id: 'filters', label: 'Filtros', icon: Filter },
     ...(userRole === 'admin' ? [{ id: 'settings', label: 'Configuración', icon: Settings }] : [])
   ];
 
@@ -85,20 +86,26 @@ const AdminDashboard: React.FC = () => {
   // CRUD para proyectos
   const handleSaveProject = async (project: Project) => {
     try {
+      const projectData = {
+        ...project,
+        id: project.id || crypto.randomUUID(),
+        user_id: user?.id
+      };
+  
       if (project.id && projects.find(p => p.id === project.id)) {
         // Actualizar
         const { error } = await supabase
           .from('projects')
-          .update(project)
+          .update(projectData)
           .eq('id', project.id);
         
         if (error) throw error;
-        setProjects(prev => prev.map(p => p.id === project.id ? project : p));
+        setProjects(prev => prev.map(p => p.id === project.id ? projectData : p));
       } else {
         // Crear
         const { data, error } = await supabase
           .from('projects')
-          .insert([{ ...project, user_id: user?.id }])
+          .insert([projectData])
           .select()
           .single();
         
@@ -106,8 +113,11 @@ const AdminDashboard: React.FC = () => {
         setProjects(prev => [data, ...prev]);
       }
       setEditingProject(null);
+      // Sincronizar con homepage
+      window.dispatchEvent(new CustomEvent('projectsUpdated', { detail: projects }));
     } catch (error) {
       console.error('Error saving project:', error);
+      alert('Error al guardar el proyecto');
     }
   };
 
@@ -130,20 +140,27 @@ const AdminDashboard: React.FC = () => {
   // CRUD para blog posts
   const handleSaveBlogPost = async (post: BlogPost) => {
     try {
+      const postData = {
+        ...post,
+        id: post.id || crypto.randomUUID(),
+        author_id: user?.id,
+        publishedAt: post.publishedAt || new Date()
+      };
+  
       if (post.id && blogPosts.find(p => p.id === post.id)) {
         // Actualizar
         const { error } = await supabase
           .from('blog_posts')
-          .update(post)
+          .update(postData)
           .eq('id', post.id);
         
         if (error) throw error;
-        setBlogPosts(prev => prev.map(p => p.id === post.id ? post : p));
+        setBlogPosts(prev => prev.map(p => p.id === post.id ? postData : p));
       } else {
         // Crear
         const { data, error } = await supabase
           .from('blog_posts')
-          .insert([{ ...post, author_id: user?.id }])
+          .insert([postData])
           .select()
           .single();
         
@@ -151,8 +168,11 @@ const AdminDashboard: React.FC = () => {
         setBlogPosts(prev => [data, ...prev]);
       }
       setEditingPost(null);
+      // Sincronizar con blog page
+      window.dispatchEvent(new CustomEvent('blogPostsUpdated', { detail: blogPosts }));
     } catch (error) {
       console.error('Error saving blog post:', error);
+      alert('Error al guardar el post');
     }
   };
 

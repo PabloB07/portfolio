@@ -10,6 +10,37 @@ const Hero: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [profileImage, setProfileImage] = useState(personalInfo.avatar || '');
+  const [cvUrl, setCvUrl] = useState<string | null>(null);
+
+  // Escuchar cambios de avatar
+  useEffect(() => {
+    const handleAvatarUpdate = (event: CustomEvent) => {
+      setProfileImage(event.detail);
+    };
+    
+    const handleCvUpdate = (event: CustomEvent) => {
+      setCvUrl(event.detail);
+    };
+
+    window.addEventListener('avatarUpdated', handleAvatarUpdate as EventListener);
+    window.addEventListener('cvUpdated', handleCvUpdate as EventListener);
+
+    return () => {
+      window.removeEventListener('avatarUpdated', handleAvatarUpdate as EventListener);
+      window.removeEventListener('cvUpdated', handleCvUpdate as EventListener);
+    };
+  }, []);
+
+  const handleDownloadCV = () => {
+    if (cvUrl) {
+      const link = document.createElement('a');
+      link.href = cvUrl;
+      link.download = 'Pablo_Blanco_CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
 
   const texts = [
     'Full Stack Developer',
