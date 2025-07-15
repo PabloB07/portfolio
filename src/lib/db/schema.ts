@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean, uuid } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, boolean, uuid, json } from 'drizzle-orm/pg-core';
 
 // Tabla de usuarios (complementa auth.users de Supabase)
 export const users = pgTable('users', {
@@ -7,6 +7,17 @@ export const users = pgTable('users', {
   fullName: text('full_name'),
   avatar: text('avatar'),
   role: text('role').default('user'), // 'admin', 'user'
+  cvUrl: text('cv_url'), // URL del CV en Supabase Storage
+  cvFileName: text('cv_file_name'),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow()
+});
+
+// Tabla de configuración del sistema
+export const systemSettings = pgTable('system_settings', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  settingsType: text('settings_type').notNull().unique(), // 'auth', 'general', etc.
+  settings: json('settings').notNull(), // JSON con la configuración
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow()
 });

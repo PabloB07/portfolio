@@ -15,6 +15,20 @@
       "when": 1752284222096,
       "tag": "0001_tidy_mastermind",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1752563575512,
+      "tag": "0002_fat_jean_grey",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1752566182070,
+      "tag": "0003_next_mister_sinister",
+      "breakpoints": true
     }
   ]
 }

@@ -1,39 +1,27 @@
-import React, { useState, useEffect } from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BarChart3, FileText, Bot, Plus, Edit, Trash2, Eye, EyeOff, User, LogOut, Settings, Filter } from 'lucide-react';
+import { BarChart3, FileText, Bot, Plus, Edit, Trash2, User, LogOut, Settings, Filter } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAuth } from '../../contexts/AuthContext';
+import { useProjects } from '../../hooks/useProjects';
+import { useBlogPosts } from '../../hooks/useBlogPosts';
 import Login from './Login';
 import ProfileSettings from './ProfileSettings';
 import ProjectForm from './ProjectForm';
 import BlogForm from './BlogForm';
 import SystemSettings from './SystemSettings';
-import { projects as initialProjects, blogPosts as initialBlogPosts } from '../../data/portfolio';
 import { Project, BlogPost } from '../../types';
-import { supabase } from '../../lib/supabase';
-
-interface AdminUser {
-  username: string;
-  email: string;
-  fullName: string;
-  avatar?: string;
-}
 
 const AdminDashboard: React.FC = () => {
   const { t } = useLanguage();
   const { user, isAuthenticated, userRole, signOut } = useAuth();
+  const { projects, createProject, updateProject, deleteProject } = useProjects();
+  const { blogPosts, createBlogPost, updateBlogPost, deleteBlogPost } = useBlogPosts();
   const [activeTab, setActiveTab] = useState('projects');
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
-  const [projects, setProjects] = useState<Project[]>(initialProjects);
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(initialBlogPosts);
-  const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState<AdminUser>({
-    username: '',
-    email: '',
-    fullName: '',
-    avatar: undefined
-  });
 
   const tabs = [
     { id: 'projects', label: t('admin.tabs.projects'), icon: BarChart3 },
@@ -44,77 +32,30 @@ const AdminDashboard: React.FC = () => {
     ...(userRole === 'admin' ? [{ id: 'settings', label: 'Configuración', icon: Settings }] : [])
   ];
 
-  // Cargar datos desde Supabase
-  useEffect(() => {
-    if (isAuthenticated) {
-      loadProjects();
-      loadBlogPosts();
-    }
-  }, [isAuthenticated]);
-
-  const loadProjects = async () => {
-    try {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .order('created_at', { ascending: false });
-      
-      if (error) throw error;
-      setProjects(data || []);
-    } catch (error) {
-      console.error('Error loading projects:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const loadBlogPosts = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('blog_posts')
-        .select('*')
-        .order('created_at', { ascending: false });
-      
-      if (error) throw error;
-      setBlogPosts(data || []);
-    } catch (error) {
-      console.error('Error loading blog posts:', error);
-    }
-  };
-
   // CRUD para proyectos
   const handleSaveProject = async (project: Project) => {
     try {
-      const projectData = {
-        ...project,
-        id: project.id || crypto.randomUUID(),
-        user_id: user?.id
-      };
-  
       if (project.id && projects.find(p => p.id === project.id)) {
         // Actualizar
-        const { error } = await supabase
-          .from('projects')
-          .update(projectData)
-          .eq('id', project.id);
-        
-        if (error) throw error;
-        setProjects(prev => prev.map(p => p.id === project.id ? projectData : p));
+        const result = await updateProject(project.id, project);
+        if (result.success) {
+          setEditingProject(null);
+          // Sincronizar con homepage
+          window.dispatchEvent(new CustomEvent('projectsUpdated', { detail: projects }));
+        } else {
+          alert('Error al actualizar el proyecto');
+        }
       } else {
         // Crear
-        const { data, error } = await supabase
-          .from('projects')
-          .insert([projectData])
-          .select()
-          .single();
-        
-        if (error) throw error;
-        setProjects(prev => [data, ...prev]);
+        const result = await createProject(project);
+        if (result.success) {
+          setEditingProject(null);
+          // Sincronizar con homepage
+          window.dispatchEvent(new CustomEvent('projectsUpdated', { detail: projects }));
+        } else {
+          alert('Error al crear el proyecto');
+        }
       }
-      setEditingProject(null);
-      // Sincronizar con homepage
-      window.dispatchEvent(new CustomEvent('projectsUpdated', { detail: projects }));
     } catch (error) {
       console.error('Error saving project:', error);
       alert('Error al guardar el proyecto');
@@ -123,16 +64,9 @@ const AdminDashboard: React.FC = () => {
 
   const handleDeleteProject = async (id: string) => {
     if (confirm('¿Estás seguro de que quieres eliminar este proyecto?')) {
-      try {
-        const { error } = await supabase
-          .from('projects')
-          .delete()
-          .eq('id', id);
-        
-        if (error) throw error;
-        setProjects(prev => prev.filter(p => p.id !== id));
-      } catch (error) {
-        console.error('Error deleting project:', error);
+      const result = await deleteProject(id);
+      if (!result.success) {
+        alert('Error al eliminar el proyecto');
       }
     }
   };
@@ -140,36 +74,23 @@ const AdminDashboard: React.FC = () => {
   // CRUD para blog posts
   const handleSaveBlogPost = async (post: BlogPost) => {
     try {
-      const postData = {
-        ...post,
-        id: post.id || crypto.randomUUID(),
-        author_id: user?.id,
-        publishedAt: post.publishedAt || new Date()
-      };
-  
       if (post.id && blogPosts.find(p => p.id === post.id)) {
         // Actualizar
-        const { error } = await supabase
-          .from('blog_posts')
-          .update(postData)
-          .eq('id', post.id);
-        
-        if (error) throw error;
-        setBlogPosts(prev => prev.map(p => p.id === post.id ? postData : p));
+        const result = await updateBlogPost(post.id, post);
+        if (result.success) {
+          setEditingPost(null);
+        } else {
+          alert('Error al actualizar el post');
+        }
       } else {
         // Crear
-        const { data, error } = await supabase
-          .from('blog_posts')
-          .insert([postData])
-          .select()
-          .single();
-        
-        if (error) throw error;
-        setBlogPosts(prev => [data, ...prev]);
+        const result = await createBlogPost(post);
+        if (result.success) {
+          setEditingPost(null);
+        } else {
+          alert('Error al crear el post');
+        }
       }
-      setEditingPost(null);
-      // Sincronizar con blog page
-      window.dispatchEvent(new CustomEvent('blogPostsUpdated', { detail: blogPosts }));
     } catch (error) {
       console.error('Error saving blog post:', error);
       alert('Error al guardar el post');
@@ -178,16 +99,9 @@ const AdminDashboard: React.FC = () => {
 
   const handleDeleteBlogPost = async (id: string) => {
     if (confirm('¿Estás seguro de que quieres eliminar este post?')) {
-      try {
-        const { error } = await supabase
-          .from('blog_posts')
-          .delete()
-          .eq('id', id);
-        
-        if (error) throw error;
-        setBlogPosts(prev => prev.filter(p => p.id !== id));
-      } catch (error) {
-        console.error('Error deleting blog post:', error);
+      const result = await deleteBlogPost(id);
+      if (!result.success) {
+        alert('Error al eliminar el post');
       }
     }
   };
@@ -199,18 +113,6 @@ const AdminDashboard: React.FC = () => {
   // Si no está autenticado, mostrar login
   if (!isAuthenticated) {
     return <Login />;
-  }
-
-  // Mostrar loading mientras cargan los datos
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Cargando...</p>
-        </div>
-      </div>
-    );
   }
 
   return (
@@ -438,30 +340,7 @@ const AdminDashboard: React.FC = () => {
           )}
 
           {activeTab === 'profile' && (
-            <ProfileSettings 
-              profile={{
-                username: currentUser.username,
-                email: currentUser.email,
-                fullName: currentUser.fullName,
-                avatar: currentUser.avatar
-              }}
-              onUpdateProfile={async (updatedProfile) => {
-                // Handle profile update
-                setCurrentUser(prev => ({
-                  ...prev,
-                  ...updatedProfile
-                }));
-              }}
-              onChangePassword={async (oldPassword, newPassword) => {
-                // Handle password change
-                try {
-                  // Implement password change logic here
-                  console.log('Password change requested');
-                } catch (error) {
-                  console.error('Error changing password:', error);
-                }
-              }}
-            />
+            <ProfileSettings />
           )}
 
           {activeTab === 'settings' && userRole === 'admin' && (

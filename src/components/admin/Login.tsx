@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
@@ -139,6 +141,16 @@ const Login: React.FC = () => {
           >
             {isLoading ? 'Procesando...' : 'Iniciar Sesión'}
           </button>
+
+          <div className="text-center">
+            <button
+              type="button"
+              onClick={() => router.push('/admin/register')}
+              className="text-primary-500 hover:text-primary-600 text-sm font-medium"
+            >
+              ¿No tienes cuenta? Regístrate aquí
+            </button>
+          </div>
         </form>
       </motion.div>
     </div>

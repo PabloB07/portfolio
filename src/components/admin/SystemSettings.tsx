@@ -1,48 +1,30 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Settings, Shield, Globe, Database, CheckCircle, XCircle, Save } from 'lucide-react';
+import { Settings, Shield, Globe, Database, CheckCircle, XCircle, Save, Users } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { useSupabaseSettings } from '../../hooks/useSupabaseSettings';
 import { supabase } from '../../lib/supabase';
 
-interface AuthSettings {
-  enableRegistration: boolean;
-  requireEmailVerification: boolean;
-  enablePasswordReset: boolean;
-  enableSocialLogin: boolean;
-}
-
-interface SystemSettingsProps {
-  onSettingsChange?: (settings: AuthSettings) => void;
-}
-
-const SystemSettings: React.FC<SystemSettingsProps> = ({ onSettingsChange }) => {
+const SystemSettings: React.FC = () => {
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState<'authentication' | 'general' | 'security'>('authentication');
-  const [authSettings, setAuthSettings] = useState<AuthSettings>({
-    enableRegistration: true,
-    requireEmailVerification: true,
-    enablePasswordReset: true,
-    enableSocialLogin: false
-  });
+  const { settings, updateAuthSettings, isLoading: settingsLoading } = useSupabaseSettings();
+  const [activeTab, setActiveTab] = useState<'authentication' | 'general' | 'security' | 'users'>('authentication');
   const [isLoading, setIsLoading] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'testing'>('disconnected');
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [users, setUsers] = useState<any[]>([]);
 
   useEffect(() => {
-    // Cargar configuraciones guardadas desde localStorage
-    const savedSettings = localStorage.getItem('authSettings');
-    if (savedSettings) {
-      setAuthSettings(JSON.parse(savedSettings));
-    }
-    
-    // Probar conexión inicial
     testSupabaseConnection();
+    loadUsers();
   }, []);
 
   const testSupabaseConnection = async () => {
     setConnectionStatus('testing');
     try {
-      const { data, error } = await supabase.from('profiles').select('count').limit(1);
+      const { error } = await supabase.from('users').select('count').limit(1);
       if (error) throw error;
       setConnectionStatus('connected');
     } catch (error) {
@@ -51,27 +33,54 @@ const SystemSettings: React.FC<SystemSettingsProps> = ({ onSettingsChange }) => 
     }
   };
 
-  const handleSettingChange = (key: keyof AuthSettings, value: boolean) => {
-    const newSettings = { ...authSettings, [key]: value };
-    setAuthSettings(newSettings);
-    onSettingsChange?.(newSettings);
+  const loadUsers = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select('id, email, full_name, role, created_at')
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      setUsers(data || []);
+    } catch (error) {
+      console.error('Error loading users:', error);
+    }
+  };
+
+  const handleSettingChange = async (key: keyof typeof settings.auth, value: boolean) => {
+    setIsLoading(true);
+    try {
+      const result = await updateAuthSettings({ [key]: value });
+      if (result.success) {
+        setMessage({ type: 'success', text: 'Configuración actualizada correctamente' });
+      } else {
+        setMessage({ type: 'error', text: 'Error al actualizar la configuración' });
+      }
+    } catch (error) {
+      setMessage({ type: 'error', text: 'Error al actualizar la configuración' });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleSaveSettings = async () => {
-    setIsLoading(true);
+    setMessage({ type: 'success', text: 'Configuraciones guardadas en la base de datos' });
+  };
+
+  const updateUserRole = async (userId: string, newRole: string) => {
     try {
-      // Guardar en localStorage
-      localStorage.setItem('authSettings', JSON.stringify(authSettings));
+      const { error } = await supabase
+        .from('users')
+        .update({ role: newRole, updated_at: new Date().toISOString() })
+        .eq('id', userId);
+
+      if (error) throw error;
       
-      // Aquí podrías guardar en Supabase si tienes una tabla de configuraciones
-      // await supabase.from('app_settings').upsert({ settings: authSettings });
-      
-      setMessage({ type: 'success', text: t('admin.settings.settingsSaved') });
+      await loadUsers();
+      setMessage({ type: 'success', text: 'Rol de usuario actualizado' });
     } catch (error) {
-      console.error('Error saving settings:', error);
-      setMessage({ type: 'error', text: t('admin.settings.settingsError') });
-    } finally {
-      setIsLoading(false);
+      console.error('Error updating user role:', error);
+      setMessage({ type: 'error', text: 'Error al actualizar el rol' });
     }
   };
 
@@ -109,6 +118,7 @@ const SystemSettings: React.FC<SystemSettingsProps> = ({ onSettingsChange }) => 
           <nav className="flex space-x-8 px-6">
             {[
               { id: 'authentication', label: t('admin.settings.authenticationTab'), icon: Shield },
+              { id: 'users', label: 'Usuarios', icon: Users },
               { id: 'general', label: t('admin.settings.generalTab'), icon: Settings },
               { id: 'security', label: t('admin.settings.securityTab'), icon: Globe }
             ].map(({ id, label, icon: Icon }) => (
@@ -196,22 +206,22 @@ const SystemSettings: React.FC<SystemSettingsProps> = ({ onSettingsChange }) => 
               <div className="space-y-4">
                 {[
                   {
-                    key: 'enableRegistration' as keyof AuthSettings,
+                    key: 'enableRegistration' as keyof typeof settings.auth,
                     title: t('admin.settings.enableRegistration'),
                     description: t('admin.settings.enableRegistrationDesc')
                   },
                   {
-                    key: 'requireEmailVerification' as keyof AuthSettings,
+                    key: 'requireEmailVerification' as keyof typeof settings.auth,
                     title: t('admin.settings.requireEmailVerification'),
                     description: t('admin.settings.requireEmailVerificationDesc')
                   },
                   {
-                    key: 'enablePasswordReset' as keyof AuthSettings,
+                    key: 'enablePasswordReset' as keyof typeof settings.auth,
                     title: t('admin.settings.enablePasswordReset'),
                     description: t('admin.settings.enablePasswordResetDesc')
                   },
                   {
-                    key: 'enableSocialLogin' as keyof AuthSettings,
+                    key: 'enableSocialLogin' as keyof typeof settings.auth,
                     title: t('admin.settings.enableSocialLogin'),
                     description: t('admin.settings.enableSocialLoginDesc')
                   }
@@ -222,9 +232,9 @@ const SystemSettings: React.FC<SystemSettingsProps> = ({ onSettingsChange }) => 
                       <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{description}</p>
                     </div>
                     <ToggleSwitch
-                      enabled={authSettings[key]}
+                      enabled={settings.auth[key]}
                       onChange={(value) => handleSettingChange(key, value)}
-                      disabled={connectionStatus !== 'connected'}
+                      disabled={connectionStatus !== 'connected' || settingsLoading}
                     />
                   </div>
                 ))}
@@ -242,6 +252,88 @@ const SystemSettings: React.FC<SystemSettingsProps> = ({ onSettingsChange }) => 
                   <Save size={18} />
                   <span>{isLoading ? 'Guardando...' : t('admin.settings.saveSettings')}</span>
                 </motion.button>
+              </div>
+            </motion.div>
+          )}
+
+          {activeTab === 'users' && (
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="space-y-6"
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                  Gestión de Usuarios
+                </h3>
+                <button
+                  onClick={loadUsers}
+                  className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600"
+                >
+                  Actualizar
+                </button>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                  <thead className="bg-gray-50 dark:bg-gray-700">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                        Usuario
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                        Email
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                        Rol
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                        Fecha de Registro
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                        Acciones
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                    {users.map((user) => (
+                      <tr key={user.id}>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900 dark:text-white">
+                            {user.full_name || 'Sin nombre'}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900 dark:text-white">
+                            {user.email}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <select
+                            value={user.role}
+                            onChange={(e) => updateUserRole(user.id, e.target.value)}
+                            className="text-sm border border-gray-300 dark:border-gray-600 rounded px-2 py-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                          >
+                            <option value="user">Usuario</option>
+                            <option value="admin">Administrador</option>
+                          </select>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                          {new Date(user.created_at).toLocaleDateString('es-ES')}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          <span className={`px-2 py-1 rounded-full text-xs ${
+                            user.role === 'admin' 
+                              ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                              : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                          }`}>
+                            {user.role === 'admin' ? 'Admin' : 'Usuario'}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </motion.div>
           )}

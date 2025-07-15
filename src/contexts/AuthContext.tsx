@@ -1,7 +1,8 @@
+"use client";
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
-import { useAuthSettings } from '../hooks/useAuthSettings';
 import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
@@ -32,10 +33,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [userRole, setUserRole] = useState<string | null>(null);
-  const { settings: authSettings } = useAuthSettings();
+  const [authSettings, setAuthSettings] = useState({
+    enableRegistration: true,
+    requireEmailVerification: true,
+    enablePasswordReset: true
+  });
   const router = useRouter();
 
   useEffect(() => {
+    // Cargar configuración de autenticación
+    loadAuthSettings();
+    
     // Recuperar sesión guardada
     const savedSession = localStorage.getItem('supabase-session');
     if (savedSession) {
@@ -91,6 +99,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     return () => subscription.unsubscribe();
   }, [router]);
+
+  const loadAuthSettings = async () => {
+    try {
+      const { data } = await supabase
+        .from('system_settings')
+        .select('settings')
+        .eq('settings_type', 'auth')
+        .single();
+      
+      if (data?.settings) {
+        setAuthSettings(data.settings);
+      }
+    } catch (error) {
+      console.error('Error loading auth settings:', error);
+    }
+  };
 
   const fetchUserRole = async (userId: string) => {
     try {
@@ -183,19 +207,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signIn = async (email: string, password: string, rememberMe: boolean = false) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    
-    if (!error && data.session) {
-      if (rememberMe) {
-        localStorage.setItem('supabase-session', JSON.stringify(data.session));
-        localStorage.setItem('remember-credentials', JSON.stringify({ email }));
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      
+      if (error) {
+        console.error('Sign in error:', error);
+        return { error };
       }
+      
+      if (data.session) {
+        if (rememberMe) {
+          localStorage.setItem('remember-credentials', JSON.stringify({ email }));
+        } else {
+          localStorage.removeItem('remember-credentials');
+        }
+      }
+      
+      return { error: null };
+    } catch (error) {
+      console.error('Unexpected sign in error:', error);
+      return { error: { message: 'Error inesperado al iniciar sesión' } };
     }
-    
-    return { error };
   };
 
   const resetPassword = async (email: string) => {

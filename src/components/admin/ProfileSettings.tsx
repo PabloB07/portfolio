@@ -1,34 +1,23 @@
-import React, { useState } from 'react';
+"use client";
+
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { User, Mail, Lock, Save, Camera, Eye, EyeOff, FileText, Download, Trash2, Settings, UserPlus, Upload } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { useAuthSettings } from '../../hooks/useAuthSettings';
+import { useSupabaseSettings } from '../../hooks/useSupabaseSettings';
+import { useUserProfile } from '../../hooks/useUserProfile';
 import SystemSettings from './SystemSettings';
 
-interface ProfileData {
-  username: string;
-  email: string;
-  fullName: string;
-  avatar?: string;
-  cv?: string; // URL del CV
-  cvFileName?: string;
-}
-
-interface ProfileSettingsProps {
-  profile: ProfileData;
-  onUpdateProfile: (profile: ProfileData) => void;
-  onChangePassword: (oldPassword: string, newPassword: string) => void;
-}
-
-const ProfileSettings: React.FC<ProfileSettingsProps> = ({
-  profile,
-  onUpdateProfile,
-  onChangePassword
-}) => {
+const ProfileSettings: React.FC = () => {
   const { t } = useLanguage();
-  const { settings, updateSettings } = useAuthSettings();
+  const { settings, updateAuthSettings } = useSupabaseSettings();
+  const { profile, updateProfile, uploadAvatar, uploadCV, changePassword, loading: profileLoading } = useUserProfile();
   const [activeTab, setActiveTab] = useState<'profile' | 'password' | 'cv' | 'settings' | 'registration'>('profile');
-  const [profileData, setProfileData] = useState<ProfileData>(profile);
+  const [profileData, setProfileData] = useState({
+    fullName: '',
+    email: '',
+    avatar: ''
+  });
   const [passwordData, setPasswordData] = useState({
     oldPassword: '',
     newPassword: '',
@@ -42,14 +31,31 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
+  useEffect(() => {
+    if (profile) {
+      setProfileData({
+        fullName: profile.fullName || '',
+        email: profile.email || '',
+        avatar: profile.avatar || ''
+      });
+    }
+  }, [profile]);
+
   const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      onUpdateProfile(profileData);
-      setMessage({ type: 'success', text: t('admin.profile.updateSuccess') });
+      const result = await updateProfile({
+        fullName: profileData.fullName,
+        avatar: profileData.avatar
+      });
+      
+      if (result.success) {
+        setMessage({ type: 'success', text: t('admin.profile.updateSuccess') });
+      } else {
+        setMessage({ type: 'error', text: 'Error al actualizar el perfil' });
+      }
     } catch (error) {
       setMessage({ type: 'error', text: t('admin.profile.updateError') });
     } finally {
@@ -68,10 +74,14 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
     setIsLoading(true);
     
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      onChangePassword(passwordData.oldPassword, passwordData.newPassword);
-      setPasswordData({ oldPassword: '', newPassword: '', confirmPassword: '' });
-      setMessage({ type: 'success', text: t('admin.profile.passwordSuccess') });
+      const result = await changePassword(passwordData.newPassword);
+      
+      if (result.success) {
+        setPasswordData({ oldPassword: '', newPassword: '', confirmPassword: '' });
+        setMessage({ type: 'success', text: t('admin.profile.passwordSuccess') });
+      } else {
+        setMessage({ type: 'error', text: 'Error al cambiar la contraseña' });
+      }
     } catch (error) {
       setMessage({ type: 'error', text: t('admin.profile.passwordError') });
     } finally {
@@ -82,59 +92,81 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
   const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const newAvatar = e.target?.result as string;
-        setProfileData({ ...profileData, avatar: newAvatar });
-        // Sincronizar avatar globalmente
-        window.dispatchEvent(new CustomEvent('avatarUpdated', { detail: newAvatar }));
-      };
-      reader.readAsDataURL(file);
+      setIsLoading(true);
+      try {
+        const result = await uploadAvatar(file);
+        if (result.success) {
+          setProfileData({ ...profileData, avatar: result.url || '' });
+          setMessage({ type: 'success', text: 'Avatar actualizado correctamente' });
+          // Sincronizar avatar globalmente
+          window.dispatchEvent(new CustomEvent('avatarUpdated', { detail: result.url }));
+        } else {
+          setMessage({ type: 'error', text: 'Error al subir el avatar' });
+        }
+      } catch (error) {
+        setMessage({ type: 'error', text: 'Error al subir el avatar' });
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
   const handleCVDownload = () => {
-    if (profileData.cv) {
+    if (profile?.cvUrl) {
       const link = document.createElement('a');
-      link.href = profileData.cv;
-      link.download = profileData.cvFileName || 'CV.pdf';
+      link.href = profile.cvUrl;
+      link.download = profile.cvFileName || 'CV.pdf';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       // Sincronizar CV al homepage
-      window.dispatchEvent(new CustomEvent('cvUpdated', { detail: profileData.cv }));
+      window.dispatchEvent(new CustomEvent('cvUpdated', { detail: profile.cvUrl }));
     }
   };
 
-  const handleCVUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCVUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && file.type === 'application/pdf') {
-      const formData = new FormData();
-      formData.append('cv', file);
-      
-      // Simular upload del CV
       setIsLoading(true);
-      setTimeout(() => {
-        setProfileData({ 
-          ...profileData, 
-          cv: URL.createObjectURL(file),
-          cvFileName: file.name
-        });
-        setMessage({ type: 'success', text: t('admin.profile.cvUploadSuccess') });
+      try {
+        const result = await uploadCV(file);
+        if (result.success) {
+          setMessage({ type: 'success', text: t('admin.profile.cvUploadSuccess') });
+          // Disparar evento para sincronizar con homepage
+          window.dispatchEvent(new CustomEvent('cvUpdated', { detail: result.url }));
+        } else {
+          setMessage({ type: 'error', text: 'Error al subir el CV' });
+        }
+      } catch (error) {
+        setMessage({ type: 'error', text: 'Error al subir el CV' });
+      } finally {
         setIsLoading(false);
-      }, 1000);
+      }
     } else {
       setMessage({ type: 'error', text: 'Solo se permiten archivos PDF' });
     }
   };
 
-  const handleCVRemove = () => {
-    setProfileData({ ...profileData, cv: undefined, cvFileName: undefined });
-    setMessage({ type: 'success', text: 'CV eliminado correctamente' });
+  const handleCVRemove = async () => {
+    try {
+      const result = await updateProfile({ cvUrl: '', cvFileName: '' });
+      if (result.success) {
+        setMessage({ type: 'success', text: 'CV eliminado correctamente' });
+      }
+    } catch (error) {
+      setMessage({ type: 'error', text: 'Error al eliminar el CV' });
+    }
   };
 
-  const handleRegistrationToggle = () => {
-    updateSettings({ enableRegistration: !settings.enableRegistration });
+  const handleRegistrationToggle = async () => {
+    const result = await updateAuthSettings({ 
+      enableRegistration: !settings.auth.enableRegistration 
+    });
+    if (result.success) {
+      setMessage({ type: 'success', text: 'Configuración actualizada' });
+    } else {
+      setMessage({ type: 'error', text: 'Error al actualizar la configuración' });
+    }
   };
 
   return (
@@ -246,14 +278,13 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    {t('admin.profile.username')}
+                    {t('admin.profile.email')}
                   </label>
                   <input
-                    type="text"
-                    value={profileData.username}
-                    onChange={(e) => setProfileData({ ...profileData, username: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                    required
+                    type="email"
+                    value={profileData.email}
+                    disabled
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 text-gray-900 dark:text-white transition-colors"
                   />
                 </div>
 
@@ -351,7 +382,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
                   {t('admin.profile.uploadCV')}
                 </h3>
                 
-                {profileData.cv ? (
+                {profile?.cvUrl ? (
                   <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
                     <div className="flex items-center justify-center space-x-4 mb-4">
                       <FileText className="text-red-500" size={48} />
@@ -360,7 +391,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
                           {t('admin.profile.currentCV')}
                         </p>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
-                          {profileData.cvFileName}
+                          {profile.cvFileName}
                         </p>
                       </div>
                     </div>
