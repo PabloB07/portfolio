@@ -1,8 +1,8 @@
 'use client'
 
+import React from 'react';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import { LanguageProvider } from '../contexts/LanguageContext';
-import { AuthProvider } from '../contexts/AuthContext';
 import '../index.css';
 
 export default function RootLayout({
@@ -15,9 +15,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <LanguageProvider>
-            <AuthProvider>
-              {children}
-            </AuthProvider>
+            {children}
           </LanguageProvider>
         </ThemeProvider>
       </body>

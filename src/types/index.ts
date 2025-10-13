@@ -12,12 +12,17 @@ export interface Project {
   id: string;
   title: string;
   description: string;
+  fullDescription?: string;
   technologies: string[];
   image: string;
   github?: string;
   demo?: string;
   featured?: boolean;
   published?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  status?: 'completed' | 'in-progress' | 'planned';
+  category?: string;
 }
 
 export interface Experience {
@@ -27,19 +32,7 @@ export interface Experience {
   period: string;
   description: string;
   technologies: string[];
-}
-
-export interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  author: string;
-  publishedAt: Date;
-  tags: string[];
-  featured?: boolean;
-  published?: boolean;
-  image?: string;
+  type?: 'work' | 'education' | 'volunteer';
 }
 
 export interface ContactForm {

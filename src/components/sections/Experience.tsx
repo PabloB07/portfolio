@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Building2, Calendar, ChevronRight } from 'lucide-react';
+import { Calendar, ChevronRight, Briefcase, GraduationCap } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { experiences } from '../../data/portfolio';
 
@@ -54,15 +54,28 @@ const Experience: React.FC = () => {
                   }`}
                 >
                   <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 group hover:shadow-xl transition-all duration-300">
-                    {/* Company & Period */}
+                    {/* Type Badge & Period */}
                     <div className="flex flex-wrap items-center justify-between mb-4">
-                      <div className="flex items-center space-x-2 text-primary-500 mb-2 sm:mb-0">
-                        <Building2 size={20} />
-                        <span className="font-semibold">{experience.company}</span>
+                      <div className="flex items-center space-x-3 mb-2 sm:mb-0">
+                        <div className="flex items-center space-x-2 text-primary-500">
+                          {experience.type === 'education' ? (
+                            <GraduationCap size={20} />
+                          ) : (
+                            <Briefcase size={20} />
+                          )}
+                          <span className="font-semibold">{experience.company}</span>
+                        </div>
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          experience.type === 'education' 
+                            ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
+                            : 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300'
+                        }`}>
+                          {experience.type === 'education' ? 'Educación' : 'Trabajo'}
+                        </span>
                       </div>
                       <div className="flex items-center space-x-2 text-gray-500 dark:text-gray-400">
                         <Calendar size={16} />
-                        <span className="text-sm">{experience.period}</span>
+                        <span className="text-sm font-medium">{experience.period}</span>
                       </div>
                     </div>
 
@@ -79,15 +92,16 @@ const Experience: React.FC = () => {
                     {/* Technologies */}
                     <div className="space-y-3">
                       <h4 className="text-sm font-semibold text-gray-900 dark:text-white flex items-center">
-                        <ChevronRight size={16} className="mr-1" />
-                        Tecnologías utilizadas:
+                        <ChevronRight size={16} className="mr-1 text-primary-500" />
+                        {t('experience.technologies')}
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {experience.technologies.map((tech) => (
                           <motion.span
                             key={tech}
-                            whileHover={{ scale: 1.05 }}
-                            className="px-3 py-1 bg-gradient-to-r from-primary-100 to-secondary-100 dark:from-primary-900 dark:to-secondary-900 text-primary-700 dark:text-primary-300 rounded-full text-xs font-medium border border-primary-200 dark:border-primary-800"
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-3 py-1.5 bg-gradient-to-r from-primary-50 to-secondary-50 dark:from-primary-900/50 dark:to-secondary-900/50 text-primary-700 dark:text-primary-300 rounded-lg text-xs font-medium border border-primary-200 dark:border-primary-700 hover:shadow-md transition-all duration-200"
                           >
                             {tech}
                           </motion.span>

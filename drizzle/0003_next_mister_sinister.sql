@@ -1,1 +1,0 @@
-ALTER TABLE "system_settings" ADD CONSTRAINT "system_settings_settings_type_unique" UNIQUE("settings_type");

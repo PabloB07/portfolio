@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Eye, Filter } from 'lucide-react';
+import { ExternalLink, Github, Eye } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { projects } from '../../data/portfolio';
 
@@ -31,12 +31,14 @@ const Projects: React.FC = () => {
     if (!project.published) return false;
     if (filter === 'all') return true;
     if (filter === 'featured') return project.featured;
+    if (filter === 'ruby-gems') return project.category === 'ruby-gem';
+    if (filter === 'web-apps') return project.category === 'web-application';
+    if (filter === 'minecraft') return project.category === 'minecraft-plugin';
     if (filter === 'rails') return project.technologies.some(tech => tech.toLowerCase().includes('rails'));
     if (filter === 'laravel') return project.technologies.some(tech => tech.toLowerCase().includes('laravel'));
     if (filter === 'java') return project.technologies.some(tech => tech.toLowerCase().includes('java') || tech.toLowerCase().includes('minecraft') || tech.toLowerCase().includes('paper'));
     if (filter === 'nextjs') return project.technologies.some(tech => tech.toLowerCase().includes('next') || tech.toLowerCase().includes('react'));
     if (filter === 'ruby') return project.technologies.some(tech => tech.toLowerCase().includes('ruby'));
-    if (filter === 'crystal') return project.technologies.some(tech => tech.toLowerCase().includes('crystal'));
     return true;
   });
 
@@ -58,14 +60,13 @@ const Projects: React.FC = () => {
           {/* Filter Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {[
-              { key: 'all', label: t('projects.filters.all') },
-              { key: 'featured', label: t('projects.filters.featured') },
-              { key: 'rails', label: t('projects.filters.rails') },
-              { key: 'laravel', label: t('projects.filters.laravel') },
-              { key: 'java', label: t('projects.filters.java') },
-              { key: 'nextjs', label: t('projects.filters.nextjs') },
-              { key: 'ruby', label: t('projects.filters.ruby') },
-              { key: 'crystal', label: t('projects.filters.crystal') }
+              { key: 'all', label: t('projects.filters.all'), emoji: '🌟' },
+              { key: 'featured', label: t('projects.filters.featured'), emoji: '⭐' },
+              { key: 'ruby-gems', label: t('projects.filters.rubyGems'), emoji: '💎' },
+              { key: 'web-apps', label: t('projects.filters.webApps'), emoji: '🌐' },
+              { key: 'minecraft', label: t('projects.filters.minecraft'), emoji: '🎮' },
+              { key: 'rails', label: t('projects.filters.rails'), emoji: '🛤️' },
+              { key: 'nextjs', label: t('projects.filters.nextjs'), emoji: '⚛️' }
             ].map((filterOption) => (
               <motion.button
                 key={filterOption.key}
@@ -74,12 +75,12 @@ const Projects: React.FC = () => {
                 onClick={() => setFilter(filterOption.key)}
                 className={`flex items-center space-x-2 px-6 py-3 rounded-full transition-all duration-300 ${
                   filter === filterOption.key
-                    ? 'bg-primary-500 text-white shadow-lg'
-                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700'
+                    ? 'bg-gradient-to-r from-primary-500 to-secondary-500 text-white shadow-lg shadow-primary-500/25'
+                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600'
                 }`}
               >
-                <Filter size={16} />
-                <span>{filterOption.label}</span>
+                <span className="text-lg">{filterOption.emoji}</span>
+                <span className="font-medium">{filterOption.label}</span>
               </motion.button>
             ))}
           </div>
@@ -116,13 +117,28 @@ const Projects: React.FC = () => {
                       className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     
-                    {project.featured && (
-                      <div className="absolute top-4 left-4">
+                    <div className="absolute top-4 left-4 flex flex-col gap-2">
+                      {project.featured && (
                         <span className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                          Destacado
+                          ⭐ Destacado
                         </span>
-                      </div>
-                    )}
+                      )}
+                      {project.category && (
+                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                          project.category === 'ruby-gem' 
+                            ? 'bg-red-500/90 text-white'
+                            : project.category === 'web-application'
+                            ? 'bg-blue-500/90 text-white'
+                            : project.category === 'minecraft-plugin'
+                            ? 'bg-green-500/90 text-white'
+                            : 'bg-gray-500/90 text-white'
+                        }`}>
+                          {project.category === 'ruby-gem' && '💎 Ruby Gem'}
+                          {project.category === 'web-application' && '🌐 Web App'}
+                          {project.category === 'minecraft-plugin' && '🎮 Plugin'}
+                        </span>
+                      )}
+                    </div>
                     
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
                       <motion.button
@@ -184,13 +200,37 @@ const Projects: React.FC = () => {
                       )}
                     </div>
                     
+                    {/* Status indicator */}
+                    {project.status && (
+                      <div className="mb-4 flex items-center">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${
+                          project.status === 'completed'
+                            ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300'
+                            : project.status === 'in-progress'
+                            ? 'bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300'
+                            : 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
+                        }`}>
+                          <div className={`w-2 h-2 rounded-full ${
+                            project.status === 'completed'
+                              ? 'bg-green-500'
+                              : project.status === 'in-progress'
+                              ? 'bg-yellow-500'
+                              : 'bg-blue-500'
+                          }`} />
+                          {project.status === 'completed' && 'Completado'}
+                          {project.status === 'in-progress' && 'En desarrollo'}
+                          {project.status === 'planned' && 'Planificado'}
+                        </span>
+                      </div>
+                    )}
+
                     <div className="flex justify-between items-center">
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         onClick={() => setSelectedProject(project.id)}
-                        className="text-primary-500 hover:text-primary-600 font-medium text-sm"
+                        className="text-primary-500 hover:text-primary-600 font-medium text-sm transition-colors duration-200"
                       >
-                        Ver detalles
+                        Ver detalles →
                       </motion.button>
                       
                       <div className="flex space-x-2">
@@ -200,7 +240,8 @@ const Projects: React.FC = () => {
                             href={project.demo}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors duration-200"
+                            className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors duration-200 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20"
+                            title="Ver demo"
                           >
                             <ExternalLink size={16} />
                           </motion.a>
@@ -212,7 +253,8 @@ const Projects: React.FC = () => {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors duration-200"
+                            className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors duration-200 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20"
+                            title="Ver código fuente"
                           >
                             <Github size={16} />
                           </motion.a>

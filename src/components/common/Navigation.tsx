@@ -25,14 +25,13 @@ const Navigation: React.FC = () => {
     { href: '/', label: t('nav.home') },
     { href: '#about', label: t('nav.about') },
     { href: '#projects', label: t('nav.projects') },
-    { href: '/blog', label: t('nav.blog'), isRoute: true },
     { href: '#experience', label: t('nav.experience') },
     { href: '#contact', label: t('nav.contact') },
   ];
 
-  const handleNavClick = (href: string, isRoute?: boolean) => {
+  const handleNavClick = (href: string) => {
     setIsOpen(false);
-    if (isRoute || href === '/') {
+    if (href === '/') {
       window.location.href = href;
     } else {
       const element = document.querySelector(href);
@@ -69,7 +68,7 @@ const Navigation: React.FC = () => {
                 key={item.href}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => handleNavClick(item.href, item.isRoute)}
+                onClick={() => handleNavClick(item.href)}
                 className="text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors duration-200"
               >
                 {item.label}
@@ -154,7 +153,7 @@ const Navigation: React.FC = () => {
                   <motion.button
                     key={item.href}
                     whileHover={{ x: 10 }}
-                    onClick={() => handleNavClick(item.href, item.isRoute)}
+                    onClick={() => handleNavClick(item.href)}
                     className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
                   >
                     {item.label}

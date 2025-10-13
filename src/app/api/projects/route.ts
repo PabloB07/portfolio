@@ -1,32 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '../../../lib/db';
-import { projects } from '../../../lib/db/schema';
+
+// Datos estáticos para proyectos
+const staticProjects = [
+  {
+    id: '1',
+    title: 'Portfolio Personal',
+    description: 'Mi portafolio personal desarrollado con Next.js, TypeScript y Tailwind CSS.',
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'React'],
+    image: '/projects/portfolio.jpg',
+    github: 'https://github.com/usuario/portfolio',
+    demo: 'https://mi-portfolio.com',
+    featured: true,
+    published: true,
+    createdAt: '2024-01-15T10:00:00Z',
+    updatedAt: '2024-01-15T10:00:00Z'
+  }
+];
 
 export async function GET() {
   try {
-    const allProjects = await db.select().from(projects);
-    return NextResponse.json(allProjects);
+    return NextResponse.json(staticProjects);
   } catch (error) {
     return NextResponse.json({ error: 'Error fetching projects' }, { status: 500 });
   }
 }
 
 export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json();
-    const newProject = await db.insert(projects).values({
-      title: body.title,
-      description: body.description,
-      technologies: body.technologies,
-      image: body.image,
-      github: body.github,
-      demo: body.demo,
-      featured: body.featured,
-      published: body.published
-    }).returning();
-    
-    return NextResponse.json(newProject[0]);
-  } catch (error) {
-    return NextResponse.json({ error: 'Error creating project' }, { status: 500 });
-  }
+  return NextResponse.json(
+    { error: 'Funcionalidad de creación deshabilitada en versión estática' }, 
+    { status: 403 }
+  );
 }
