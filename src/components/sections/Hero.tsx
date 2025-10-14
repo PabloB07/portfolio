@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Github, Mail, Linkedin, MapPin, Camera } from 'lucide-react';
+import { ChevronDown, Github, Mail, Linkedin, MapPin, Camera, Download } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { personalInfo } from '../../data/portfolio';
 
@@ -10,37 +10,20 @@ const Hero: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [profileImage, setProfileImage] = useState(personalInfo.avatar || '');
-  const [cvUrl, setCvUrl] = useState<string | null>(null);
-
   // Escuchar cambios de avatar
   useEffect(() => {
     const handleAvatarUpdate = (event: CustomEvent) => {
       setProfileImage(event.detail);
     };
-    
-    const handleCvUpdate = (event: CustomEvent) => {
-      setCvUrl(event.detail);
-    };
 
     window.addEventListener('avatarUpdated', handleAvatarUpdate as EventListener);
-    window.addEventListener('cvUpdated', handleCvUpdate as EventListener);
 
     return () => {
       window.removeEventListener('avatarUpdated', handleAvatarUpdate as EventListener);
-      window.removeEventListener('cvUpdated', handleCvUpdate as EventListener);
     };
   }, []);
 
-  const handleDownloadCV = () => {
-    if (cvUrl) {
-      const link = document.createElement('a');
-      link.href = cvUrl;
-      link.download = 'Pablo_Blanco_CV.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
+
 
   const texts = [
     'Full Stack Developer',
@@ -159,21 +142,16 @@ const Hero: React.FC = () => {
                 {t('hero.cta')}
               </motion.button>
 
-              <motion.button
+              <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  const link = document.createElement('a');
-                  link.href = '/api/download-cv';
-                  link.download = 'Pablo_Blanco_Navarro_CV.pdf';
-                  document.body.appendChild(link);
-                  link.click();
-                  document.body.removeChild(link);
-                }}
-                className="px-8 py-4 border-2 border-primary-500 text-primary-500 dark:text-primary-400 font-semibold rounded-lg hover:bg-primary-500 hover:text-white dark:hover:text-white transition-all duration-300"
+                href="/api/download-cv"
+                download="Pablo_Blanco_Navarro_CV.pdf"
+                className="px-8 py-4 border-2 border-primary-500 text-primary-500 dark:text-primary-400 font-semibold rounded-lg hover:bg-primary-500 hover:text-white dark:hover:text-white transition-all duration-300 flex items-center gap-2 no-underline"
               >
+                <Download size={20} />
                 {t('hero.downloadCV')}
-              </motion.button>
+              </motion.a>
             </motion.div>
 
             {/* Social Links */}

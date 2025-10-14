@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sun, Moon, Globe } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { personalInfo } from '../../data/portfolio';
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

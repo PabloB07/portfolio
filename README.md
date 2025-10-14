@@ -65,6 +65,10 @@ cd portfolio
 # Instalar dependencias
 npm install
 
+# Configurar tu CV (opcional)
+# Coloca tu archivo CV en: public/cv/PabloB-CV-es.pdf
+# O actualiza la ruta en: src/app/api/download-cv/route.ts
+
 # Iniciar servidor de desarrollo
 npm run dev
 ```
@@ -101,8 +105,36 @@ portfolio/
 │   ├── 📂 utils/               # Utilidades y traducciones
 │   └── 📂 lib/                 # Configuraciones y librerías
 ├── 📂 public/                  # Archivos estáticos
+│   ├── 📂 cv/                  # Archivos de CV
+│   │   └── PabloB-CV-es.pdf    # CV en formato PDF
+│   ├── favicon.svg             # Ícono del sitio
+│   └── me.png                  # Foto de perfil
 └── 📋 README.md               # Este archivo
 ```
+
+## 📄 **Configuración del CV**
+
+### **Descarga de CV**
+El portfolio incluye funcionalidad para descargar tu CV en PDF:
+
+1. **Ubicación del archivo**: Coloca tu CV en `public/cv/PabloB-CV-es.pdf`
+2. **API Route**: La descarga se maneja en `src/app/api/download-cv/route.ts`
+3. **Botón de descarga**: Disponible en la sección Hero con ícono y animaciones
+
+### **Personalizar CV**
+```bash
+# Para usar tu propio CV:
+1. Reemplaza el archivo en: public/cv/PabloB-CV-es.pdf
+2. O cambia la ruta en: src/app/api/download-cv/route.ts
+3. Actualiza el nombre de descarga si es necesario
+```
+
+### **Funcionalidades del CV**
+- ✅ **Descarga directa** - Botón con ícono de descarga
+- ✅ **API segura** - Endpoint protegido para servir el archivo
+- ✅ **Nombre personalizado** - El archivo se descarga con nombre legible
+- ✅ **Animaciones** - Hover effects y transiciones suaves
+- ✅ **Responsive** - Funciona en todos los dispositivos
 
 ## 🎨 **Características del Diseño**
 
