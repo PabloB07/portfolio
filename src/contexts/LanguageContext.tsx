@@ -55,13 +55,25 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
   const t = (key: string): string => {
     const keys = key.split('.');
-    let value: typeof translations[keyof typeof translations] = translations[currentLanguage.code as keyof typeof translations];
+    const langCode = currentLanguage.code as keyof typeof translations;
+    
+    // Fallback to Spanish if language not found
+    let value: any = translations[langCode] || translations['es'];
     
     for (const k of keys) {
-      value = (value as any)?.[k];
+      value = value?.[k];
     }
     
-    return typeof value === 'string' ? value : key;
+    // If translation not found, try fallback to Spanish
+    if (typeof value !== 'string') {
+      let fallbackValue: any = translations['es'];
+      for (const k of keys) {
+        fallbackValue = fallbackValue?.[k];
+      }
+      return typeof fallbackValue === 'string' ? fallbackValue : key;
+    }
+    
+    return value;
   };
 
   return (

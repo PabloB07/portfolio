@@ -1,61 +1,170 @@
 import { Project, Experience } from '../types';
 
-export const projects: Project[] = [
+// Base project data with language-agnostic fields
+export const projectsBase = [
   {
-    id: 'ruby-gem-auth',
-    title: 'AuthGuard Gem',
-    description: 'Gema Ruby para autenticación y autorización simplificada en aplicaciones Rails. Incluye middleware personalizable y integración con JWT.',
-    fullDescription: 'Una gema Ruby completa que proporciona un sistema de autenticación robusto y flexible para aplicaciones Rails. Incluye generadores, middleware personalizable, integración con JWT, y soporte para múltiples estrategias de autenticación.',
-    image: 'https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Ruby', 'Rails', 'JWT', 'RSpec', 'Redis'],
-    github: 'https://github.com/PabloB07/authguard-gem',
+    id: 'kickwp',
+    translationKey: 'kickwp',
+    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['PHP', 'WordPress', 'Kick.com API', 'JavaScript', 'CSS'],
+    github: 'https://github.com/PabloB07/KickWP',
     demo: '',
-    status: 'completed',
+    status: 'completed' as const,
+    featured: true,
+    published: true,
+    category: 'wordpress-plugin'
+  },
+  {
+    id: 'orionx-sdk-ruby',
+    translationKey: 'orionxSdk',
+    image: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Ruby', 'API REST', 'GraphQL', 'RSpec', 'Cryptocurrency'],
+    github: 'https://github.com/PabloB07/orionx-sdk-ruby',
+    demo: '',
+    status: 'completed' as const,
     featured: true,
     published: true,
     category: 'ruby-gem'
   },
   {
-    id: 'ruby-gem-api-validator',
-    title: 'API Validator Gem',
-    description: 'Gema para validación automática de parámetros de API REST con soporte para JSON Schema y documentación automática.',
-    fullDescription: 'Herramienta que simplifica la validación de parámetros en APIs REST desarrolladas en Rails. Genera documentación automática y proporciona validaciones robustas basadas en JSON Schema.',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Ruby', 'Rails', 'JSON Schema', 'Swagger', 'RDoc'],
-    github: 'https://github.com/PabloB07/api-validator-gem',
+    id: 'buda-api-ruby',
+    translationKey: 'budaApi',
+    image: 'https://images.unsplash.com/photo-1622630998477-20aa696ecb05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Ruby', 'API REST', 'RSpec', 'Cryptocurrency', 'WebSocket'],
+    github: 'https://github.com/PabloB07/buda-api-ruby',
     demo: '',
-    status: 'completed',
+    status: 'completed' as const,
     featured: true,
     published: true,
     category: 'ruby-gem'
   },
   {
-    id: 'minecraft-economy-plugin',
-    title: 'EconomyPro Plugin',
-    description: 'Plugin de economía avanzada para servidores Minecraft con sistema bancario, tiendas automatizadas y transacciones seguras.',
-    fullDescription: 'Sistema de economía completo para Minecraft que incluye bancos virtuales, tiendas automatizadas, sistema de impuestos, transacciones P2P y panel de administración web integrado.',
-    image: 'https://images.unsplash.com/photo-1606181121385-b3e34d816509?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Java', 'Spigot API', 'MySQL', 'Vault API', 'Maven'],
-    github: 'https://github.com/PabloB07/economy-pro-plugin',
+    id: 'kapso-client-ruby',
+    translationKey: 'kapsoClient',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Ruby', 'API REST', 'AI', 'RSpec', 'JSON'],
+    github: 'https://github.com/PabloB07/kapso-client-ruby',
     demo: '',
-    status: 'completed',
+    status: 'completed' as const,
     featured: true,
     published: true,
-    category: 'minecraft-plugin'
+    category: 'ruby-gem'
   },
   {
-    id: 'rails-ecommerce',
-    title: 'Plataforma E-commerce Rails',
-    description: 'Aplicación e-commerce completa desarrollada en Ruby on Rails con panel administrativo, pagos integrados y gestión de inventario.',
-    fullDescription: 'Plataforma de comercio electrónico robusta con funcionalidades completas: carrito de compras, procesamiento de pagos con Stripe, gestión de inventario, sistema de usuarios y panel administrativo avanzado.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Ruby on Rails', 'PostgreSQL', 'Stripe', 'Redis', 'Sidekiq', 'AWS S3'],
-    github: 'https://github.com/PabloB07/rails-ecommerce',
-    demo: 'https://rails-ecommerce-demo.vercel.app',
-    status: 'completed',
+    id: 'ytwrapper',
+    translationKey: 'ytwrapper',
+    image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Ruby', 'YouTube API', 'API REST', 'RSpec'],
+    github: 'https://github.com/PabloB07/ytwrapper',
+    demo: '',
+    status: 'completed' as const,
+    featured: true,
+    published: true,
+    category: 'ruby-gem'
+  },
+  {
+    id: 'portfolio-nextjs',
+    translationKey: 'portfolio',
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
+    github: 'https://github.com/PabloB07/portfolio',
+    demo: 'https://blancocl.vercel.app',
+    status: 'completed' as const,
     featured: true,
     published: true,
     category: 'web-application'
+  }
+];
+
+// Helper function to get localized projects
+export const getLocalizedProjects = (t: (key: string) => string): Project[] => {
+  return projectsBase.map(project => ({
+    id: project.id,
+    title: t(`projectData.${project.translationKey}.title`),
+    description: t(`projectData.${project.translationKey}.description`),
+    fullDescription: t(`projectData.${project.translationKey}.fullDescription`),
+    image: project.image,
+    technologies: project.technologies,
+    github: project.github,
+    demo: project.demo,
+    status: project.status,
+    featured: project.featured,
+    published: project.published,
+    category: project.category
+  }));
+};
+
+// Legacy export for backwards compatibility (Spanish by default)
+export const projects: Project[] = [
+  {
+    id: 'kickwp',
+    title: 'KickWP',
+    description: 'Plugin de WordPress que utiliza la API de kick.com para mostrar información del canal en tiempo real y más funcionalidades.',
+    fullDescription: 'Plugin completo de WordPress que se integra con la API de kick.com para mostrar información de canales de streaming en tiempo real, estadísticas de viewers, estado del stream y más características avanzadas para streamers.',
+    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['PHP', 'WordPress', 'Kick.com API', 'JavaScript', 'CSS'],
+    github: 'https://github.com/PabloB07/KickWP',
+    demo: '',
+    status: 'completed',
+    featured: true,
+    published: true,
+    category: 'wordpress-plugin'
+  },
+  {
+    id: 'orionx-sdk-ruby',
+    title: 'Orionx SDK Ruby',
+    description: 'SDK no oficial de Ruby para la plataforma orionx. Interfaz completa para interactuar con el exchange de criptomonedas.',
+    fullDescription: 'SDK completo de Ruby que proporciona una interfaz limpia y fácil de usar para interactuar con la plataforma orionx. Incluye métodos para trading, consultas de mercado, gestión de órdenes y más.',
+    image: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Ruby', 'API REST', 'GraphQL', 'RSpec', 'Cryptocurrency'],
+    github: 'https://github.com/PabloB07/orionx-sdk-ruby',
+    demo: '',
+    status: 'completed',
+    featured: true,
+    published: true,
+    category: 'ruby-gem'
+  },
+  {
+    id: 'buda-api-ruby',
+    title: 'Buda API Ruby',
+    description: 'SDK no oficial de Ruby para el exchange de criptomonedas Buda. Interfaz completa para trading y consultas de mercado.',
+    fullDescription: 'SDK completo de Ruby para interactuar con la API de Buda, uno de los principales exchanges de criptomonedas en Latinoamérica. Incluye funcionalidades para trading, consultas de mercado, gestión de órdenes y más.',
+    image: 'https://images.unsplash.com/photo-1622630998477-20aa696ecb05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Ruby', 'API REST', 'RSpec', 'Cryptocurrency', 'WebSocket'],
+    github: 'https://github.com/PabloB07/buda-api-ruby',
+    demo: '',
+    status: 'completed',
+    featured: true,
+    published: true,
+    category: 'ruby-gem'
+  },
+  {
+    id: 'kapso-client-ruby',
+    title: 'Kapso Client Ruby',
+    description: 'SDK no oficial de Ruby para la plataforma kapso.ai. Cliente completo para interactuar con los servicios de IA.',
+    fullDescription: 'SDK de Ruby para la plataforma kapso.ai que proporciona una interfaz simple y eficiente para interagir con servicios de inteligencia artificial, procesamiento de lenguaje natural y más capacidades de la plataforma.',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Ruby', 'API REST', 'AI', 'RSpec', 'JSON'],
+    github: 'https://github.com/PabloB07/kapso-client-ruby',
+    demo: '',
+    status: 'completed',
+    featured: true,
+    published: true,
+    category: 'ruby-gem'
+  },
+  {
+    id: 'ytwrapper',
+    title: 'YTWrapper',
+    description: 'Wrapper de Ruby para interactuar con servicios relacionados a YouTube. Simplifica operaciones comunes y consultas.',
+    fullDescription: 'Librería de Ruby que actúa como wrapper para facilitar la interacción con servicios de YouTube, simplificando operaciones comunes como búsquedas, obtención de información de videos, gestión de playlists y más.',
+    image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Ruby', 'YouTube API', 'API REST', 'RSpec'],
+    github: 'https://github.com/PabloB07/ytwrapper',
+    demo: '',
+    status: 'completed',
+    featured: true,
+    published: true,
+    category: 'ruby-gem'
   },
   {
     id: 'portfolio-nextjs',
@@ -65,7 +174,7 @@ export const projects: Project[] = [
     image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
     github: 'https://github.com/PabloB07/portfolio',
-    demo: 'https://pablo-blanco.vercel.app',
+    demo: 'https://blancocl.vercel.app',
     status: 'completed',
     featured: true,
     published: true,

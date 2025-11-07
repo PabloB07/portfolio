@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ExternalLink, Github, Eye } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { projects } from '../../data/portfolio';
+import { projects, getLocalizedProjects } from '../../data/portfolio';
 
 const Projects: React.FC = () => {
   const { t } = useLanguage();
@@ -13,7 +13,15 @@ const Projects: React.FC = () => {
   });
   const [filter, setFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
-  const [projectsList, setProjectsList] = useState(projects);
+  
+  // Get localized projects
+  const localizedProjects = getLocalizedProjects(t);
+  const [projectsList, setProjectsList] = useState(localizedProjects);
+
+  // Update projects when language changes
+  React.useEffect(() => {
+    setProjectsList(getLocalizedProjects(t));
+  }, [t]);
 
   // Escuchar actualizaciones de proyectos
   React.useEffect(() => {
@@ -33,6 +41,7 @@ const Projects: React.FC = () => {
     if (filter === 'featured') return project.featured;
     if (filter === 'ruby-gems') return project.category === 'ruby-gem';
     if (filter === 'web-apps') return project.category === 'web-application';
+    if (filter === 'wordpress') return project.category === 'wordpress-plugin';
     if (filter === 'minecraft') return project.category === 'minecraft-plugin';
     if (filter === 'rails') return project.technologies.some(tech => tech.toLowerCase().includes('rails'));
     if (filter === 'laravel') return project.technologies.some(tech => tech.toLowerCase().includes('laravel'));
@@ -64,7 +73,7 @@ const Projects: React.FC = () => {
               { key: 'featured', label: t('projects.filters.featured'), emoji: '⭐' },
               { key: 'ruby-gems', label: t('projects.filters.rubyGems'), emoji: '💎' },
               { key: 'web-apps', label: t('projects.filters.webApps'), emoji: '🌐' },
-              { key: 'minecraft', label: t('projects.filters.minecraft'), emoji: '🎮' },
+              { key: 'wordpress', label: t('projects.filters.wordpress'), emoji: '📝' },
               { key: 'rails', label: t('projects.filters.rails'), emoji: '🛤️' },
               { key: 'nextjs', label: t('projects.filters.nextjs'), emoji: '⚛️' }
             ].map((filterOption) => (
@@ -129,12 +138,15 @@ const Projects: React.FC = () => {
                             ? 'bg-red-500/90 text-white'
                             : project.category === 'web-application'
                             ? 'bg-blue-500/90 text-white'
+                            : project.category === 'wordpress-plugin'
+                            ? 'bg-purple-500/90 text-white'
                             : project.category === 'minecraft-plugin'
                             ? 'bg-green-500/90 text-white'
                             : 'bg-gray-500/90 text-white'
                         }`}>
                           {project.category === 'ruby-gem' && '💎 Ruby Gem'}
                           {project.category === 'web-application' && '🌐 Web App'}
+                          {project.category === 'wordpress-plugin' && '📝 WordPress'}
                           {project.category === 'minecraft-plugin' && '🎮 Plugin'}
                         </span>
                       )}
