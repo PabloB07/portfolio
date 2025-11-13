@@ -73,6 +73,30 @@ export const projectsBase = [
     featured: true,
     published: true,
     category: 'web-application'
+  },
+  {
+    id: 'arbolfamiliar',
+    translationKey: 'arbolFamiliar',
+    image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Framer Motion'],
+    github: 'https://github.com/PabloB07/arbolfamiliar',
+    demo: '',
+    status: 'completed' as const,
+    featured: true,
+    published: true,
+    category: 'web-application'
+  },
+  {
+    id: 'frutify',
+    translationKey: 'frutify',
+    image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Stripe'],
+    github: 'https://github.com/PabloB07/frutify',
+    demo: '',
+    status: 'completed' as const,
+    featured: true,
+    published: true,
+    category: 'web-application'
   }
 ];
 
@@ -175,6 +199,34 @@ export const projects: Project[] = [
     technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
     github: 'https://github.com/PabloB07/portfolio',
     demo: 'https://blancocl.vercel.app',
+    status: 'completed',
+    featured: true,
+    published: true,
+    category: 'web-application'
+  },
+  {
+    id: 'arbolfamiliar',
+    title: 'Árbol Familiar',
+    description: 'Sitio web de árbol genealógico con visualización interactiva, gestión de miembros y relaciones familiares.',
+    fullDescription: 'Aplicación web moderna para crear y gestionar árboles genealógicos. Incluye autenticación con Supabase, visualización interactiva de árboles familiares con animaciones, gestión de miembros con información detallada, relaciones familiares y modo oscuro. Ideal para preservar historias familiares.',
+    image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Framer Motion'],
+    github: 'https://github.com/PabloB07/arbolfamiliar',
+    demo: '',
+    status: 'completed',
+    featured: true,
+    published: true,
+    category: 'web-application'
+  },
+  {
+    id: 'frutify',
+    title: 'Frutify',
+    description: 'Plataforma e-commerce para fruterías locales con gestión de inventario, pedidos y pagos con Stripe.',
+    fullDescription: 'Plataforma completa de e-commerce diseñada específicamente para fruterías y PYMEs locales en Chile. Incluye catálogo de productos con gestión de inventario, carrito de compras, procesamiento de pagos con Stripe, panel de administración, gestión de pedidos y más. Construida con las mejores prácticas de desarrollo moderno.',
+    image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Stripe'],
+    github: 'https://github.com/PabloB07/frutify',
+    demo: '',
     status: 'completed',
     featured: true,
     published: true,

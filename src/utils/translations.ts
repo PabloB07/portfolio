@@ -106,6 +106,16 @@ export const translations = {
         title: 'Portfolio Personal',
         description: 'Portfolio personal desarrollado con Next.js, TypeScript y Tailwind CSS. Incluye animaciones fluidas y modo oscuro.',
         fullDescription: 'Portfolio moderno y responsivo con animaciones suaves, cambio de tema, internacionalización y optimizaciones de rendimiento. Desplegado en Vercel con CI/CD automatizado.'
+      },
+      arbolFamiliar: {
+        title: 'Árbol Familiar',
+        description: 'Sitio web de árbol genealógico con visualización interactiva, gestión de miembros y relaciones familiares.',
+        fullDescription: 'Aplicación web moderna para crear y gestionar árboles genealógicos. Incluye autenticación con Supabase, visualización interactiva de árboles familiares con animaciones, gestión de miembros con información detallada, relaciones familiares y modo oscuro. Ideal para preservar historias familiares.'
+      },
+      frutify: {
+        title: 'Frutify',
+        description: 'Plataforma e-commerce para fruterías locales con gestión de inventario, pedidos y pagos con Stripe.',
+        fullDescription: 'Plataforma completa de e-commerce diseñada específicamente para fruterías y PYMEs locales en Chile. Incluye catálogo de productos con gestión de inventario, carrito de compras, procesamiento de pagos con Stripe, panel de administración, gestión de pedidos y más. Construida con las mejores prácticas de desarrollo moderno.'
       }
     }
   },
@@ -216,6 +226,16 @@ export const translations = {
         title: 'Personal Portfolio',
         description: 'Personal portfolio developed with Next.js, TypeScript, and Tailwind CSS. Includes smooth animations and dark mode.',
         fullDescription: 'Modern and responsive portfolio with smooth animations, theme switching, internationalization, and performance optimizations. Deployed on Vercel with automated CI/CD.'
+      },
+      arbolFamiliar: {
+        title: 'Family Tree',
+        description: 'Genealogical tree website with interactive visualization, member management and family relationships.',
+        fullDescription: 'Modern web application to create and manage family trees. Includes authentication with Supabase, interactive family tree visualization with animations, member management with detailed information, family relationships and dark mode. Ideal for preserving family histories.'
+      },
+      frutify: {
+        title: 'Frutify',
+        description: 'E-commerce platform for local fruit stores with inventory management, orders and Stripe payments.',
+        fullDescription: 'Complete e-commerce platform specifically designed for fruit stores and local SMEs in Chile. Includes product catalog with inventory management, shopping cart, payment processing with Stripe, admin panel, order management and more. Built with modern development best practices.'
       }
     }
   },
@@ -326,6 +346,16 @@ export const translations = {
         title: 'Portfólio Pessoal',
         description: 'Portfólio pessoal desenvolvido com Next.js, TypeScript e Tailwind CSS. Inclui animações suaves e modo escuro.',
         fullDescription: 'Portfólio moderno e responsivo com animações suaves, troca de tema, internacionalização e otimizações de desempenho. Implantado na Vercel com CI/CD automatizado.'
+      },
+      arbolFamiliar: {
+        title: 'Árvore Genealógica',
+        description: 'Site de árvore genealógica com visualização interativa, gestão de membros e relações familiares.',
+        fullDescription: 'Aplicação web moderna para criar e gerir árvores genealógicas. Inclui autenticação com Supabase, visualização interativa de árvores familiares com animações, gestão de membros com informação detalhada, relações familiares e modo escuro. Ideal para preservar histórias familiares.'
+      },
+      frutify: {
+        title: 'Frutify',
+        description: 'Plataforma e-commerce para frutarias locais com gestão de inventário, pedidos e pagamentos com Stripe.',
+        fullDescription: 'Plataforma completa de e-commerce especificamente projetada para frutarias e PMEs locais no Chile. Inclui catálogo de produtos com gestão de inventário, carrinho de compras, processamento de pagamentos com Stripe, painel de administração, gestão de pedidos e mais. Construída com as melhores práticas de desenvolvimento moderno.'
       }
     }
   },
@@ -436,6 +466,16 @@ export const translations = {
         title: 'Persönliches Portfolio',
         description: 'Persönliches Portfolio entwickelt mit Next.js, TypeScript und Tailwind CSS. Enthält flüssige Animationen und Dunkelmodus.',
         fullDescription: 'Modernes und responsives Portfolio mit sanften Animationen, Themenwechsel, Internationalisierung und Leistungsoptimierungen. Bereitgestellt auf Vercel mit automatisiertem CI/CD.'
+      },
+      arbolFamiliar: {
+        title: 'Stammbaum',
+        description: 'Genealogie-Website mit interaktiver Visualisierung, Mitgliederverwaltung und Familienbeziehungen.',
+        fullDescription: 'Moderne Webanwendung zum Erstellen und Verwalten von Stammbäumen. Enthält Authentifizierung mit Supabase, interaktive Stammbaum-Visualisierung mit Animationen, Mitgliederverwaltung mit detaillierten Informationen, Familienbeziehungen und Dunkelmodus. Ideal zur Bewahrung von Familiengeschichten.'
+      },
+      frutify: {
+        title: 'Frutify',
+        description: 'E-Commerce-Plattform für lokale Obstgeschäfte mit Bestandsverwaltung, Bestellungen und Stripe-Zahlungen.',
+        fullDescription: 'Vollständige E-Commerce-Plattform speziell für Obstgeschäfte und lokale KMU in Chile entwickelt. Enthält Produktkatalog mit Bestandsverwaltung, Warenkorb, Zahlungsabwicklung mit Stripe, Admin-Panel, Bestellverwaltung und mehr. Erstellt mit modernen Entwicklungs-Best-Practices.'
       }
     }
   }
