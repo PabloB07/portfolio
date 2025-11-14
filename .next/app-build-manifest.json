@@ -1,0 +1,54 @@
+{
+  "pages": {
+    "/_not-found/page": [
+      "static/chunks/webpack-556339a1464aa81f.js",
+      "static/chunks/fd9d1056-f42e3a44b4c14fe1.js",
+      "static/chunks/117-b003d4131a112d74.js",
+      "static/chunks/main-app-70caa9cf377d7de2.js",
+      "static/chunks/app/_not-found/page-188bd59446ba0862.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-556339a1464aa81f.js",
+      "static/chunks/fd9d1056-f42e3a44b4c14fe1.js",
+      "static/chunks/117-b003d4131a112d74.js",
+      "static/chunks/main-app-70caa9cf377d7de2.js",
+      "static/css/6876b5403a9f41ef.css",
+      "static/chunks/283-084cb279c38790c2.js",
+      "static/chunks/app/layout-dcdfe8293712c212.js"
+    ],
+    "/minecraft/page": [
+      "static/chunks/webpack-556339a1464aa81f.js",
+      "static/chunks/fd9d1056-f42e3a44b4c14fe1.js",
+      "static/chunks/117-b003d4131a112d74.js",
+      "static/chunks/main-app-70caa9cf377d7de2.js",
+      "static/chunks/b536a0f1-a0735bbd0d47625b.js",
+      "static/chunks/bd904a5c-6eef4c6e69265f8a.js",
+      "static/chunks/659-4d8ab7381a5eb7db.js",
+      "static/chunks/142-67868103b8f15548.js",
+      "static/chunks/283-084cb279c38790c2.js",
+      "static/chunks/528-b15cfeab16d73e3b.js",
+      "static/chunks/app/minecraft/page-031d4d8efc7a485d.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-556339a1464aa81f.js",
+      "static/chunks/fd9d1056-f42e3a44b4c14fe1.js",
+      "static/chunks/117-b003d4131a112d74.js",
+      "static/chunks/main-app-70caa9cf377d7de2.js",
+      "static/chunks/659-4d8ab7381a5eb7db.js",
+      "static/chunks/529-1f4f2672cb7536cb.js",
+      "static/chunks/283-084cb279c38790c2.js",
+      "static/chunks/528-b15cfeab16d73e3b.js",
+      "static/chunks/app/page-b1966ae75f53138f.js"
+    ],
+    "/portfolio-services/page": [
+      "static/chunks/webpack-556339a1464aa81f.js",
+      "static/chunks/fd9d1056-f42e3a44b4c14fe1.js",
+      "static/chunks/117-b003d4131a112d74.js",
+      "static/chunks/main-app-70caa9cf377d7de2.js",
+      "static/chunks/659-4d8ab7381a5eb7db.js",
+      "static/chunks/283-084cb279c38790c2.js",
+      "static/chunks/528-b15cfeab16d73e3b.js",
+      "static/chunks/app/portfolio-services/page-1ff46de8f9c698d1.js"
+    ]
+  }
+}

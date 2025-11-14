@@ -8,6 +8,7 @@ interface LanguageContextType {
   currentLanguage: Language;
   setLanguage: (language: Language) => void;
   t: (key: string) => string | string[];
+  tString: (key: string) => string;
   languages: Language[];
 }
 
@@ -76,8 +77,13 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     return value;
   };
 
+  const tString = (key: string): string => {
+    const result = t(key);
+    return Array.isArray(result) ? result.join(', ') : result;
+  };
+
   return (
-    <LanguageContext.Provider value={{ currentLanguage, setLanguage, t, languages }}>
+    <LanguageContext.Provider value={{ currentLanguage, setLanguage, t, tString, languages }}>
       {children}
     </LanguageContext.Provider>
   );

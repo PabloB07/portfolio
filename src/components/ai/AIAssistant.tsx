@@ -5,7 +5,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { AIResponse } from '../../types';
 
 const AIAssistant: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, tString } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [message, setMessage] = useState('');
@@ -126,7 +126,7 @@ const AIAssistant: React.FC = () => {
                   <span className="text-sm font-bold">AI</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold">{t('ai.title')}</h3>
+                  <h3 className="font-semibold">{tString('ai.title')}</h3>
                   <p className="text-xs opacity-80">Online</p>
                 </div>
               </div>
@@ -222,7 +222,7 @@ const AIAssistant: React.FC = () => {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      placeholder={t('ai.placeholder')}
+                      placeholder={tString('ai.placeholder')}
                       className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
                     />
                     <motion.button
