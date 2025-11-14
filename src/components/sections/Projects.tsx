@@ -6,7 +6,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { projects, getLocalizedProjects } from '../../data/portfolio';
 
 const Projects: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, tString } = useLanguage();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -15,13 +15,13 @@ const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   
   // Get localized projects
-  const localizedProjects = getLocalizedProjects(t);
+  const localizedProjects = getLocalizedProjects(tString);
   const [projectsList, setProjectsList] = useState(localizedProjects);
 
   // Update projects when language changes
   React.useEffect(() => {
-    setProjectsList(getLocalizedProjects(t));
-  }, [t]);
+    setProjectsList(getLocalizedProjects(tString));
+  }, [tString]);
 
   // Escuchar actualizaciones de proyectos
   React.useEffect(() => {
@@ -62,20 +62,20 @@ const Projects: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            {t('projects.title')}
+            {tString('projects.title')}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto rounded-full mb-8" />
           
           {/* Filter Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {[
-              { key: 'all', label: t('projects.filters.all'), emoji: '🌟' },
-              { key: 'featured', label: t('projects.filters.featured'), emoji: '⭐' },
-              { key: 'ruby-gems', label: t('projects.filters.rubyGems'), emoji: '💎' },
-              { key: 'web-apps', label: t('projects.filters.webApps'), emoji: '🌐' },
-              { key: 'wordpress', label: t('projects.filters.wordpress'), emoji: '📝' },
-              { key: 'rails', label: t('projects.filters.rails'), emoji: '🛤️' },
-              { key: 'nextjs', label: t('projects.filters.nextjs'), emoji: '⚛️' }
+              { key: 'all', label: tString('projects.filters.all'), emoji: '🌟' },
+              { key: 'featured', label: tString('projects.filters.featured'), emoji: '⭐' },
+              { key: 'ruby-gems', label: tString('projects.filters.rubyGems'), emoji: '💎' },
+              { key: 'web-apps', label: tString('projects.filters.webApps'), emoji: '🌐' },
+              { key: 'wordpress', label: tString('projects.filters.wordpress'), emoji: '📝' },
+              { key: 'rails', label: tString('projects.filters.rails'), emoji: '🛤️' },
+              { key: 'nextjs', label: tString('projects.filters.nextjs'), emoji: '⚛️' }
             ].map((filterOption) => (
               <motion.button
                 key={filterOption.key}
@@ -101,10 +101,10 @@ const Projects: React.FC = () => {
               <div className="col-span-full text-center py-16">
                 <div className="text-6xl mb-4">🚀</div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                  {t('projects.emptyState')}
+                  {tString('projects.emptyState')}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400">
-                  {t('projects.emptyStateDesc')}
+                  {tString('projects.emptyStateDesc')}
                 </p>
               </div>
             ) : (
@@ -327,7 +327,7 @@ const Projects: React.FC = () => {
                         
                         <div className="mb-6">
                           <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-                            {t('projects.technologies')}:
+                            {tString('projects.technologies')}:
                           </h4>
                           <div className="flex flex-wrap gap-2">
                             {project.technologies.map((tech) => (
@@ -351,7 +351,7 @@ const Projects: React.FC = () => {
                               className="flex items-center space-x-2 px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors duration-200"
                             >
                               <ExternalLink size={20} />
-                              <span>{t('projects.viewDemo')}</span>
+                              <span>{tString('projects.viewDemo')}</span>
                             </motion.a>
                           )}
                           
@@ -364,7 +364,7 @@ const Projects: React.FC = () => {
                               className="flex items-center space-x-2 px-6 py-3 border-2 border-primary-500 text-primary-500 rounded-lg hover:bg-primary-500 hover:text-white transition-all duration-200"
                             >
                               <Github size={20} />
-                              <span>{t('projects.viewCode')}</span>
+                              <span>{tString('projects.viewCode')}</span>
                             </motion.a>
                           )}
                         </div>
