@@ -1,8 +1,0 @@
-{
-  "/_not-found/page": "app/_not-found/page.js",
-  "/minecraft/page": "app/minecraft/page.js",
-  "/api/download-cv/route": "app/api/download-cv/route.js",
-  "/api/projects/route": "app/api/projects/route.js",
-  "/page": "app/page.js",
-  "/portfolio-services/page": "app/portfolio-services/page.js"
-}
