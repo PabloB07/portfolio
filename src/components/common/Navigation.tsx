@@ -25,6 +25,8 @@ const Navigation: React.FC = () => {
     { href: '#about', label: t('nav.about') },
     { href: '#projects', label: t('nav.projects') },
     { href: '#experience', label: t('nav.experience') },
+    { href: '/minecraft', label: t('nav.minecraft') },
+    { href: '/portfolio-services', label: t('nav.services') },
     { href: '#contact', label: t('nav.contact') },
   ];
 
@@ -32,7 +34,11 @@ const Navigation: React.FC = () => {
     setIsOpen(false);
     if (href === '/') {
       window.location.href = href;
-    } else {
+    } else if (href.startsWith('/')) {
+      // Rutas de página
+      window.location.href = href;
+    } else if (href.startsWith('#')) {
+      // Anclas dentro de la página
       const element = document.querySelector(href);
       element?.scrollIntoView({ behavior: 'smooth' });
     }

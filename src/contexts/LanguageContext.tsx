@@ -7,7 +7,7 @@ import { translations } from '../utils/translations';
 interface LanguageContextType {
   currentLanguage: Language;
   setLanguage: (language: Language) => void;
-  t: (key: string) => string;
+  t: (key: string) => string | string[];
   languages: Language[];
 }
 
@@ -53,7 +53,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     }
   };
 
-  const t = (key: string): string => {
+  const t = (key: string): string | string[] => {
     const keys = key.split('.');
     const langCode = currentLanguage.code as keyof typeof translations;
     
@@ -65,12 +65,12 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     }
     
     // If translation not found, try fallback to Spanish
-    if (typeof value !== 'string') {
+    if (value === undefined || value === null) {
       let fallbackValue: any = translations['es'];
       for (const k of keys) {
         fallbackValue = fallbackValue?.[k];
       }
-      return typeof fallbackValue === 'string' ? fallbackValue : key;
+      return fallbackValue !== undefined && fallbackValue !== null ? fallbackValue : key;
     }
     
     return value;

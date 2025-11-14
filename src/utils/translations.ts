@@ -6,7 +6,9 @@ export const translations = {
       projects: 'Proyectos',
       experience: 'Experiencia',
       contact: 'Contacto',
-      admin: 'Admin'
+      admin: 'Admin',
+      minecraft: '🎮 Minecraft',
+      services: '💼 Servicios'
     },
     hero: {
       greeting: '¡Hola! Soy',
@@ -76,6 +78,82 @@ export const translations = {
       madeWith: 'Hecho con',
       and: 'y'
     },
+    minecraft: {
+      title: 'Mundo Minecraft 3D',
+      description: 'Explora este mundo voxel generado proceduralmente usando Three.js',
+      controls: {
+        title: 'Controles',
+        rotate: '🖱️ Click + Arrastrar: Rotar',
+        zoom: '🔍 Scroll: Zoom',
+        pan: '🖱️ Click Derecho + Arrastrar: Pan'
+      }
+    },
+    services: {
+      hero: {
+        title: 'Servicios de Minecraft',
+        subtitle: 'Desarrollo profesional de plugins, configuración de servidores y sistemas personalizados para tu servidor de Minecraft',
+        cta: 'Ver Servicios'
+      },
+      title: 'Servicios Disponibles',
+      subtitle: 'Soluciones completas para tu servidor de Minecraft',
+      technologies: {
+        title: 'Tecnologías',
+        subtitle: 'Stack tecnológico que utilizo en mis proyectos'
+      },
+      testimonials: {
+        title: 'Testimonios',
+        subtitle: 'Lo que dicen mis clientes'
+      },
+      cta: {
+        title: '¿Listo para mejorar tu servidor?',
+        subtitle: 'Contáctame para discutir tu proyecto y obtener un presupuesto personalizado',
+        button: 'Contactar Ahora'
+      },
+      serviceItems: {
+        pluginDevelopment: {
+          title: 'Desarrollo de Plugins',
+          description: 'Plugins personalizados para servidores de Minecraft con funcionalidades únicas y optimizadas.',
+          features: ['Bukkit/Spigot', 'Paper API', 'NMS/Reflection', 'Optimización de rendimiento']
+        },
+        serverSetup: {
+          title: 'Configuración de Servidores',
+          description: 'Setup completo de servidores Minecraft con todas las configuraciones necesarias.',
+          features: ['Instalación y configuración', 'Optimización de servidor', 'Backups automáticos', 'Monitoreo']
+        },
+        database: {
+          title: 'Sistemas de Base de Datos',
+          description: 'Implementación de sistemas de almacenamiento eficientes para datos de jugadores y servidor.',
+          features: ['MySQL/PostgreSQL', 'Redis Cache', 'MongoDB', 'Sistemas de economía']
+        },
+        security: {
+          title: 'Sistemas de Seguridad',
+          description: 'Protección avanzada contra hacks, exploits y comportamientos no deseados.',
+          features: ['Anti-cheat personalizado', 'Sistemas de moderación', 'Logs y auditoría', 'Protección DDoS']
+        },
+        optimization: {
+          title: 'Optimización de Rendimiento',
+          description: 'Mejora del rendimiento del servidor para manejar más jugadores simultáneos.',
+          features: ['Profiling y análisis', 'Optimización de código', 'Reducción de lag', 'Chunk loading inteligente']
+        },
+        multiplayer: {
+          title: 'Sistemas Multiplayer',
+          description: 'Desarrollo de sistemas complejos para interacción entre jugadores.',
+          features: ['Sistemas de clanes', 'Economía y comercio', 'Sistemas de ranking', 'Eventos automáticos']
+        }
+      },
+      testimonialsItems: {
+        testimonial1: {
+          name: 'Servidor Anónimo',
+          role: 'Administrador de Servidor',
+          content: 'Excelente trabajo en el desarrollo de plugins personalizados. Muy profesional y eficiente.'
+        },
+        testimonial2: {
+          name: 'Cliente Satisfecho',
+          role: 'Dueño de Servidor',
+          content: 'La optimización del servidor fue increíble. Pasamos de 50 a 100 jugadores sin problemas.'
+        }
+      }
+    },
     projectData: {
       kickwp: {
         title: 'KickWP',
@@ -126,7 +204,9 @@ export const translations = {
       projects: 'Projects',
       experience: 'Experience',
       contact: 'Contact',
-      admin: 'Admin'
+      admin: 'Admin',
+      minecraft: '🎮 Minecraft',
+      services: '💼 Services'
     },
     hero: {
       greeting: 'Hello! I am',
@@ -196,6 +276,82 @@ export const translations = {
       madeWith: 'Made with',
       and: 'and'
     },
+    minecraft: {
+      title: 'Minecraft 3D World',
+      description: 'Explore this procedurally generated voxel world using Three.js',
+      controls: {
+        title: 'Controls',
+        rotate: '🖱️ Click + Drag: Rotate',
+        zoom: '🔍 Scroll: Zoom',
+        pan: '🖱️ Right Click + Drag: Pan'
+      }
+    },
+    services: {
+      hero: {
+        title: 'Minecraft Services',
+        subtitle: 'Professional plugin development, server configuration and custom systems for your Minecraft server',
+        cta: 'View Services'
+      },
+      title: 'Available Services',
+      subtitle: 'Complete solutions for your Minecraft server',
+      technologies: {
+        title: 'Technologies',
+        subtitle: 'Technology stack I use in my projects'
+      },
+      testimonials: {
+        title: 'Testimonials',
+        subtitle: 'What my clients say'
+      },
+      cta: {
+        title: 'Ready to improve your server?',
+        subtitle: 'Contact me to discuss your project and get a personalized quote',
+        button: 'Contact Now'
+      },
+      serviceItems: {
+        pluginDevelopment: {
+          title: 'Plugin Development',
+          description: 'Custom plugins for Minecraft servers with unique and optimized features.',
+          features: ['Bukkit/Spigot', 'Paper API', 'NMS/Reflection', 'Performance optimization']
+        },
+        serverSetup: {
+          title: 'Server Configuration',
+          description: 'Complete Minecraft server setup with all necessary configurations.',
+          features: ['Installation and configuration', 'Server optimization', 'Automatic backups', 'Monitoring']
+        },
+        database: {
+          title: 'Database Systems',
+          description: 'Implementation of efficient storage systems for player and server data.',
+          features: ['MySQL/PostgreSQL', 'Redis Cache', 'MongoDB', 'Economy systems']
+        },
+        security: {
+          title: 'Security Systems',
+          description: 'Advanced protection against hacks, exploits and unwanted behavior.',
+          features: ['Custom anti-cheat', 'Moderation systems', 'Logs and auditing', 'DDoS protection']
+        },
+        optimization: {
+          title: 'Performance Optimization',
+          description: 'Server performance improvement to handle more simultaneous players.',
+          features: ['Profiling and analysis', 'Code optimization', 'Lag reduction', 'Smart chunk loading']
+        },
+        multiplayer: {
+          title: 'Multiplayer Systems',
+          description: 'Development of complex systems for player interaction.',
+          features: ['Clan systems', 'Economy and trading', 'Ranking systems', 'Automatic events']
+        }
+      },
+      testimonialsItems: {
+        testimonial1: {
+          name: 'Anonymous Server',
+          role: 'Server Administrator',
+          content: 'Excellent work on custom plugin development. Very professional and efficient.'
+        },
+        testimonial2: {
+          name: 'Satisfied Client',
+          role: 'Server Owner',
+          content: 'The server optimization was incredible. We went from 50 to 100 players without problems.'
+        }
+      }
+    },
     projectData: {
       kickwp: {
         title: 'KickWP',
@@ -246,7 +402,9 @@ export const translations = {
       projects: 'Projetos',
       experience: 'Experiência',
       contact: 'Contato',
-      admin: 'Admin'
+      admin: 'Admin',
+      minecraft: '🎮 Minecraft',
+      services: '💼 Serviços'
     },
     hero: {
       greeting: 'Olá! Eu sou',
@@ -316,6 +474,82 @@ export const translations = {
       madeWith: 'Feito com',
       and: 'e'
     },
+    minecraft: {
+      title: 'Mundo Minecraft 3D',
+      description: 'Explore este mundo voxel gerado proceduralmente usando Three.js',
+      controls: {
+        title: 'Controles',
+        rotate: '🖱️ Clique + Arrastar: Rotacionar',
+        zoom: '🔍 Scroll: Zoom',
+        pan: '🖱️ Clique Direito + Arrastar: Mover'
+      }
+    },
+    services: {
+      hero: {
+        title: 'Serviços de Minecraft',
+        subtitle: 'Desenvolvimento profissional de plugins, configuração de servidores e sistemas personalizados para seu servidor de Minecraft',
+        cta: 'Ver Serviços'
+      },
+      title: 'Serviços Disponíveis',
+      subtitle: 'Soluções completas para seu servidor de Minecraft',
+      technologies: {
+        title: 'Tecnologias',
+        subtitle: 'Stack tecnológico que uso em meus projetos'
+      },
+      testimonials: {
+        title: 'Depoimentos',
+        subtitle: 'O que meus clientes dizem'
+      },
+      cta: {
+        title: 'Pronto para melhorar seu servidor?',
+        subtitle: 'Entre em contato para discutir seu projeto e obter um orçamento personalizado',
+        button: 'Contatar Agora'
+      },
+      serviceItems: {
+        pluginDevelopment: {
+          title: 'Desenvolvimento de Plugins',
+          description: 'Plugins personalizados para servidores de Minecraft com funcionalidades únicas e otimizadas.',
+          features: ['Bukkit/Spigot', 'Paper API', 'NMS/Reflection', 'Otimização de desempenho']
+        },
+        serverSetup: {
+          title: 'Configuração de Servidores',
+          description: 'Configuração completa de servidores Minecraft com todas as configurações necessárias.',
+          features: ['Instalação e configuração', 'Otimização de servidor', 'Backups automáticos', 'Monitoramento']
+        },
+        database: {
+          title: 'Sistemas de Banco de Dados',
+          description: 'Implementação de sistemas de armazenamento eficientes para dados de jogadores e servidor.',
+          features: ['MySQL/PostgreSQL', 'Redis Cache', 'MongoDB', 'Sistemas de economia']
+        },
+        security: {
+          title: 'Sistemas de Segurança',
+          description: 'Proteção avançada contra hacks, exploits e comportamentos indesejados.',
+          features: ['Anti-cheat personalizado', 'Sistemas de moderação', 'Logs e auditoria', 'Proteção DDoS']
+        },
+        optimization: {
+          title: 'Otimização de Desempenho',
+          description: 'Melhoria do desempenho do servidor para lidar com mais jogadores simultâneos.',
+          features: ['Profiling e análise', 'Otimização de código', 'Redução de lag', 'Carregamento inteligente de chunks']
+        },
+        multiplayer: {
+          title: 'Sistemas Multiplayer',
+          description: 'Desenvolvimento de sistemas complexos para interação entre jogadores.',
+          features: ['Sistemas de clãs', 'Economia e comércio', 'Sistemas de ranking', 'Eventos automáticos']
+        }
+      },
+      testimonialsItems: {
+        testimonial1: {
+          name: 'Servidor Anônimo',
+          role: 'Administrador de Servidor',
+          content: 'Excelente trabalho no desenvolvimento de plugins personalizados. Muito profissional e eficiente.'
+        },
+        testimonial2: {
+          name: 'Cliente Satisfeito',
+          role: 'Proprietário de Servidor',
+          content: 'A otimização do servidor foi incrível. Passamos de 50 para 100 jogadores sem problemas.'
+        }
+      }
+    },
     projectData: {
       kickwp: {
         title: 'KickWP',
@@ -366,7 +600,9 @@ export const translations = {
       projects: 'Projekte',
       experience: 'Erfahrung',
       contact: 'Kontakt',
-      admin: 'Admin'
+      admin: 'Admin',
+      minecraft: '🎮 Minecraft',
+      services: '💼 Dienstleistungen'
     },
     hero: {
       greeting: 'Hallo! Ich bin',
@@ -435,6 +671,82 @@ export const translations = {
       rights: 'Alle Rechte vorbehalten',
       madeWith: 'Gemacht mit',
       and: 'und'
+    },
+    minecraft: {
+      title: 'Minecraft 3D Welt',
+      description: 'Erkunden Sie diese prozedural generierte Voxel-Welt mit Three.js',
+      controls: {
+        title: 'Steuerung',
+        rotate: '🖱️ Klicken + Ziehen: Drehen',
+        zoom: '🔍 Scrollen: Zoom',
+        pan: '🖱️ Rechtsklick + Ziehen: Verschieben'
+      }
+    },
+    services: {
+      hero: {
+        title: 'Minecraft Dienstleistungen',
+        subtitle: 'Professionelle Plugin-Entwicklung, Server-Konfiguration und benutzerdefinierte Systeme für Ihren Minecraft-Server',
+        cta: 'Dienstleistungen ansehen'
+      },
+      title: 'Verfügbare Dienstleistungen',
+      subtitle: 'Vollständige Lösungen für Ihren Minecraft-Server',
+      technologies: {
+        title: 'Technologien',
+        subtitle: 'Technologie-Stack, den ich in meinen Projekten verwende'
+      },
+      testimonials: {
+        title: 'Testimonials',
+        subtitle: 'Was meine Kunden sagen'
+      },
+      cta: {
+        title: 'Bereit, Ihren Server zu verbessern?',
+        subtitle: 'Kontaktieren Sie mich, um Ihr Projekt zu besprechen und ein personalisiertes Angebot zu erhalten',
+        button: 'Jetzt kontaktieren'
+      },
+      serviceItems: {
+        pluginDevelopment: {
+          title: 'Plugin-Entwicklung',
+          description: 'Benutzerdefinierte Plugins für Minecraft-Server mit einzigartigen und optimierten Funktionen.',
+          features: ['Bukkit/Spigot', 'Paper API', 'NMS/Reflection', 'Leistungsoptimierung']
+        },
+        serverSetup: {
+          title: 'Server-Konfiguration',
+          description: 'Vollständige Minecraft-Server-Einrichtung mit allen notwendigen Konfigurationen.',
+          features: ['Installation und Konfiguration', 'Server-Optimierung', 'Automatische Backups', 'Überwachung']
+        },
+        database: {
+          title: 'Datenbanksysteme',
+          description: 'Implementierung effizienter Speichersysteme für Spieler- und Serverdaten.',
+          features: ['MySQL/PostgreSQL', 'Redis Cache', 'MongoDB', 'Wirtschaftssysteme']
+        },
+        security: {
+          title: 'Sicherheitssysteme',
+          description: 'Erweiterter Schutz vor Hacks, Exploits und unerwünschtem Verhalten.',
+          features: ['Benutzerdefiniertes Anti-Cheat', 'Moderationssysteme', 'Protokolle und Auditierung', 'DDoS-Schutz']
+        },
+        optimization: {
+          title: 'Leistungsoptimierung',
+          description: 'Server-Leistungsverbesserung zur Handhabung von mehr gleichzeitigen Spielern.',
+          features: ['Profiling und Analyse', 'Code-Optimierung', 'Lag-Reduzierung', 'Intelligentes Chunk-Laden']
+        },
+        multiplayer: {
+          title: 'Multiplayer-Systeme',
+          description: 'Entwicklung komplexer Systeme für Spielerinteraktion.',
+          features: ['Clan-Systeme', 'Wirtschaft und Handel', 'Ranking-Systeme', 'Automatische Events']
+        }
+      },
+      testimonialsItems: {
+        testimonial1: {
+          name: 'Anonymer Server',
+          role: 'Server-Administrator',
+          content: 'Ausgezeichnete Arbeit bei der Entwicklung benutzerdefinierter Plugins. Sehr professionell und effizient.'
+        },
+        testimonial2: {
+          name: 'Zufriedener Kunde',
+          role: 'Server-Besitzer',
+          content: 'Die Server-Optimierung war unglaublich. Wir gingen von 50 auf 100 Spieler ohne Probleme.'
+        }
+      }
     },
     projectData: {
       kickwp: {
