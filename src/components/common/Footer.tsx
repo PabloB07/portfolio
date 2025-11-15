@@ -5,7 +5,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { personalInfo } from '../../data/portfolio';
 
 const Footer: React.FC = () => {
-  const { t } = useLanguage();
+  const { tString } = useLanguage();
 
   return (
     <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
@@ -34,10 +34,10 @@ const Footer: React.FC = () => {
             </h3>
             <div className="space-y-2">
               {[
-                { href: '#home', label: t('nav.home') },
-                { href: '#about', label: t('nav.about') },
-                { href: '#projects', label: t('nav.projects') },
-                { href: '#contact', label: t('nav.contact') },
+                { href: '#home', label: tString('nav.home') },
+                { href: '#about', label: tString('nav.about') },
+                { href: '#projects', label: tString('nav.projects') },
+                { href: '#contact', label: tString('nav.contact') },
               ].map((link) => (
                 <motion.button
                   key={link.href}
@@ -100,13 +100,13 @@ const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-600 dark:text-gray-400 text-sm flex items-center">
-            © 2024 Pablo Blanco Navarro. {t('footer.rights')}.
+            © 2024 Pablo Blanco Navarro. {tString('footer.rights')}.
           </p>
           
           <motion.p 
             className="text-gray-600 dark:text-gray-400 text-sm flex items-center space-x-1 mt-4 md:mt-0"
           >
-            <span>{t('footer.madeWith')}</span>
+            <span>{tString('footer.madeWith')}</span>
             <motion.span
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
             >
               <Heart size={16} fill="currentColor" />
             </motion.span>
-            <span>{t('footer.by')} Pablo Blanco Navarro</span>
+            <span>{tString('footer.and')} Pablo Blanco Navarro</span>
           </motion.p>
         </div>
       </div>
