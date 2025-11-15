@@ -351,7 +351,7 @@ const Projects: React.FC = () => {
                               className="flex items-center space-x-2 px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors duration-200"
                             >
                               <ExternalLink size={20} />
-                              <span>{tString('projects.viewDemo')}</span>
+                              <span>{tString('projects.liveDemo')}</span>
                             </motion.a>
                           )}
                           
@@ -364,7 +364,7 @@ const Projects: React.FC = () => {
                               className="flex items-center space-x-2 px-6 py-3 border-2 border-primary-500 text-primary-500 rounded-lg hover:bg-primary-500 hover:text-white transition-all duration-200"
                             >
                               <Github size={20} />
-                              <span>{tString('projects.viewCode')}</span>
+                              <span>{tString('projects.sourceCode')}</span>
                             </motion.a>
                           )}
                         </div>

@@ -194,6 +194,11 @@ export const translations = {
         title: 'Frutify',
         description: 'Plataforma e-commerce para fruterías locales con gestión de inventario, pedidos y pagos con Stripe.',
         fullDescription: 'Plataforma completa de e-commerce diseñada específicamente para fruterías y PYMEs locales en Chile. Incluye catálogo de productos con gestión de inventario, carrito de compras, procesamiento de pagos con Stripe, panel de administración, gestión de pedidos y más. Construida con las mejores prácticas de desarrollo moderno.'
+      },
+      mcshop: {
+        title: 'MCShop',
+        description: 'Tienda e-commerce para plugins de Minecraft con autenticación, pagos integrados y gestión de licencias.',
+        fullDescription: 'Plataforma completa de e-commerce especializada en la venta de plugins para servidores de Minecraft. Incluye autenticación con validación de usuario de Minecraft (Mojang API), integración completa con Flow.cl para procesamiento de pagos, sistema de gestión de plugins con versionado, generación de enlaces de descarga seguros (one-time use), dashboard de usuario y administración, sistema de licencias, rate limiting, logs de auditoría y almacenamiento seguro de archivos .jar en Supabase Storage.'
       }
     }
   },
@@ -392,6 +397,11 @@ export const translations = {
         title: 'Frutify',
         description: 'E-commerce platform for local fruit stores with inventory management, orders and Stripe payments.',
         fullDescription: 'Complete e-commerce platform specifically designed for fruit stores and local SMEs in Chile. Includes product catalog with inventory management, shopping cart, payment processing with Stripe, admin panel, order management and more. Built with modern development best practices.'
+      },
+      mcshop: {
+        title: 'MCShop',
+        description: 'E-commerce store for Minecraft plugins with authentication, integrated payments and license management.',
+        fullDescription: 'Complete e-commerce platform specialized in selling plugins for Minecraft servers. Includes authentication with Minecraft user validation (Mojang API), complete integration with Flow.cl for payment processing, plugin management system with versioning, secure download link generation (one-time use), user and admin dashboard, license system, rate limiting, audit logs and secure .jar file storage in Supabase Storage.'
       }
     }
   },
@@ -590,6 +600,11 @@ export const translations = {
         title: 'Frutify',
         description: 'Plataforma e-commerce para frutarias locais com gestão de inventário, pedidos e pagamentos com Stripe.',
         fullDescription: 'Plataforma completa de e-commerce especificamente projetada para frutarias e PMEs locais no Chile. Inclui catálogo de produtos com gestão de inventário, carrinho de compras, processamento de pagamentos com Stripe, painel de administração, gestão de pedidos e mais. Construída com as melhores práticas de desenvolvimento moderno.'
+      },
+      mcshop: {
+        title: 'MCShop',
+        description: 'Loja e-commerce para plugins de Minecraft com autenticação, pagamentos integrados e gestão de licenças.',
+        fullDescription: 'Plataforma completa de e-commerce especializada na venda de plugins para servidores de Minecraft. Inclui autenticação com validação de usuário de Minecraft (Mojang API), integração completa com Flow.cl para processamento de pagamentos, sistema de gestão de plugins com versionamento, geração de links de download seguros (uso único), dashboard de usuário e administração, sistema de licenças, rate limiting, logs de auditoria e armazenamento seguro de arquivos .jar no Supabase Storage.'
       }
     }
   },
@@ -788,6 +803,11 @@ export const translations = {
         title: 'Frutify',
         description: 'E-Commerce-Plattform für lokale Obstgeschäfte mit Bestandsverwaltung, Bestellungen und Stripe-Zahlungen.',
         fullDescription: 'Vollständige E-Commerce-Plattform speziell für Obstgeschäfte und lokale KMU in Chile entwickelt. Enthält Produktkatalog mit Bestandsverwaltung, Warenkorb, Zahlungsabwicklung mit Stripe, Admin-Panel, Bestellverwaltung und mehr. Erstellt mit modernen Entwicklungs-Best-Practices.'
+      },
+      mcshop: {
+        title: 'MCShop',
+        description: 'E-Commerce-Shop für Minecraft-Plugins mit Authentifizierung, integrierten Zahlungen und Lizenzverwaltung.',
+        fullDescription: 'Vollständige E-Commerce-Plattform spezialisiert auf den Verkauf von Plugins für Minecraft-Server. Enthält Authentifizierung mit Minecraft-Benutzervalidierung (Mojang API), vollständige Integration mit Flow.cl für die Zahlungsabwicklung, Plugin-Verwaltungssystem mit Versionskontrolle, sichere Download-Link-Generierung (Einmalnutzung), Benutzer- und Admin-Dashboard, Lizenzsystem, Rate Limiting, Audit-Protokolle und sichere .jar-Dateispeicherung in Supabase Storage.'
       }
     }
   }

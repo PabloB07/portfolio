@@ -97,6 +97,18 @@ export const projectsBase = [
     featured: true,
     published: true,
     category: 'web-application'
+  },
+  {
+    id: 'mcshop',
+    translationKey: 'mcshop',
+    image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Next.js', 'TypeScript', 'Supabase', 'Flow.cl Payment Gateway', 'API REST', 'Tailwind CSS', 'Zustand'],
+    github: 'https://github.com/PabloB07/mcshop',
+    demo: 'https://shopmc.vercel.app',
+    status: 'completed' as const,
+    featured: true,
+    published: true,
+    category: 'web-application'
   }
 ];
 
