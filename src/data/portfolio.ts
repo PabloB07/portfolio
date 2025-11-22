@@ -330,15 +330,3 @@ export const certificatesBase = [
     certificateUrl: '/certificates/IA.pdf'
   }
 ];
-
-// Helper function to get localized certificates
-export const getLocalizedCertificates = (t: (key: string) => string): Certificate[] => {
-  return certificatesBase.map(cert => ({
-    id: cert.id,
-    courseName: t(`certificatesData.${cert.translationKey}.courseName`),
-    institution: cert.institution,
-    date: cert.date,
-    imageUrl: cert.imageUrl,
-    certificateUrl: cert.certificateUrl
-  })) as Certificate[];
-};
