@@ -54,6 +54,13 @@ export const translations = {
       title: 'Experiencia profesional',
       technologies: 'Tecnologías utilizadas'
     },
+    certificates: {
+      title: 'Certificados',
+      subtitle: 'Cursos y certificaciones completadas',
+      viewCertificate: 'Ver certificado',
+      issuedBy: 'Emitido por',
+      completedIn: 'Completado en'
+    },
     contact: {
       title: 'Contáctame',
       subtitle: '¿Tienes un proyecto en mente? ¡Hablemos!',
@@ -200,6 +207,20 @@ export const translations = {
         description: 'Tienda e-commerce para plugins de Minecraft con autenticación, pagos integrados y gestión de licencias.',
         fullDescription: 'Plataforma completa de e-commerce especializada en la venta de plugins para servidores de Minecraft. Incluye autenticación con validación de usuario de Minecraft (Mojang API), integración completa con Flow.cl para procesamiento de pagos, sistema de gestión de plugins con versionado, generación de enlaces de descarga seguros (one-time use), dashboard de usuario y administración, sistema de licencias, rate limiting, logs de auditoría y almacenamiento seguro de archivos .jar en Supabase Storage.'
       }
+    },
+    certificatesData: {
+      rubyComplete: {
+        courseName: 'Curso Profesional de Ruby'
+      },
+      ruby2: {
+        courseName: 'Ruby - Programación Completa'
+      },
+      javaComplete: {
+        courseName: 'Java - Desarrollo Completo'
+      },
+      IAComplete: {
+        courseName: 'Inteligencia Artificial - Fundamentos'
+      }
     }
   },
   en: {
@@ -256,6 +277,13 @@ export const translations = {
     experience: {
       title: 'Professional experience',
       technologies: 'Technologies used'
+    },
+    certificates: {
+      title: 'Certificates',
+      subtitle: 'Completed courses and certifications',
+      viewCertificate: 'View certificate',
+      issuedBy: 'Issued by',
+      completedIn: 'Completed in'
     },
     contact: {
       title: 'Contact me',
@@ -403,6 +431,20 @@ export const translations = {
         description: 'E-commerce store for Minecraft plugins with authentication, integrated payments and license management.',
         fullDescription: 'Complete e-commerce platform specialized in selling plugins for Minecraft servers. Includes authentication with Minecraft user validation (Mojang API), complete integration with Flow.cl for payment processing, plugin management system with versioning, secure download link generation (one-time use), user and admin dashboard, license system, rate limiting, audit logs and secure .jar file storage in Supabase Storage.'
       }
+    },
+    certificatesData: {
+      rubyComplete: {
+        courseName: 'Professional Ruby Course'
+      },
+      ruby2: {
+        courseName: 'Ruby - Complete Programming'
+      },
+      javaComplete: {
+        courseName: 'Java - Complete Development'
+      },
+      IAComplete: {
+        courseName: 'Artificial Intelligence - Fundamentals'
+      }
     }
   },
   pt: {
@@ -459,6 +501,13 @@ export const translations = {
     experience: {
       title: 'Experiência profissional',
       technologies: 'Tecnologias utilizadas'
+    },
+    certificates: {
+      title: 'Certificados',
+      subtitle: 'Cursos e certificações concluídas',
+      viewCertificate: 'Ver certificado',
+      issuedBy: 'Emitido por',
+      completedIn: 'Concluído em'
     },
     contact: {
       title: 'Entre em contato',
@@ -606,6 +655,20 @@ export const translations = {
         description: 'Loja e-commerce para plugins de Minecraft com autenticação, pagamentos integrados e gestão de licenças.',
         fullDescription: 'Plataforma completa de e-commerce especializada na venda de plugins para servidores de Minecraft. Inclui autenticação com validação de usuário de Minecraft (Mojang API), integração completa com Flow.cl para processamento de pagamentos, sistema de gestão de plugins com versionamento, geração de links de download seguros (uso único), dashboard de usuário e administração, sistema de licenças, rate limiting, logs de auditoria e armazenamento seguro de arquivos .jar no Supabase Storage.'
       }
+    },
+    certificatesData: {
+      rubyComplete: {
+        courseName: 'Curso Profissional de Ruby'
+      },
+      ruby2: {
+        courseName: 'Ruby - Programação Completa'
+      },
+      javaComplete: {
+        courseName: 'Java - Desenvolvimento Completo'
+      },
+      IAComplete: {
+        courseName: 'Inteligência Artificial - Fundamentos'
+      }
     }
   },
   de: {
@@ -662,6 +725,13 @@ export const translations = {
     experience: {
       title: 'Berufserfahrung',
       technologies: 'Verwendete Technologien'
+    },
+    certificates: {
+      title: 'Zertifikate',
+      subtitle: 'Abgeschlossene Kurse und Zertifizierungen',
+      viewCertificate: 'Zertifikat anzeigen',
+      issuedBy: 'Ausgestellt von',
+      completedIn: 'Abgeschlossen in'
     },
     contact: {
       title: 'Kontaktieren Sie mich',
@@ -809,12 +879,26 @@ export const translations = {
         description: 'E-Commerce-Shop für Minecraft-Plugins mit Authentifizierung, integrierten Zahlungen und Lizenzverwaltung.',
         fullDescription: 'Vollständige E-Commerce-Plattform spezialisiert auf den Verkauf von Plugins für Minecraft-Server. Enthält Authentifizierung mit Minecraft-Benutzervalidierung (Mojang API), vollständige Integration mit Flow.cl für die Zahlungsabwicklung, Plugin-Verwaltungssystem mit Versionskontrolle, sichere Download-Link-Generierung (Einmalnutzung), Benutzer- und Admin-Dashboard, Lizenzsystem, Rate Limiting, Audit-Protokolle und sichere .jar-Dateispeicherung in Supabase Storage.'
       }
+    },
+    certificatesData: {
+      rubyComplete: {
+        courseName: 'Professioneller Ruby-Kurs'
+      },
+      ruby2: {
+        courseName: 'Ruby - Vollständige Programmierung'
+      },
+      javaComplete: {
+        courseName: 'Java - Vollständige Entwicklung'
+      },
+      IAComplete: {
+        courseName: 'Künstliche Intelligenz - Grundlagen'
+      }
     }
   }
 };
 
 export type TranslationKey = keyof typeof translations.es;
-export type NestedTranslationKey = 
+export type NestedTranslationKey =
   | 'nav.home' | 'nav.about' | 'nav.projects' | 'nav.experience' | 'nav.contact'
   | 'hero.greeting' | 'hero.name' | 'hero.title' | 'hero.subtitle' | 'hero.cta' | 'hero.contact' | 'hero.downloadCV'
   | 'about.title' | 'about.description' | 'about.additionalText' | 'about.whyWorkWithMe' | 'about.fastDelivery' | 'about.fastDeliveryDesc' | 'about.innovativeSolutions' | 'about.innovativeSolutionsDesc'

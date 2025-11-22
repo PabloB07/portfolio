@@ -285,3 +285,60 @@ export const personalInfo = {
   location: 'Chile',
   avatar: 'https://avatars.githubusercontent.com/u/36685434?s=400&u=8f518ea4af6f810143ff3af98c207394a8ae1c5a&v=4' // Vacío para que se maneje desde el perfil
 };
+
+export interface Certificate {
+  id: string;
+  translationKey: string;
+  institution: string;
+  date: string;
+  imageUrl: string;
+  certificateUrl: string;
+}
+
+// Base certificate data
+export const certificatesBase = [
+  {
+    id: 'ruby-complete',
+    translationKey: 'rubyComplete',
+    institution: 'Codigofacilito',
+    date: '2024',
+    imageUrl: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    certificateUrl: '/certificates/ruby.pdf'
+  },
+  {
+    id: 'ruby-2',
+    translationKey: 'ruby2',
+    institution: 'Udemy',
+    date: '2019',
+    imageUrl: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    certificateUrl: '/certificates/ruby2.pdf'
+  },
+  {
+    id: 'java-complete',
+    translationKey: 'javaComplete',
+    institution: 'Udemy',
+    date: '2020',
+    imageUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    certificateUrl: '/certificates/java.pdf'
+  },
+  {
+    id: 'IA-complete',
+    translationKey: 'IAComplete',
+    institution: 'BIG School',
+    date: '2025',
+    imageUrl: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    certificateUrl: '/certificates/IA.pdf'
+  }
+];
+
+// Helper function to get localized certificates
+export const getLocalizedCertificates = (t: (key: string) => string): Certificate[] => {
+  return certificatesBase.map(cert => ({
+    id: cert.id,
+    courseName: t(`certificatesData.${cert.translationKey}.courseName`),
+    institution: cert.institution,
+    date: cert.date,
+    imageUrl: cert.imageUrl,
+    certificateUrl: cert.certificateUrl
+  })) as Certificate[];
+};
