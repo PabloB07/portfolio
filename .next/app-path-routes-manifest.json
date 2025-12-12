@@ -1,0 +1,8 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/api/download-cv/route": "/api/download-cv",
+  "/api/projects/route": "/api/projects",
+  "/minecraft/page": "/minecraft",
+  "/page": "/",
+  "/portfolio-services/page": "/portfolio-services"
+}

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef, useMemo, useEffect, useState } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import * as THREE from 'three'
 import { useLanguage } from '../../contexts/LanguageContext'
@@ -44,20 +44,20 @@ class PerlinNoise {
   constructor(seed: number = 0) {
     this.permutation = []
     this.p = []
-    
+
     // Inicializar permutación
     for (let i = 0; i < 256; i++) {
       this.permutation[i] = i
     }
-    
+
     // Mezclar con seed
     let rng = seed
     for (let i = 255; i > 0; i--) {
       rng = (rng * 1103515245 + 12345) & 0x7fffffff
       const j = rng % (i + 1)
-      ;[this.permutation[i], this.permutation[j]] = [this.permutation[j], this.permutation[i]]
+        ;[this.permutation[i], this.permutation[j]] = [this.permutation[j], this.permutation[i]]
     }
-    
+
     // Duplicar array
     for (let i = 0; i < 512; i++) {
       this.p[i] = this.permutation[i % 256]
@@ -135,25 +135,25 @@ class PerlinNoise {
 function generateChunk(chunkX: number, chunkZ: number, seed: number = 0): BlockType[][][] {
   const noise = new PerlinNoise(seed)
   const chunk: BlockType[][][] = []
-  
+
   for (let x = 0; x < CHUNK_SIZE; x++) {
     chunk[x] = []
     for (let z = 0; z < CHUNK_SIZE; z++) {
       chunk[x][z] = []
-      
+
       const worldX = chunkX * CHUNK_SIZE + x
       const worldZ = chunkZ * CHUNK_SIZE + z
-      
+
       // Generar altura usando múltiples octavas de ruido
       let height = 32
       height += noise.noise(worldX * 0.01, 0, worldZ * 0.01) * 20
       height += noise.noise(worldX * 0.02, 0, worldZ * 0.02) * 10
       height += noise.noise(worldX * 0.05, 0, worldZ * 0.05) * 5
       height = Math.floor(height)
-      
+
       // Generar cuevas
       const caveNoise = noise.noise(worldX * 0.1, 0, worldZ * 0.1)
-      
+
       for (let y = 0; y < CHUNK_HEIGHT; y++) {
         if (y === 0) {
           chunk[x][z][y] = BlockType.BEDROCK
@@ -192,27 +192,27 @@ function generateChunk(chunkX: number, chunkZ: number, seed: number = 0): BlockT
       }
     }
   }
-  
+
   return chunk
 }
 
 // Componente de Chunk optimizado
-function Chunk({ 
-  chunkX, 
-  chunkZ, 
-  seed 
-}: { 
+function Chunk({
+  chunkX,
+  chunkZ,
+  seed
+}: {
   chunkX: number
   chunkZ: number
   seed: number
 }) {
   const meshRef = useRef<THREE.InstancedMesh>(null)
   const [blocks, setBlocks] = useState<Array<{ pos: [number, number, number], type: BlockType }>>([])
-  
+
   useEffect(() => {
     const chunk = generateChunk(chunkX, chunkZ, seed)
     const blockList: Array<{ pos: [number, number, number], type: BlockType }> = []
-    
+
     for (let x = 0; x < CHUNK_SIZE; x++) {
       for (let z = 0; z < CHUNK_SIZE; z++) {
         for (let y = 0; y < CHUNK_HEIGHT; y++) {
@@ -226,29 +226,29 @@ function Chunk({
         }
       }
     }
-    
+
     setBlocks(blockList)
   }, [chunkX, chunkZ, seed])
-  
+
   useEffect(() => {
     if (!meshRef.current || blocks.length === 0) return
-    
+
     const tempObject = new THREE.Object3D()
     blocks.forEach((block, i) => {
       tempObject.position.set(...block.pos)
       tempObject.updateMatrix()
       meshRef.current!.setMatrixAt(i, tempObject.matrix)
     })
-    
+
     meshRef.current.instanceMatrix.needsUpdate = true
   }, [blocks])
-  
+
   if (blocks.length === 0) return null
-  
+
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, blocks.length]}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial 
+      <meshStandardMaterial
         color="#8B7355"
         roughness={0.8}
         metalness={0.1}
@@ -258,35 +258,35 @@ function Chunk({
 }
 
 // Componente de bloques agrupados por tipo (más eficiente)
-function BlockGroup({ 
-  blocks, 
-  type 
-}: { 
+function BlockGroup({
+  blocks,
+  type
+}: {
   blocks: Array<[number, number, number]>
   type: BlockType
 }) {
   const meshRef = useRef<THREE.InstancedMesh>(null)
   const color = BLOCK_COLORS[type]
   const tempObject = new THREE.Object3D()
-  
+
   useEffect(() => {
     if (!meshRef.current) return
-    
+
     blocks.forEach((position, i) => {
       tempObject.position.set(...position)
       tempObject.updateMatrix()
       meshRef.current!.setMatrixAt(i, tempObject.matrix)
     })
-    
+
     meshRef.current.instanceMatrix.needsUpdate = true
   }, [blocks])
-  
+
   if (blocks.length === 0) return null
-  
+
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, blocks.length]}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial 
+      <meshStandardMaterial
         color={color}
         roughness={0.8}
         metalness={0.1}
@@ -301,32 +301,32 @@ function MinecraftWorld() {
   const chunksToRender = useMemo(() => {
     const chunks: Array<{ x: number, z: number }> = []
     const renderDistance = 2 // Renderizar chunks en un radio de 2
-    
+
     for (let x = -renderDistance; x <= renderDistance; x++) {
       for (let z = -renderDistance; z <= renderDistance; z++) {
         chunks.push({ x, z })
       }
     }
-    
+
     return chunks
   }, [])
-  
+
   useFrame((state) => {
     setTime(state.clock.elapsedTime)
   })
-  
+
   // Calcular iluminación basada en tiempo (ciclo día/noche)
   const sunIntensity = useMemo(() => {
     const dayCycle = (Math.sin(time * 0.1) + 1) / 2
     return Math.max(0.3, dayCycle)
   }, [time])
-  
+
   return (
     <>
       <ambientLight intensity={0.4 * sunIntensity} />
-      <directionalLight 
-        position={[10, 20, 10]} 
-        intensity={1.5 * sunIntensity} 
+      <directionalLight
+        position={[10, 20, 10]}
+        intensity={1.5 * sunIntensity}
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
@@ -336,22 +336,22 @@ function MinecraftWorld() {
         shadow-camera-top={30}
         shadow-camera-bottom={-30}
       />
-      <directionalLight 
-        position={[-10, 5, -10]} 
-        intensity={0.2 * sunIntensity} 
-        color="#87CEEB" 
+      <directionalLight
+        position={[-10, 5, -10]}
+        intensity={0.2 * sunIntensity}
+        color="#87CEEB"
       />
-      
+
       {/* Renderizar chunks */}
       {chunksToRender.map((chunk) => (
-        <Chunk 
+        <Chunk
           key={`${chunk.x}-${chunk.z}`}
           chunkX={chunk.x}
           chunkZ={chunk.z}
           seed={0}
         />
       ))}
-      
+
       {/* Plano base */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]} receiveShadow>
         <planeGeometry args={[CHUNK_SIZE * 6, CHUNK_SIZE * 6]} />
@@ -365,13 +365,13 @@ function MinecraftWorld() {
 export default function MinecraftWorldCanvas() {
   const controlsRef = useRef<any>(null)
   const { tString } = useLanguage()
-  
+
   return (
     <div className="w-full h-screen relative">
       <Canvas
         shadows
-        gl={{ 
-          antialias: true, 
+        gl={{
+          antialias: true,
           alpha: false,
           powerPreference: "high-performance"
         }}
@@ -395,7 +395,7 @@ export default function MinecraftWorldCanvas() {
         <MinecraftWorld />
         <fog attach="fog" args={['#87CEEB', 30, 100]} />
       </Canvas>
-      
+
       {/* Controles UI */}
       <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-sm text-white p-4 rounded-lg">
         <h3 className="font-bold mb-2">{tString('minecraft.controls.title')}</h3>

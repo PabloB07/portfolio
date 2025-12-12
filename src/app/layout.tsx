@@ -11,7 +11,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <title>Pablo B. - Full-Stack Developer Portfolio</title>
+        <meta name="description" content="Full-stack developer specializing in React, Next.js, and modern web technologies. Explore my projects and experience." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body>
         <ThemeProvider>
           <LanguageProvider>

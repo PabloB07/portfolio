@@ -1,7 +1,5 @@
 'use client'
 
-import { ThemeProvider } from '../contexts/ThemeContext';
-import { LanguageProvider } from '../contexts/LanguageContext';
 import Navigation from '../components/common/Navigation';
 import Hero from '../components/sections/Hero';
 import About from '../components/sections/About';
@@ -14,22 +12,18 @@ import AIAssistant from '../components/ai/AIAssistant';
 
 export default function Home() {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <div className="min-h-screen bg-white dark:bg-gray-900">
-          <Navigation />
-          <main>
-            <Hero />
-            <About />
-            <Projects />
-            <Experience />
-            <Certificates />
-            <Contact />
-          </main>
-          <Footer />
-          <AIAssistant />
-        </div>
-      </LanguageProvider>
-    </ThemeProvider>
+    <div className="min-h-screen bg-white dark:bg-gray-900">
+      <Navigation />
+      <main>
+        <Hero />
+        <About />
+        <Projects />
+        <Experience />
+        <Certificates />
+        <Contact />
+      </main>
+      <Footer />
+      <AIAssistant />
+    </div>
   )
 }
