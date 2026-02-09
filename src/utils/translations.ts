@@ -21,7 +21,7 @@ export const translations = {
     },
     about: {
       title: 'Acerca de mí',
-      description: 'Desarrollador Full Stack apasionado con experiencia en Ruby on Rails y Laravel. Me especializo en crear aplicaciones web modernas y escalables que combinan diseño atractivo con funcionalidad robusta.',
+      description: 'Desarrollador Full Stack apasionado con experiencia en Desarrollo web y scripting de videojuegos. Me especializo en crear aplicaciones web modernas y escalables que combinan diseño atractivo con funcionalidad robusta.',
       additionalText: 'Mi pasión por la tecnología me impulsa a mantenerme actualizado con las últimas tendencias y mejores prácticas en el desarrollo web.',
       whyWorkWithMe: '¿Por qué trabajar conmigo?',
       fastDelivery: 'Entrega Rápida',
@@ -86,13 +86,12 @@ export const translations = {
       and: 'y'
     },
     minecraft: {
-      title: 'Mundo Minecraft 3D',
-      description: 'Explora este mundo voxel generado proceduralmente usando Three.js',
-      controls: {
-        title: 'Controles',
-        rotate: '🖱️ Click + Arrastrar: Rotar',
-        zoom: '🔍 Scroll: Zoom',
-        pan: '🖱️ Click Derecho + Arrastrar: Pan'
+      title: 'Proyectos Minecraft',
+      description: 'Accesos directos a proyectos destacados relacionados con Minecraft.',
+      projects: {
+        townyFaith: 'TownyFaith',
+        hytaleChile: 'Hytale Chile',
+        visit: 'Visitar sitio'
       }
     },
     services: {
@@ -245,7 +244,7 @@ export const translations = {
     },
     about: {
       title: 'About me',
-      description: 'Passionate Full Stack developer with experience in Ruby on Rails and Laravel. I specialize in creating modern and scalable web applications that combine attractive design with robust functionality.',
+      description: 'Passionate Full Stack developer with experience in web development and video game scripting. I specialize in creating modern and scalable web applications that combine attractive design with robust functionality.',
       additionalText: 'My passion for technology drives me to stay updated with the latest trends and best practices in web development.',
       whyWorkWithMe: 'Why work with me?',
       fastDelivery: 'Fast Delivery',
@@ -310,13 +309,12 @@ export const translations = {
       and: 'and'
     },
     minecraft: {
-      title: 'Minecraft 3D World',
-      description: 'Explore this procedurally generated voxel world using Three.js',
-      controls: {
-        title: 'Controls',
-        rotate: '🖱️ Click + Drag: Rotate',
-        zoom: '🔍 Scroll: Zoom',
-        pan: '🖱️ Right Click + Drag: Pan'
+      title: 'Minecraft Projects',
+      description: 'Shortcuts to featured Minecraft-related projects.',
+      projects: {
+        townyFaith: 'TownyFaith',
+        hytaleChile: 'Hytale Chile',
+        visit: 'Visit site'
       }
     },
     services: {
@@ -469,7 +467,7 @@ export const translations = {
     },
     about: {
       title: 'Sobre mim',
-      description: 'Desenvolvedor Full Stack apaixonado com experiência em Ruby on Rails e Laravel. Especializo-me em criar aplicações web modernas e escaláveis que combinam design atraente com funcionalidade robusta.',
+      description: 'Desenvolvedor Full Stack apaixonado com experiência em desenvolvimento web e scripting de videogames. Especializo-me em criar aplicações web modernas e escaláveis que combinam design atraente com funcionalidade robusta.',
       additionalText: 'Minha paixão pela tecnologia me impulsiona a me manter atualizado com as últimas tendências e melhores práticas em desenvolvimento web.',
       whyWorkWithMe: 'Por que trabalhar comigo?',
       fastDelivery: 'Entrega Rápida',
@@ -534,13 +532,12 @@ export const translations = {
       and: 'e'
     },
     minecraft: {
-      title: 'Mundo Minecraft 3D',
-      description: 'Explore este mundo voxel gerado proceduralmente usando Three.js',
-      controls: {
-        title: 'Controles',
-        rotate: '🖱️ Clique + Arrastar: Rotacionar',
-        zoom: '🔍 Scroll: Zoom',
-        pan: '🖱️ Clique Direito + Arrastar: Mover'
+      title: 'Projetos Minecraft',
+      description: 'Acessos diretos a projetos em destaque relacionados ao Minecraft.',
+      projects: {
+        townyFaith: 'TownyFaith',
+        hytaleChile: 'Hytale Chile',
+        visit: 'Visitar site'
       }
     },
     services: {
@@ -693,7 +690,7 @@ export const translations = {
     },
     about: {
       title: 'Über mich',
-      description: 'Leidenschaftlicher Full Stack Entwickler mit Erfahrung in Ruby on Rails und Laravel. Ich spezialisiere mich auf die Entwicklung moderner und skalierbarer Webanwendungen, die attraktives Design mit robuster Funktionalität kombinieren.',
+      description: 'Leidenschaftlicher Full-Stack-Entwickler mit Erfahrung in Webentwicklung und Videospiel-Scripting. Ich spezialisiere mich auf die Entwicklung moderner und skalierbarer Webanwendungen, die attraktives Design mit robuster Funktionalität kombinieren.',
       additionalText: 'Meine Leidenschaft für Technologie treibt mich an, mit den neuesten Trends und Best Practices in der Webentwicklung auf dem Laufenden zu bleiben.',
       whyWorkWithMe: 'Warum mit mir arbeiten?',
       fastDelivery: 'Schnelle Lieferung',
@@ -758,13 +755,12 @@ export const translations = {
       and: 'und'
     },
     minecraft: {
-      title: 'Minecraft 3D Welt',
-      description: 'Erkunden Sie diese prozedural generierte Voxel-Welt mit Three.js',
-      controls: {
-        title: 'Steuerung',
-        rotate: '🖱️ Klicken + Ziehen: Drehen',
-        zoom: '🔍 Scrollen: Zoom',
-        pan: '🖱️ Rechtsklick + Ziehen: Verschieben'
+      title: 'Minecraft-Projekte',
+      description: 'Direkte Links zu hervorgehobenen Minecraft-Projekten.',
+      projects: {
+        townyFaith: 'TownyFaith',
+        hytaleChile: 'Hytale Chile',
+        visit: 'Website besuchen'
       }
     },
     services: {

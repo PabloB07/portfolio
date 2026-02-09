@@ -5,13 +5,13 @@ import { join } from 'path';
 export async function GET() {
   try {
     // Ruta donde se almacena el CV
-    const cvPath = join(process.cwd(), 'public', 'cv', 'PabloB-CV-es.pdf');
+    const cvPath = join(process.cwd(), 'public', 'cv', 'Pablo_Blanco_CV_es.pdf');
     const fileBuffer = readFileSync(cvPath);
     
     return new NextResponse(fileBuffer, {
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename="Pablo_Blanco_Navarro_CV.pdf"'
+        'Content-Disposition': 'attachment; filename="Pablo_Blanco_CV_es.pdf"'
       }
     });
   } catch (error) {
