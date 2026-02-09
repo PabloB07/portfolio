@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 58, "column": 0}, "map": {"version":3,"sources":["file:///home/blancocl/portfolio/src/app/api/download-cv/route.ts"],"sourcesContent":["import { NextResponse } from 'next/server';\r\nimport { readFileSync } from 'fs';\r\nimport { join } from 'path';\r\n\r\nexport async function GET() {\r\n  try {\r\n    // Ruta donde se almacena el CV\r\n    const cvPath = join(process.cwd(), 'public', 'cv', 'Pablo_Blanco_CV_es.pdf');\n    const fileBuffer = readFileSync(cvPath);\r\n    \r\n    return new NextResponse(fileBuffer, {\r\n      headers: {\r\n        'Content-Type': 'application/pdf',\r\n        'Content-Disposition': 'attachment; filename=\"Pablo_Blanco_CV_es.pdf\"'\n      }\r\n    });\r\n  } catch (error) {\r\n    console.error('Error al leer el CV:', error);\r\n    return NextResponse.json({ error: 'CV no encontrado' }, { status: 404 });\r\n  }\r\n}\n"],"names":[],"mappings":";;;;AAAA;AACA;AACA;;;;AAEO,eAAe;IACpB,IAAI;QACF,+BAA+B;QAC/B,MAAM,SAAS,IAAA,yGAAI,EAAC,QAAQ,GAAG,IAAI,UAAU,MAAM;QACnD,MAAM,aAAa,IAAA,6GAAY,EAAC;QAEhC,OAAO,IAAI,gJAAY,CAAC,YAAY;YAClC,SAAS;gBACP,gBAAgB;gBAChB,uBAAuB;YACzB;QACF;IACF,EAAE,OAAO,OAAO;QACd,QAAQ,KAAK,CAAC,wBAAwB;QACtC,OAAO,gJAAY,CAAC,IAAI,CAAC;YAAE,OAAO;QAAmB,GAAG;YAAE,QAAQ;QAAI;IACxE;AACF"}}]
-}

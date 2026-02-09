@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 16, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/middleware.ts"],"sourcesContent":["import { NextResponse } from 'next/server'\r\nimport type { NextRequest } from 'next/server'\r\n\r\nexport async function middleware(request: NextRequest) {\r\n  // Sin autenticación necesaria - portafolio estático\r\n  return NextResponse.next()\r\n}\r\n\r\nexport const config = {\r\n  matcher: []\r\n}"],"names":[],"mappings":";;;;;;AAAA;AAAA;;AAGO,eAAe,WAAW,OAAoB;IACnD,oDAAoD;IACpD,OAAO,gMAAY,CAAC,IAAI;AAC1B;AAEO,MAAM,SAAS;IACpB,SAAS,EAAE;AACb"}}]
-}
