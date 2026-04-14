@@ -4,102 +4,89 @@ import { motion } from 'framer-motion'
 import Navigation from '../../components/common/Navigation'
 import Footer from '../../components/common/Footer'
 import { useLanguage } from '../../contexts/LanguageContext'
-import { 
-  Code, 
-  Server, 
-  Database, 
-  Shield, 
-  Zap, 
-  Users, 
-  Gamepad2,
-  CheckCircle2,
-  Star
-} from 'lucide-react'
 
 const technologies = [
-  'Java', 'Paper API', 'Folia API', 'MySQL', 'Redis', 'Docker', 'Linux', 'Nginx', 'Velocity'
+  { name: 'Java', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg' },
+  { name: 'Paper API', icon: 'https://assets.papermc.io/brand/papermc_logo.min.svg' },
+  { name: 'MySQL', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg' },
+  { name: 'Redis', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original.svg' },
+  { name: 'Docker', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg' },
+  { name: 'Linux', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg' },
+  { name: 'Nginx', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nginx/nginx-original.svg' },
+]
+
+const services = [
+  {
+    titleKey: 'services.serviceItems.pluginDevelopment.title',
+    descriptionKey: 'services.serviceItems.pluginDevelopment.description',
+    featuresKey: 'services.serviceItems.pluginDevelopment.features',
+    color: 'from-blue-500 to-cyan-500',
+    key: 'pluginDevelopment'
+  },
+  {
+    titleKey: 'services.serviceItems.serverSetup.title',
+    descriptionKey: 'services.serviceItems.serverSetup.description',
+    featuresKey: 'services.serviceItems.serverSetup.features',
+    color: 'from-purple-500 to-pink-500',
+    key: 'serverSetup'
+  },
+  {
+    titleKey: 'services.serviceItems.database.title',
+    descriptionKey: 'services.serviceItems.database.description',
+    featuresKey: 'services.serviceItems.database.features',
+    color: 'from-green-500 to-emerald-500',
+    key: 'database'
+  },
+  {
+    titleKey: 'services.serviceItems.security.title',
+    descriptionKey: 'services.serviceItems.security.description',
+    featuresKey: 'services.serviceItems.security.features',
+    color: 'from-red-500 to-orange-500',
+    key: 'security'
+  },
+  {
+    titleKey: 'services.serviceItems.optimization.title',
+    descriptionKey: 'services.serviceItems.optimization.description',
+    featuresKey: 'services.serviceItems.optimization.features',
+    color: 'from-yellow-500 to-amber-500',
+    key: 'optimization'
+  },
+  {
+    titleKey: 'services.serviceItems.multiplayer.title',
+    descriptionKey: 'services.serviceItems.multiplayer.description',
+    featuresKey: 'services.serviceItems.multiplayer.features',
+    color: 'from-indigo-500 to-purple-500',
+    key: 'multiplayer'
+  }
+]
+
+const testimonials = [
+  {
+    nameKey: 'services.testimonialsItems.testimonial1.name',
+    roleKey: 'services.testimonialsItems.testimonial1.role',
+    contentKey: 'services.testimonialsItems.testimonial1.content',
+    rating: 5
+  },
+  {
+    nameKey: 'services.testimonialsItems.testimonial2.name',
+    roleKey: 'services.testimonialsItems.testimonial2.role',
+    contentKey: 'services.testimonialsItems.testimonial2.content',
+    rating: 4
+  }
 ]
 
 export default function PortfolioServicesPage() {
   const { t } = useLanguage()
   
-  // Helper function to get features array
   const getFeatures = (key: string): string[] => {
-    const features = t(`services.serviceItems.${key}.features`)
+    const features = t(key)
     return Array.isArray(features) ? features : (typeof features === 'string' ? [features] : [])
   }
-  
-  const services = [
-    {
-      icon: Code,
-      title: t('services.serviceItems.pluginDevelopment.title'),
-      description: t('services.serviceItems.pluginDevelopment.description'),
-      features: getFeatures('pluginDevelopment'),
-      color: 'from-blue-500 to-cyan-500',
-      key: 'pluginDevelopment'
-    },
-    {
-      icon: Server,
-      title: t('services.serviceItems.serverSetup.title'),
-      description: t('services.serviceItems.serverSetup.description'),
-      features: getFeatures('serverSetup'),
-      color: 'from-purple-500 to-pink-500',
-      key: 'serverSetup'
-    },
-    {
-      icon: Database,
-      title: t('services.serviceItems.database.title'),
-      description: t('services.serviceItems.database.description'),
-      features: getFeatures('database'),
-      color: 'from-green-500 to-emerald-500',
-      key: 'database'
-    },
-    {
-      icon: Shield,
-      title: t('services.serviceItems.security.title'),
-      description: t('services.serviceItems.security.description'),
-      features: getFeatures('security'),
-      color: 'from-red-500 to-orange-500',
-      key: 'security'
-    },
-    {
-      icon: Zap,
-      title: t('services.serviceItems.optimization.title'),
-      description: t('services.serviceItems.optimization.description'),
-      features: getFeatures('optimization'),
-      color: 'from-yellow-500 to-amber-500',
-      key: 'optimization'
-    },
-    {
-      icon: Users,
-      title: t('services.serviceItems.multiplayer.title'),
-      description: t('services.serviceItems.multiplayer.description'),
-      features: getFeatures('multiplayer'),
-      color: 'from-indigo-500 to-purple-500',
-      key: 'multiplayer'
-    }
-  ]
-
-  const testimonials = [
-    {
-      name: t('services.testimonialsItems.testimonial1.name'),
-      role: t('services.testimonialsItems.testimonial1.role'),
-      content: t('services.testimonialsItems.testimonial1.content'),
-      rating: 5
-    },
-    {
-      name: t('services.testimonialsItems.testimonial2.name'),
-      role: t('services.testimonialsItems.testimonial2.role'),
-      content: t('services.testimonialsItems.testimonial2.content'),
-      rating: 4
-    }
-  ]
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <Navigation />
       
-      {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary-600 via-secondary-600 to-accent-600">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
@@ -107,7 +94,7 @@ export default function PortfolioServicesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Gamepad2 className="w-20 h-20 mx-auto mb-6 text-white" />
+            <div className="text-6xl mb-6">🎮</div>
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
               {t('services.hero.title')}
             </h1>
@@ -126,7 +113,6 @@ export default function PortfolioServicesPage() {
         </div>
       </section>
 
-      {/* Services Grid */}
       <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -144,46 +130,47 @@ export default function PortfolioServicesPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => {
-              const Icon = service.icon
-              return (
-                <motion.div
-                  key={service.key}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                  className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
-                >
-                  <div className={`h-2 bg-gradient-to-r ${service.color}`} />
-                  <div className="p-6">
-                    <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${service.color} flex items-center justify-center mb-4`}>
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      {service.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                          <CheckCircle2 className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
+            {services.map((service, index) => (
+              <motion.div
+                key={service.key}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
+              >
+                <div className={`h-2 bg-gradient-to-r ${service.color}`} />
+                <div className="p-6">
+                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${service.color} flex items-center justify-center mb-4 text-3xl`}>
+                    {index === 0 && '⚙️'}
+                    {index === 1 && '🖥️'}
+                    {index === 2 && '💾'}
+                    {index === 3 && '🛡️'}
+                    {index === 4 && '⚡'}
+                    {index === 5 && '👥'}
                   </div>
-                </motion.div>
-              )
-            })}
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                    {t(service.titleKey)}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    {t(service.descriptionKey)}
+                  </p>
+                  <ul className="space-y-2">
+                    {getFeatures(service.featuresKey).map((feature, idx) => (
+                      <li key={idx} className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                        <span className="w-4 h-4 mr-2 text-green-500">✓</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Technologies */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -200,7 +187,7 @@ export default function PortfolioServicesPage() {
             </p>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-6">
             {technologies.map((tech, index) => (
               <motion.div
                 key={index}
@@ -209,16 +196,25 @@ export default function PortfolioServicesPage() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
                 whileHover={{ scale: 1.1 }}
-                className="px-6 py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-full font-semibold shadow-lg"
+                className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all"
               >
-                {tech}
+                <img 
+                  src={tech.icon} 
+                  alt={tech.name}
+                  className="h-10 w-auto object-contain mb-2"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {tech.name}
+                </span>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -246,18 +242,18 @@ export default function PortfolioServicesPage() {
               >
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <span key={i} className="text-yellow-400 text-lg">★</span>
                   ))}
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 mb-4 italic">
-                  "{testimonial.content}"
+                  "{t(testimonial.contentKey)}"
                 </p>
                 <div>
                   <p className="font-semibold text-gray-900 dark:text-white">
-                    {testimonial.name}
+                    {t(testimonial.nameKey)}
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {testimonial.role}
+                    {t(testimonial.roleKey)}
                   </p>
                 </div>
               </motion.div>
@@ -266,7 +262,6 @@ export default function PortfolioServicesPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-primary-600 to-secondary-600">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div

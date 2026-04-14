@@ -23,19 +23,19 @@ const AIAssistant: React.FC = () => {
 
   const generateAIResponse = (userMessage: string): string => {
     const responses = {
-      experiencia: "Tengo experiencia en desarrollo Full Stack con Ruby on Rails y Laravel. He trabajado en proyectos desde startups hasta empresas consolidadas, siempre enfocándome en crear soluciones escalables y eficientes.",
+      experiencia: "Tengo experiencia en desarrollo Full Stack con Ruby on Rails y Java. He trabajado en proyectos desde startups hasta empresas consolidadas, siempre enfocándome en crear soluciones escalables y eficientes.",
       
-      habilidades: "Mis principales habilidades incluyen Ruby on Rails, Laravel, Ruby, Git, HTML5, Bootstrap, Tailwind CSS y VibeCoding. Me especializo en desarrollo web moderno y escalable.",
+      habilidades: "Mis principales habilidades incluyen Ruby on Rails, Ruby, Java, Git, Next.js, React, TypeScript, PostgreSQL, Supabase y Tailwind CSS. Me especializo en desarrollo web moderno y escalable.",
       
-      proyectos: "He desarrollado proyectos como plataformas de e-commerce, sistemas de gestión de tareas y la plataforma VibeCoding. Todos han sido deployados y utilizados por usuarios reales.",
+      proyectos: "He desarrollado proyectos como plataformas de e-commerce, sistemas de gestión, APIs de criptomonedas, y más. Todos han sido deployados y utilizados por usuarios reales.",
       
-      contacto: "Puedes contactarme en pablo@vibecoding.com o a través del formulario de contacto. Siempre respondo en menos de 24 horas y estoy disponible 24/7 para discutir nuevos proyectos.",
+      contacto: "Puedes contactarme en pablob0798@gmail.com o a través del formulario de contacto. Siempre respondo en menos de 24 horas y estoy disponible 24/7 para discutir nuevos proyectos.",
       
-      tecnologias: "Trabajo principalmente con Ruby on Rails y Laravel, pero también tengo experiencia con HTML5, Bootstrap, Tailwind CSS, Git y VibeCoding. Me mantengo actualizado con las últimas tendencias en desarrollo web.",
+      tecnologias: "Trabajo principalmente con Ruby on Rails, Ruby, Java, Next.js, React, TypeScript, PostgreSQL, Supabase y Tailwind CSS. Me mantengo actualizado con las últimas tendencias en desarrollo web.",
       
       colaboracion: "Estoy abierto a colaboraciones en proyectos innovadores, especialmente en startups tecnológicas, aplicaciones web, y proyectos que tengan impacto. Me gusta trabajar en equipos multidisciplinarios.",
       
-      servicios: "Ofrezco servicios de desarrollo Full Stack, consultoría técnica, desarrollo de MVPs, y mentoring para desarrolladores. También desarrollo soluciones personalizadas con Ruby on Rails y Laravel."
+      servicios: "Ofrezco servicios de desarrollo Full Stack, consultoría técnica, desarrollo de MVPs, y desarrollo de plugins para Minecraft. También desarrollo soluciones personalizadas con Ruby on Rails."
     };
 
     const lowerMessage = userMessage.toLowerCase();
@@ -52,7 +52,7 @@ const AIAssistant: React.FC = () => {
       }
     }
 
-    return "¡Hola! Soy el asistente IA de Pablo. Puedo contarte sobre su experiencia con Ruby on Rails, Laravel, sus proyectos, o cómo contactarlo. ¿Qué te interesa saber?";
+    return "¡Hola! Soy el asistente IA de Pablo. Puedo contarte sobre su experiencia con Ruby on Rails, sus proyectos, o cómo contactarlo. ¿Qué te interesa saber?";
   };
 
   const handleSendMessage = async () => {

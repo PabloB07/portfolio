@@ -27,7 +27,8 @@ export const translations = {
       fastDelivery: 'Entrega Rápida',
       fastDeliveryDesc: 'Desarrollo ágil con entregas frecuentes y comunicación constante.',
       innovativeSolutions: 'Soluciones Innovadoras',
-      innovativeSolutionsDesc: 'Enfoque creativo para resolver problemas complejos con elegancia.'
+      innovativeSolutionsDesc: 'Enfoque creativo para resolver problemas complejos con elegancia.',
+      technologies: 'Tecnologías'
     },
     projects: {
       title: 'Mis proyectos',
@@ -88,6 +89,7 @@ export const translations = {
     minecraft: {
       title: 'Proyectos Minecraft',
       description: 'Accesos directos a proyectos destacados relacionados con Minecraft.',
+      technologies: 'Tecnologías',
       projects: {
         townyFaith: 'TownyFaith',
         hytaleChile: 'Hytale Chile',
@@ -250,7 +252,8 @@ export const translations = {
       fastDelivery: 'Fast Delivery',
       fastDeliveryDesc: 'Agile development with frequent deliveries and constant communication.',
       innovativeSolutions: 'Innovative Solutions',
-      innovativeSolutionsDesc: 'Creative approach to solve complex problems with elegance.'
+      innovativeSolutionsDesc: 'Creative approach to solve complex problems with elegance.',
+      technologies: 'Technologies'
     },
     projects: {
       title: 'My projects',
@@ -311,6 +314,7 @@ export const translations = {
     minecraft: {
       title: 'Minecraft Projects',
       description: 'Shortcuts to featured Minecraft-related projects.',
+      technologies: 'Technologies',
       projects: {
         townyFaith: 'TownyFaith',
         hytaleChile: 'Hytale Chile',
@@ -473,7 +477,8 @@ export const translations = {
       fastDelivery: 'Entrega Rápida',
       fastDeliveryDesc: 'Desenvolvimento ágil com entregas frequentes e comunicação constante.',
       innovativeSolutions: 'Soluções Inovadoras',
-      innovativeSolutionsDesc: 'Abordagem criativa para resolver problemas complexos com elegância.'
+      innovativeSolutionsDesc: 'Abordagem criativa para resolver problemas complexos com elegância.',
+      technologies: 'Tecnologias'
     },
     projects: {
       title: 'Meus projetos',
@@ -534,6 +539,7 @@ export const translations = {
     minecraft: {
       title: 'Projetos Minecraft',
       description: 'Acessos diretos a projetos em destaque relacionados ao Minecraft.',
+      technologies: 'Tecnologias',
       projects: {
         townyFaith: 'TownyFaith',
         hytaleChile: 'Hytale Chile',
@@ -696,7 +702,8 @@ export const translations = {
       fastDelivery: 'Schnelle Lieferung',
       fastDeliveryDesc: 'Agile Entwicklung mit häufigen Lieferungen und konstanter Kommunikation.',
       innovativeSolutions: 'Innovative Lösungen',
-      innovativeSolutionsDesc: 'Kreativer Ansatz zur eleganten Lösung komplexer Probleme.'
+      innovativeSolutionsDesc: 'Kreativer Ansatz zur eleganten Lösung komplexer Probleme.',
+      technologies: 'Technologien'
     },
     projects: {
       title: 'Meine Projekte',
@@ -757,6 +764,7 @@ export const translations = {
     minecraft: {
       title: 'Minecraft-Projekte',
       description: 'Direkte Links zu hervorgehobenen Minecraft-Projekten.',
+      technologies: 'Technologien',
       projects: {
         townyFaith: 'TownyFaith',
         hytaleChile: 'Hytale Chile',
