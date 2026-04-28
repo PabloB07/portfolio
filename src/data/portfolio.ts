@@ -109,6 +109,18 @@ export const projectsBase = [
     featured: true,
     published: true,
     category: 'web-application'
+  },
+  {
+    id: 'mineplugins-panel',
+    translationKey: 'minepluginsPanel',
+    image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Minecraft API'],
+    github: 'https://github.com/PabloB07/mineplugins-panel',
+    demo: '',
+    status: 'completed' as const,
+    featured: true,
+    published: true,
+    category: 'web-application'
   }
 ];
 

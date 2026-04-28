@@ -207,6 +207,11 @@ export const translations = {
         title: 'MCShop',
         description: 'Tienda e-commerce para plugins de Minecraft con autenticación, pagos integrados y gestión de licencias.',
         fullDescription: 'Plataforma completa de e-commerce especializada en la venta de plugins para servidores de Minecraft. Incluye autenticación con validación de usuario de Minecraft (Mojang API), integración completa con Flow.cl para procesamiento de pagos, sistema de gestión de plugins con versionado, generación de enlaces de descarga seguros (one-time use), dashboard de usuario y administración, sistema de licencias, rate limiting, logs de auditoría y almacenamiento seguro de archivos .jar en Supabase Storage.'
+      },
+      minepluginsPanel: {
+        title: 'MinePlugins Panel',
+        description: 'Panel de administración para gestionar plugins de Minecraft con interfaz moderna y funcionalidades avanzadas.',
+        fullDescription: 'Plataforma web moderna para la gestión y administración de plugins de Minecraft. Permite a los administradores de servidores gestionar sus plugins, ver estadísticas de uso, configurar ajustes y monitorear el rendimiento de manera intuitiva y eficiente.'
       }
     },
     certificatesData: {
@@ -432,6 +437,11 @@ export const translations = {
         title: 'MCShop',
         description: 'E-commerce store for Minecraft plugins with authentication, integrated payments and license management.',
         fullDescription: 'Complete e-commerce platform specialized in selling plugins for Minecraft servers. Includes authentication with Minecraft user validation (Mojang API), complete integration with Flow.cl for payment processing, plugin management system with versioning, secure download link generation (one-time use), user and admin dashboard, license system, rate limiting, audit logs and secure .jar file storage in Supabase Storage.'
+      },
+      minepluginsPanel: {
+        title: 'MinePlugins Panel',
+        description: 'Administration panel for managing Minecraft plugins with modern interface and advanced features.',
+        fullDescription: 'Modern web platform for managing and administering Minecraft plugins. Allows server administrators to manage their plugins, view usage statistics, configure settings and monitor performance in an intuitive and efficient way.'
       }
     },
     certificatesData: {
@@ -657,6 +667,11 @@ export const translations = {
         title: 'MCShop',
         description: 'Loja e-commerce para plugins de Minecraft com autenticação, pagamentos integrados e gestão de licenças.',
         fullDescription: 'Plataforma completa de e-commerce especializada na venda de plugins para servidores de Minecraft. Inclui autenticação com validação de usuário de Minecraft (Mojang API), integração completa com Flow.cl para processamento de pagamentos, sistema de gestão de plugins com versionamento, geração de links de download seguros (uso único), dashboard de usuário e administração, sistema de licenças, rate limiting, logs de auditoria e armazenamento seguro de arquivos .jar no Supabase Storage.'
+      },
+      minepluginsPanel: {
+        title: 'MinePlugins Panel',
+        description: 'Painel de administração para gerenciar plugins de Minecraft com interface moderna e funcionalidades avançadas.',
+        fullDescription: 'Plataforma web moderna para gestão e administração de plugins de Minecraft. Permite que administradores de servidores gerenciem seus plugins, visualizem estatísticas de uso, configurem ajustes e monitorem o desempenho de maneira intuitiva e eficiente.'
       }
     },
     certificatesData: {
@@ -881,7 +896,12 @@ export const translations = {
       mcshop: {
         title: 'MCShop',
         description: 'E-Commerce-Shop für Minecraft-Plugins mit Authentifizierung, integrierten Zahlungen und Lizenzverwaltung.',
-        fullDescription: 'Vollständige E-Commerce-Plattform spezialisiert auf den Verkauf von Plugins für Minecraft-Server. Enthält Authentifizierung mit Minecraft-Benutzervalidierung (Mojang API), vollständige Integration mit Flow.cl für die Zahlungsabwicklung, Plugin-Verwaltungssystem mit Versionskontrolle, sichere Download-Link-Generierung (Einmalnutzung), Benutzer- und Admin-Dashboard, Lizenzsystem, Rate Limiting, Audit-Protokolle und sichere .jar-Dateispeicherung in Supabase Storage.'
+        fullDescription: 'Vollständige E-Commerce-Plattform spezialisiert auf den Verkauf von Plugins für Minecraft-Server. Enthält Authentifizierung mit Minecraft-Benutzervalidierung (Mojang API), vollständige Integration mit Flow.cl für die Zahlungsabwicklung, Plugin-Verwaltungssystem mit Versionskontrolle, sichere Download-Link-Generierung (Einmalnutzung), Benutzer- und Admin-Dashboard, Lizenzsystem, Rate Limiting, Audit-Protokolle und sicheren .jar-Dateispeicher in Supabase Storage.'
+      },
+      minepluginsPanel: {
+        title: 'MinePlugins Panel',
+        description: 'Verwaltungspanel für die Verwaltung von Minecraft-Plugins mit moderner Benutzeroberfläche und erweiterten Funktionen.',
+        fullDescription: 'Moderne Webplattform zur Verwaltung und Administration von Minecraft-Plugins. Ermöglicht Server-Administratoren die Verwaltung ihrer Plugins, die Anzeige von Nutzungsstatistiken, die Konfiguration von Einstellungen und die Überwachung der Leistung auf intuitive und effiziente Weise.'
       }
     },
     certificatesData: {

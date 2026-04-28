@@ -278,8 +278,8 @@ const Projects: React.FC = () => {
                 className="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
               >
                 {(() => {
-                  const project = projects.find(p => p.id === selectedProject);
-                  if (!project) return null;
+                   const project = projectsList.find(p => p.id === selectedProject);
+                   if (!project) return null;
                   
                   return (
                     <div>
