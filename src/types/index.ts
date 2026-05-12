@@ -41,9 +41,3 @@ export interface ContactForm {
   subject: string;
   message: string;
 }
-
-export interface AIResponse {
-  message: string;
-  timestamp: Date;
-  type: 'user' | 'ai';
-}

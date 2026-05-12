@@ -116,3 +116,36 @@ body {
   background: rgba(59, 130, 246, 0.3);
   color: inherit;
 }
+
+/* Fix 100vh on mobile (addresses browser chrome issue) */
+.min-h-screen {
+  min-height: 100dvh;
+}
+
+/* Smooth scrolling for iOS */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Safe area insets for notched devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Improve tap targets on mobile */
+@media (max-width: 768px) {
+  button, a {
+    min-height: 44px;
+  }
+}
+
+/* Prevent horizontal overflow on mobile */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}

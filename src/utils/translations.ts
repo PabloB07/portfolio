@@ -74,13 +74,6 @@ export const translations = {
       success: 'Mensaje enviado correctamente',
       error: 'Error al enviar el mensaje'
     },
-    ai: {
-      title: 'Asistente IA',
-      placeholder: 'Pregúntame algo sobre mi experiencia...',
-      send: 'Enviar',
-      thinking: 'Pensando...',
-      error: 'Error al procesar la respuesta'
-    },
     footer: {
       rights: 'Todos los derechos reservados',
       madeWith: 'Hecho con',
@@ -303,13 +296,6 @@ export const translations = {
       sending: 'Sending...',
       success: 'Message sent successfully',
       error: 'Error sending message'
-    },
-    ai: {
-      title: 'AI Assistant',
-      placeholder: 'Ask me something about my experience...',
-      send: 'Send',
-      thinking: 'Thinking...',
-      error: 'Error processing response'
     },
     footer: {
       rights: 'All rights reserved',
@@ -534,13 +520,6 @@ export const translations = {
       success: 'Mensagem enviada com sucesso',
       error: 'Erro ao enviar mensagem'
     },
-    ai: {
-      title: 'Assistente IA',
-      placeholder: 'Pergunte-me algo sobre minha experiência...',
-      send: 'Enviar',
-      thinking: 'Pensando...',
-      error: 'Erro ao processar resposta'
-    },
     footer: {
       rights: 'Todos os direitos reservados',
       madeWith: 'Feito com',
@@ -764,13 +743,6 @@ export const translations = {
       success: 'Nachricht erfolgreich gesendet',
       error: 'Fehler beim Senden der Nachricht'
     },
-    ai: {
-      title: 'KI-Assistent',
-      placeholder: 'Frag mich etwas über meine Erfahrung...',
-      send: 'Senden',
-      thinking: 'Denke nach...',
-      error: 'Fehler bei der Verarbeitung der Antwort'
-    },
     footer: {
       rights: 'Alle Rechte vorbehalten',
       madeWith: 'Gemacht mit',
@@ -929,5 +901,4 @@ export type NestedTranslationKey =
   | 'projects.title' | 'projects.subtitle' | 'projects.viewAll' | 'projects.viewProject' | 'projects.sourceCode' | 'projects.liveDemo' | 'projects.technologies'
   | 'experience.title'
   | 'contact.title' | 'contact.subtitle' | 'contact.name' | 'contact.email' | 'contact.subject' | 'contact.message' | 'contact.send' | 'contact.sending' | 'contact.success' | 'contact.error'
-  | 'ai.title' | 'ai.placeholder' | 'ai.send' | 'ai.thinking' | 'ai.error'
   | 'footer.rights' | 'footer.madeWith' | 'footer.and';

@@ -8,8 +8,6 @@ import Experience from '../components/sections/Experience';
 import Certificates from '../components/sections/Certificates';
 import Contact from '../components/sections/Contact';
 import Footer from '../components/common/Footer';
-import AIAssistant from '../components/ai/AIAssistant';
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -23,7 +21,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-      <AIAssistant />
     </div>
   )
 }

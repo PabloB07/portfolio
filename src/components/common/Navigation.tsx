@@ -19,6 +19,11 @@ const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
   const navItems = [
     { href: '/', label: t('nav.home') },
     { href: '#about', label: t('nav.about') },
@@ -97,7 +102,7 @@ const Navigation: React.FC = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full right-0 mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
+                    className="absolute top-full right-0 mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden min-w-[140px]"
                   >
                     {languages.map((language) => (
                       <motion.button
@@ -156,25 +161,34 @@ const Navigation: React.FC = () => {
 
         <AnimatePresence>
           {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"
-            >
-              <div className="py-4 space-y-2">
-                {navItems.map((item) => (
-                  <motion.button
-                    key={item.href}
-                    whileHover={{ x: 10 }}
-                    onClick={() => handleNavClick(item.href)}
-                    className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
-                  >
-                    {item.label}
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsOpen(false)}
+                className="fixed inset-0 bg-black/50 z-[-1] md:hidden"
+              />
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 relative"
+              >
+                <div className="py-4 space-y-2">
+                  {navItems.map((item) => (
+                    <motion.button
+                      key={item.href}
+                      whileHover={{ x: 10 }}
+                      onClick={() => handleNavClick(item.href)}
+                      className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
+                    >
+                      {item.label}
+                    </motion.button>
+                  ))}
+                </div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </div>

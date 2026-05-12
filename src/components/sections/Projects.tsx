@@ -287,7 +287,7 @@ const Projects: React.FC = () => {
                         <img
                           src={project.image}
                           alt={project.title}
-                          className="w-full h-64 object-cover"
+                          className="w-full h-48 md:h-64 object-cover"
                         />
                         <button
                           onClick={() => setSelectedProject(null)}
@@ -297,7 +297,7 @@ const Projects: React.FC = () => {
                         </button>
                       </div>
                       
-                      <div className="p-8">
+                      <div className="p-4 md:p-8">
                         <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                           {project.title}
                         </h3>

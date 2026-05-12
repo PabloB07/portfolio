@@ -195,7 +195,7 @@ const Hero: React.FC = () => {
             <div className="relative">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden bg-gradient-to-br from-primary-500 to-secondary-500 p-2 shadow-2xl"
+                className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden bg-gradient-to-br from-primary-500 to-secondary-500 p-2 shadow-2xl"
               >
                 <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-gray-800">
                   {profileImage ? (
@@ -215,17 +215,17 @@ const Hero: React.FC = () => {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-4 -right-4 w-16 h-16 bg-primary-500/20 rounded-full flex items-center justify-center"
+                className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-10 h-10 sm:w-16 sm:h-16 bg-primary-500/20 rounded-full flex items-center justify-center"
               >
-                <span className="text-2xl">⚡</span>
+                <span className="text-lg sm:text-2xl">⚡</span>
               </motion.div>
               
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="absolute -bottom-4 -left-4 w-12 h-12 bg-secondary-500/20 rounded-full flex items-center justify-center"
+                className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 w-8 h-8 sm:w-12 sm:h-12 bg-secondary-500/20 rounded-full flex items-center justify-center"
               >
-                <span className="text-xl">💎</span>
+                <span className="text-sm sm:text-xl">💎</span>
               </motion.div>
             </div>
           </motion.div>
