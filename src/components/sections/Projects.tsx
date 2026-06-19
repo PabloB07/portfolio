@@ -38,11 +38,12 @@ const Projects: React.FC = () => {
     if (filter === 'ruby-gems') return project.category === 'ruby-gem';
     if (filter === 'web-apps') return project.category === 'web-application';
     if (filter === 'wordpress') return project.category === 'wordpress-plugin';
+    if (filter === 'minecraft') return project.category === 'minecraft-plugin';
     return true;
   });
 
   return (
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="projects" className="py-20 bg-white/50 dark:bg-discord-bg-darker/40 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -63,6 +64,7 @@ const Projects: React.FC = () => {
               { key: 'ruby-gems', label: '💎 Gemas Ruby' },
               { key: 'web-apps', label: '🌐 Web Apps' },
               { key: 'wordpress', label: '📝 WordPress' },
+              { key: 'minecraft', label: '🎮 Minecraft' },
             ].map((filterOption) => (
               <motion.button
                 key={filterOption.key}
@@ -72,7 +74,7 @@ const Projects: React.FC = () => {
                 className={`px-5 py-2.5 rounded-full transition-all duration-300 text-sm font-medium ${
                   filter === filterOption.key
                     ? 'bg-gradient-to-r from-primary-500 to-secondary-500 text-white shadow-lg shadow-primary-500/25'
-                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600'
+                    : 'bg-white dark:bg-discord-card-dark text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600'
                 }`}
               >
                 {filterOption.label}
@@ -103,7 +105,7 @@ const Projects: React.FC = () => {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ y: -8 }}
-                  className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 group"
+                  className="bg-white dark:bg-discord-card-dark rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover border border-gray-200/70 dark:border-white/5 hover:border-primary-500/40 transition-all duration-300 group"
                 >
                   <div className="relative overflow-hidden">
                     <img
@@ -113,6 +115,11 @@ const Projects: React.FC = () => {
                     />
                     
                     <div className="absolute top-3 left-3 flex flex-col gap-2">
+                      {project.isNew && (
+                        <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg shadow-green-500/30 animate-pulse">
+                          ✨ {tString('projects.new')}
+                        </span>
+                      )}
                       {project.featured && (
                         <span className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
                           ⭐ Destacado
@@ -120,15 +127,18 @@ const Projects: React.FC = () => {
                       )}
                       {project.category && (
                         <span className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${
-                          project.category === 'ruby-gem' 
+                          project.category === 'ruby-gem'
                             ? 'bg-red-500/90 text-white'
                             : project.category === 'web-application'
                             ? 'bg-blue-500/90 text-white'
+                            : project.category === 'minecraft-plugin'
+                            ? 'bg-green-600/90 text-white'
                             : 'bg-purple-500/90 text-white'
                         }`}>
                           {project.category === 'ruby-gem' && '💎 Ruby Gem'}
                           {project.category === 'web-application' && '🌐 Web App'}
                           {project.category === 'wordpress-plugin' && '📝 WordPress'}
+                          {project.category === 'minecraft-plugin' && '🎮 Minecraft'}
                         </span>
                       )}
                     </div>
@@ -275,7 +285,7 @@ const Projects: React.FC = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+                className="bg-white dark:bg-discord-card-dark rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
               >
                 {(() => {
                    const project = projectsList.find(p => p.id === selectedProject);

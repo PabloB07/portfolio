@@ -121,6 +121,19 @@ export const projectsBase = [
     featured: true,
     published: true,
     category: 'web-application'
+  },
+  {
+    id: 'simonsays-multiarena',
+    translationKey: 'simonSays',
+    image: 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    technologies: ['Java', 'Spigot API', 'Paper API', 'Minigame', 'YAML'],
+    github: '',
+    demo: 'https://builtbybit.com/resources/simonsays-multiarena-minigame.112085/',
+    status: 'completed' as const,
+    featured: true,
+    published: true,
+    isNew: true,
+    category: 'minecraft-plugin'
   }
 ];
 
@@ -138,6 +151,7 @@ export const getLocalizedProjects = (t: (key: string) => string): Project[] => {
     status: project.status,
     featured: project.featured,
     published: project.published,
+    isNew: (project as { isNew?: boolean }).isNew,
     category: project.category
   }));
 };

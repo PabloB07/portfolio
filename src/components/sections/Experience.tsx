@@ -12,7 +12,7 @@ const Experience: React.FC = () => {
   });
 
   return (
-    <section id="experience" className="py-20 bg-white dark:bg-gray-800">
+    <section id="experience" className="py-20 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -41,7 +41,7 @@ const Experience: React.FC = () => {
                   index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
               >
-                <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-primary-500 rounded-full border-4 border-white dark:border-gray-800 shadow-lg z-10" />
+                <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-primary-500 rounded-full border-4 border-white dark:border-discord-bg-darkest shadow-glow z-10" />
 
                 <motion.div
                   whileHover={{ scale: 1.02, y: -5 }}
@@ -49,7 +49,7 @@ const Experience: React.FC = () => {
                     index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'
                   }`}
                 >
-                  <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group hover:shadow-xl transition-all duration-300">
+                  <div className="bg-white/80 dark:bg-discord-card-dark rounded-2xl p-6 shadow-card border border-gray-200/70 dark:border-white/5 group hover:shadow-card-hover hover:border-primary-500/40 backdrop-blur-sm transition-all duration-300">
                     <div className="flex flex-wrap items-center justify-between mb-4">
                       <div className="flex items-center space-x-3 mb-2 sm:mb-0">
                         <span className="text-2xl">

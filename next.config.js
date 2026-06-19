@@ -6,9 +6,6 @@ const nextConfig = {
     // TODO: Remove this once @react-three/fiber and @react-three/drei are updated for React 19
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: false,
-  },
 }
 
 export default nextConfig

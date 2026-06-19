@@ -19,6 +19,7 @@ export interface Project {
   demo?: string;
   featured?: boolean;
   published?: boolean;
+  isNew?: boolean;
   createdAt?: string;
   updatedAt?: string;
   status?: 'completed' | 'in-progress' | 'planned';

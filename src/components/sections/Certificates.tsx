@@ -13,7 +13,7 @@ const Certificates: React.FC = () => {
     });
 
     return (
-        <section id="certificates" className="py-20 bg-white dark:bg-gray-800">
+        <section id="certificates" className="py-20 bg-white/50 dark:bg-discord-bg-darker/40 backdrop-blur-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     ref={ref}
@@ -40,7 +40,7 @@ const Certificates: React.FC = () => {
                             transition={{ duration: 0.8, delay: index * 0.1 }}
                             className="group"
                         >
-                            <div className="bg-gray-50 dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                            <div className="bg-white dark:bg-discord-card-dark rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover border border-gray-200/70 dark:border-white/5 hover:border-primary-500/40 transition-all duration-300 transform hover:-translate-y-2">
                                 {/* Certificate Image */}
                                 <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary-500/10 to-secondary-500/10">
                                     <img

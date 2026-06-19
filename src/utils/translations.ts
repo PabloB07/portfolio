@@ -17,7 +17,9 @@ export const translations = {
       subtitle: 'Desarrollador Full Stack y Scripter de videojuegos apasionado por crear experiencias digitales excepcionales',
       cta: 'Ver mi trabajo',
       contact: 'Contacto',
-      downloadCV: 'Descargar CV'
+      downloadCV: 'Descargar CV',
+      available: 'Disponible para proyectos',
+      dragToRotate: 'Arrastra para rotar'
     },
     about: {
       title: 'Acerca de mí',
@@ -37,6 +39,7 @@ export const translations = {
       viewProject: 'Ver proyecto',
       sourceCode: 'Código fuente',
       liveDemo: 'Demo en vivo',
+      new: 'NUEVO',
       technologies: 'Tecnologías',
       filters: {
         all: 'Todos',
@@ -205,6 +208,11 @@ export const translations = {
         title: 'MinePlugins Panel',
         description: 'Panel de administración para gestionar plugins de Minecraft con interfaz moderna y funcionalidades avanzadas.',
         fullDescription: 'Plataforma web moderna para la gestión y administración de plugins de Minecraft. Permite a los administradores de servidores gestionar sus plugins, ver estadísticas de uso, configurar ajustes y monitorear el rendimiento de manera intuitiva y eficiente.'
+      },
+      simonSays: {
+        title: 'SimonSays MultiArena',
+        description: 'Minijuego de Minecraft "Simon Says" con soporte multi-arena, totalmente configurable y listo para servidores.',
+        fullDescription: 'Plugin de minijuego para Minecraft basado en el clásico "Simon Says" con soporte para múltiples arenas simultáneas. Incluye sistema de salas, rondas progresivas de dificultad, recompensas configurables, mensajes y scoreboard personalizables vía YAML, y una API limpia para integraciones. Disponible en BuiltByBit.'
       }
     },
     certificatesData: {
@@ -240,7 +248,9 @@ export const translations = {
       subtitle: 'Full Stack Developer and video game scripter passionate about creating exceptional digital experiences',
       cta: 'View my work',
       contact: 'Contact',
-      downloadCV: 'Download CV'
+      downloadCV: 'Download CV',
+      available: 'Available for projects',
+      dragToRotate: 'Drag to rotate'
     },
     about: {
       title: 'About me',
@@ -260,6 +270,7 @@ export const translations = {
       viewProject: 'View project',
       sourceCode: 'Source code',
       liveDemo: 'Live demo',
+      new: 'NEW',
       technologies: 'Technologies',
       filters: {
         all: 'All',
@@ -428,6 +439,11 @@ export const translations = {
         title: 'MinePlugins Panel',
         description: 'Administration panel for managing Minecraft plugins with modern interface and advanced features.',
         fullDescription: 'Modern web platform for managing and administering Minecraft plugins. Allows server administrators to manage their plugins, view usage statistics, configure settings and monitor performance in an intuitive and efficient way.'
+      },
+      simonSays: {
+        title: 'SimonSays MultiArena',
+        description: 'Minecraft "Simon Says" minigame with multi-arena support, fully configurable and server-ready.',
+        fullDescription: 'Minecraft minigame plugin based on the classic "Simon Says" with support for multiple simultaneous arenas. Includes a lobby system, progressively harder rounds, configurable rewards, customizable messages and scoreboard via YAML, and a clean API for integrations. Available on BuiltByBit.'
       }
     },
     certificatesData: {
@@ -463,7 +479,9 @@ export const translations = {
       subtitle: 'Desenvolvedor Full Stack e scripter de videogames apaixonado por criar experiências digitais excepcionais',
       cta: 'Ver meu trabalho',
       contact: 'Contato',
-      downloadCV: 'Baixar CV'
+      downloadCV: 'Baixar CV',
+      available: 'Disponível para projetos',
+      dragToRotate: 'Arraste para girar'
     },
     about: {
       title: 'Sobre mim',
@@ -483,6 +501,7 @@ export const translations = {
       viewProject: 'Ver projeto',
       sourceCode: 'Código fonte',
       liveDemo: 'Demo ao vivo',
+      new: 'NOVO',
       technologies: 'Tecnologias',
       filters: {
         all: 'Todos',
@@ -651,6 +670,11 @@ export const translations = {
         title: 'MinePlugins Panel',
         description: 'Painel de administração para gerenciar plugins de Minecraft com interface moderna e funcionalidades avançadas.',
         fullDescription: 'Plataforma web moderna para gestão e administração de plugins de Minecraft. Permite que administradores de servidores gerenciem seus plugins, visualizem estatísticas de uso, configurem ajustes e monitorem o desempenho de maneira intuitiva e eficiente.'
+      },
+      simonSays: {
+        title: 'SimonSays MultiArena',
+        description: 'Minigame de Minecraft "Simon Says" com suporte a múltiplas arenas, totalmente configurável e pronto para servidores.',
+        fullDescription: 'Plugin de minigame para Minecraft baseado no clássico "Simon Says" com suporte a múltiplas arenas simultâneas. Inclui sistema de lobby, rodadas com dificuldade progressiva, recompensas configuráveis, mensagens e scoreboard personalizáveis via YAML, e uma API limpa para integrações. Disponível no BuiltByBit.'
       }
     },
     certificatesData: {
@@ -686,7 +710,9 @@ export const translations = {
       subtitle: 'Full Stack Entwickler und Videospiel-Scripter mit Leidenschaft für außergewöhnliche digitale Erlebnisse',
       cta: 'Meine Arbeit ansehen',
       contact: 'Kontakt',
-      downloadCV: 'Lebenslauf herunterladen'
+      downloadCV: 'Lebenslauf herunterladen',
+      available: 'Verfügbar für Projekte',
+      dragToRotate: 'Zum Drehen ziehen'
     },
     about: {
       title: 'Über mich',
@@ -706,6 +732,7 @@ export const translations = {
       viewProject: 'Projekt ansehen',
       sourceCode: 'Quellcode',
       liveDemo: 'Live-Demo',
+      new: 'NEU',
       technologies: 'Technologien',
       filters: {
         all: 'Alle',
@@ -874,6 +901,11 @@ export const translations = {
         title: 'MinePlugins Panel',
         description: 'Verwaltungspanel für die Verwaltung von Minecraft-Plugins mit moderner Benutzeroberfläche und erweiterten Funktionen.',
         fullDescription: 'Moderne Webplattform zur Verwaltung und Administration von Minecraft-Plugins. Ermöglicht Server-Administratoren die Verwaltung ihrer Plugins, die Anzeige von Nutzungsstatistiken, die Konfiguration von Einstellungen und die Überwachung der Leistung auf intuitive und effiziente Weise.'
+      },
+      simonSays: {
+        title: 'SimonSays MultiArena',
+        description: 'Minecraft-Minispiel "Simon Says" mit Multi-Arena-Unterstützung, vollständig konfigurierbar und serverbereit.',
+        fullDescription: 'Minecraft-Minispiel-Plugin nach dem Klassiker "Simon Says" mit Unterstützung für mehrere gleichzeitige Arenen. Enthält ein Lobby-System, progressiv schwierigere Runden, konfigurierbare Belohnungen, anpassbare Nachrichten und Scoreboard via YAML sowie eine saubere API für Integrationen. Verfügbar auf BuiltByBit.'
       }
     },
     certificatesData: {

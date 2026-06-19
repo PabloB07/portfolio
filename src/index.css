@@ -18,30 +18,102 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Discord light app background */
+  background-color: #f2f3f5;
+  color: #2e3338;
+}
+
+.dark body {
+  background-color: #1e1f22;
+  color: #dbdee1;
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .glass-dark {
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(30, 31, 34, 0.6);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+  background: linear-gradient(135deg, #5865F2 0%, #818df5 40%, #EB459E 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Soft aurora blobs background helper */
+.aurora-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.aurora-bg::before,
+.aurora-bg::after {
+  content: '';
+  position: absolute;
+  width: 40rem;
+  height: 40rem;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.5;
+}
+
+.aurora-bg::before {
+  top: -10rem;
+  left: -8rem;
+  background: radial-gradient(circle at center, #5865F2, transparent 70%);
+  animation: float 14s ease-in-out infinite;
+}
+
+.aurora-bg::after {
+  bottom: -12rem;
+  right: -8rem;
+  background: radial-gradient(circle at center, #EB459E, transparent 70%);
+  animation: float 18s ease-in-out infinite reverse;
+}
+
+.dark .aurora-bg::before,
+.dark .aurora-bg::after {
+  opacity: 0.28;
+}
+
+/* Subtle grid overlay */
+.grid-overlay {
+  background-image:
+    linear-gradient(to right, rgba(88, 101, 242, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(88, 101, 242, 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 50%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 50%, transparent 100%);
+}
+
+.dark .grid-overlay {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 }
 
 .gradient-border {
   position: relative;
-  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+  background: linear-gradient(135deg, #5865F2, #EB459E);
   border-radius: 12px;
   padding: 2px;
 }
@@ -69,8 +141,8 @@ body {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+  0%, 100% { box-shadow: 0 0 20px rgba(88, 101, 242, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(88, 101, 242, 0.6); }
 }
 
 .animate-pulse-glow {
@@ -98,22 +170,22 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+  background: linear-gradient(135deg, #5865F2, #EB459E);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #2563EB, #7C3AED);
+  background: linear-gradient(135deg, #4752E0, #D62F87);
 }
 
 /* Selection styles */
 ::selection {
-  background: rgba(59, 130, 246, 0.3);
+  background: rgba(88, 101, 242, 0.3);
   color: inherit;
 }
 
 ::-moz-selection {
-  background: rgba(59, 130, 246, 0.3);
+  background: rgba(88, 101, 242, 0.3);
   color: inherit;
 }
 

@@ -24,7 +24,7 @@ const About: React.FC = () => {
   });
 
   return (
-    <section id="about" className="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="about" className="py-20 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -60,7 +60,7 @@ const About: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="grid md:grid-cols-2 gap-8 mb-12"
           >
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="bg-white dark:bg-discord-card-dark rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
               <div className="text-4xl mb-4">🚀</div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                 {t('about.fastDelivery')}
@@ -70,7 +70,7 @@ const About: React.FC = () => {
               </p>
             </div>
             
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="bg-white dark:bg-discord-card-dark rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
               <div className="text-4xl mb-4">💡</div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                 {t('about.innovativeSolutions')}
@@ -97,7 +97,7 @@ const About: React.FC = () => {
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
                   whileHover={{ scale: 1.1 }}
-                  className="flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
+                  className="flex flex-col items-center justify-center p-4 bg-white dark:bg-discord-card-dark rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
                 >
                   <div className="flex items-center justify-center mb-2 h-12">
                     <img 
@@ -144,7 +144,7 @@ const About: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 1.4 + index * 0.1 }}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700"
+                className="bg-white dark:bg-discord-card-dark rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700"
               >
                 <div className="text-3xl mb-2">{stat.icon}</div>
                 <div className="text-2xl font-bold text-gray-900 dark:text-white">
