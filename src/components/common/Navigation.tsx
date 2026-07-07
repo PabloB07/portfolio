@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { Gamepad2, Briefcase } from 'lucide-react';
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,8 +30,8 @@ const Navigation: React.FC = () => {
     { href: '#about', label: t('nav.about') },
     { href: '#projects', label: t('nav.projects') },
     { href: '#experience', label: t('nav.experience') },
-    { href: '/minecraft', label: t('nav.minecraft') },
-    { href: '/portfolio-services', label: t('nav.services') },
+    { href: '/minecraft', label: t('nav.minecraft'), icon: Gamepad2 },
+    { href: '/portfolio-services', label: t('nav.services'), icon: Briefcase },
     { href: '#contact', label: t('nav.contact') },
   ];
 
@@ -80,6 +81,7 @@ const Navigation: React.FC = () => {
                 onClick={() => handleNavClick(item.href)}
                 className="px-3 py-1.5 rounded-full text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-white hover:bg-primary-500/10 dark:hover:bg-primary-500/20 transition-colors duration-200 text-sm font-medium"
               >
+                {item.icon && <item.icon className="w-4 h-4 inline-block mr-1" />}
                 {item.label}
               </motion.button>
             ))}
@@ -190,6 +192,7 @@ const Navigation: React.FC = () => {
                       onClick={() => handleNavClick(item.href)}
                       className="block w-full text-left px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-white hover:bg-primary-500/10 dark:hover:bg-primary-500/20 transition-colors duration-200"
                     >
+                      {item.icon && <item.icon className="w-4 h-4 inline-block mr-1" />}
                       {item.label}
                     </motion.button>
                   ))}

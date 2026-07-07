@@ -7,8 +7,8 @@ export const translations = {
       experience: 'Experiencia',
       contact: 'Contacto',
       admin: 'Admin',
-      minecraft: '🎮 Minecraft',
-      services: '💼 Servicios'
+      minecraft: 'Minecraft',
+      services: 'Servicios'
     },
     hero: {
       greeting: '¡Hola! Soy',
@@ -80,7 +80,7 @@ export const translations = {
     footer: {
       rights: 'Todos los derechos reservados',
       madeWith: 'Hecho con',
-      and: 'y'
+      and: 'por'
     },
     minecraft: {
       title: 'Proyectos Minecraft',
@@ -238,8 +238,8 @@ export const translations = {
       experience: 'Experience',
       contact: 'Contact',
       admin: 'Admin',
-      minecraft: '🎮 Minecraft',
-      services: '💼 Services'
+      minecraft: 'Minecraft',
+      services: 'Services'
     },
     hero: {
       greeting: 'Hello! I am',
@@ -469,8 +469,8 @@ export const translations = {
       experience: 'Experiência',
       contact: 'Contato',
       admin: 'Admin',
-      minecraft: '🎮 Minecraft',
-      services: '💼 Serviços'
+      minecraft: 'Minecraft',
+      services: 'Serviços'
     },
     hero: {
       greeting: 'Olá! Eu sou',
@@ -700,8 +700,8 @@ export const translations = {
       experience: 'Erfahrung',
       contact: 'Kontakt',
       admin: 'Admin',
-      minecraft: '🎮 Minecraft',
-      services: '💼 Dienstleistungen'
+      minecraft: 'Minecraft',
+      services: 'Dienstleistungen'
     },
     hero: {
       greeting: 'Hallo! Ich bin',

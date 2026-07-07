@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { experiences } from '../../data/portfolio';
+import { GraduationCap, Briefcase, Calendar, Wrench } from 'lucide-react';
 
 const Experience: React.FC = () => {
   const { t } = useLanguage();
@@ -21,7 +22,7 @@ const Experience: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold font-dev text-gray-900 dark:text-white mb-6">
             {t('experience.title')}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto rounded-full" />
@@ -52,10 +53,10 @@ const Experience: React.FC = () => {
                   <div className="bg-white/80 dark:bg-discord-card-dark rounded-2xl p-6 shadow-card border border-gray-200/70 dark:border-white/5 group hover:shadow-card-hover hover:border-primary-500/40 backdrop-blur-sm transition-all duration-300">
                     <div className="flex flex-wrap items-center justify-between mb-4">
                       <div className="flex items-center space-x-3 mb-2 sm:mb-0">
-                        <span className="text-2xl">
-                          {experience.type === 'education' ? '🎓' : '💼'}
+                        <span>
+                          {experience.type === 'education' ? <GraduationCap className="w-7 h-7" /> : <Briefcase className="w-7 h-7" />}
                         </span>
-                        <span className="font-semibold text-gray-900 dark:text-white">
+                        <span className="font-semibold font-dev text-gray-900 dark:text-white">
                           {experience.company}
                         </span>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -67,12 +68,12 @@ const Experience: React.FC = () => {
                         </span>
                       </div>
                       <div className="flex items-center space-x-2 text-gray-500 dark:text-gray-400 text-sm">
-                        <span>📅</span>
+                        <Calendar className="w-4 h-4" />
                         <span className="font-medium">{experience.period}</span>
                       </div>
                     </div>
 
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary-500 transition-colors duration-300">
+                    <h3 className="text-lg font-bold font-dev text-gray-900 dark:text-white mb-3 group-hover:text-primary-500 transition-colors duration-300">
                       {experience.position}
                     </h3>
 
@@ -81,8 +82,8 @@ const Experience: React.FC = () => {
                     </p>
 
                     <div className="space-y-2">
-                      <h4 className="text-sm font-semibold text-gray-900 dark:text-white flex items-center">
-                        <span className="mr-1">🛠️</span>
+                      <h4 className="text-sm font-semibold font-dev text-gray-900 dark:text-white flex items-center">
+                        <Wrench className="w-4 h-4 mr-1" />
                         {t('experience.technologies')}
                       </h4>
                       <div className="flex flex-wrap gap-2">

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { projects, getLocalizedProjects } from '../../data/portfolio';
+import { Sparkles, Star, Gem, Globe, FileText, Gamepad2, Rocket, X, ArrowRight } from 'lucide-react';
 
 const Projects: React.FC = () => {
   const { tString } = useLanguage();
@@ -52,31 +53,32 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold font-dev text-gray-900 dark:text-white mb-6">
             {tString('projects.title')}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto rounded-full mb-8" />
           
           <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {[
-              { key: 'all', label: '🌟 Todos' },
-              { key: 'featured', label: '⭐ Destacados' },
-              { key: 'ruby-gems', label: '💎 Gemas Ruby' },
-              { key: 'web-apps', label: '🌐 Web Apps' },
-              { key: 'wordpress', label: '📝 WordPress' },
-              { key: 'minecraft', label: '🎮 Minecraft' },
-            ].map((filterOption) => (
+            {([
+              { key: 'all', label: 'Todos', icon: Sparkles },
+              { key: 'featured', label: 'Destacados', icon: Star },
+              { key: 'ruby-gems', label: 'Gemas Ruby', icon: Gem },
+              { key: 'web-apps', label: 'Web Apps', icon: Globe },
+              { key: 'wordpress', label: 'WordPress', icon: FileText },
+              { key: 'minecraft', label: 'Minecraft', icon: Gamepad2 },
+            ] as { key: string; label: string; icon: React.ComponentType<{ className?: string }> }[]).map((filterOption) => (
               <motion.button
                 key={filterOption.key}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setFilter(filterOption.key)}
-                className={`px-5 py-2.5 rounded-full transition-all duration-300 text-sm font-medium ${
+                className={`px-5 py-2.5 rounded-full transition-all duration-300 text-sm font-medium inline-flex items-center gap-1.5 ${
                   filter === filterOption.key
                     ? 'bg-gradient-to-r from-primary-500 to-secondary-500 text-white shadow-lg shadow-primary-500/25'
                     : 'bg-white dark:bg-discord-card-dark text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600'
                 }`}
               >
+                <filterOption.icon className="w-4 h-4" />
                 {filterOption.label}
               </motion.button>
             ))}
@@ -87,8 +89,8 @@ const Projects: React.FC = () => {
           <AnimatePresence>
             {filteredProjects.length === 0 ? (
               <div className="col-span-full text-center py-16">
-                <div className="text-6xl mb-4">🚀</div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                <Rocket className="w-16 h-16 mx-auto mb-4 text-gray-400 dark:text-gray-600" />
+                <h3 className="text-xl font-semibold font-dev text-gray-900 dark:text-white mb-2">
                   {tString('projects.emptyState')}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400">
@@ -117,12 +119,12 @@ const Projects: React.FC = () => {
                     <div className="absolute top-3 left-3 flex flex-col gap-2">
                       {project.isNew && (
                         <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg shadow-green-500/30 animate-pulse">
-                          ✨ {tString('projects.new')}
+                          <Sparkles className="w-3.5 h-3.5 inline-block mr-1" />{tString('projects.new')}
                         </span>
                       )}
                       {project.featured && (
                         <span className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                          ⭐ Destacado
+                          <Star className="w-3.5 h-3.5 inline-block mr-1" />Destacado
                         </span>
                       )}
                       {project.category && (
@@ -135,10 +137,10 @@ const Projects: React.FC = () => {
                             ? 'bg-green-600/90 text-white'
                             : 'bg-purple-500/90 text-white'
                         }`}>
-                          {project.category === 'ruby-gem' && '💎 Ruby Gem'}
-                          {project.category === 'web-application' && '🌐 Web App'}
-                          {project.category === 'wordpress-plugin' && '📝 WordPress'}
-                          {project.category === 'minecraft-plugin' && '🎮 Minecraft'}
+                          {project.category === 'ruby-gem' && <><Gem className="w-3.5 h-3.5 inline-block mr-1" />Ruby Gem</>}
+                          {project.category === 'web-application' && <><Globe className="w-3.5 h-3.5 inline-block mr-1" />Web App</>}
+                          {project.category === 'wordpress-plugin' && <><FileText className="w-3.5 h-3.5 inline-block mr-1" />WordPress</>}
+                          {project.category === 'minecraft-plugin' && <><Gamepad2 className="w-3.5 h-3.5 inline-block mr-1" />Minecraft</>}
                         </span>
                       )}
                     </div>
@@ -186,7 +188,7 @@ const Projects: React.FC = () => {
                   </div>
                   
                   <div className="p-5">
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                    <h3 className="text-lg font-bold font-dev text-gray-900 dark:text-white mb-2">
                       {project.title}
                     </h3>
                     
@@ -230,7 +232,7 @@ const Projects: React.FC = () => {
                         onClick={() => setSelectedProject(project.id)}
                         className="text-primary-500 hover:text-primary-600 font-medium text-sm transition-colors duration-200"
                       >
-                        Ver detalles →
+                        Ver detalles <ArrowRight className="w-3.5 h-3.5 inline-block ml-1" />
                       </button>
                       
                       <div className="flex gap-2">
@@ -303,12 +305,12 @@ const Projects: React.FC = () => {
                           onClick={() => setSelectedProject(null)}
                           className="absolute top-4 right-4 p-2 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors duration-200"
                         >
-                          ✕
+                          <X className="w-5 h-5" />
                         </button>
                       </div>
                       
                       <div className="p-4 md:p-8">
-                        <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                        <h3 className="text-3xl font-bold font-dev text-gray-900 dark:text-white mb-4">
                           {project.title}
                         </h3>
                         
@@ -321,7 +323,7 @@ const Projects: React.FC = () => {
                         </p>
                         
                         <div className="mb-6">
-                          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                          <h4 className="font-semibold font-dev text-gray-900 dark:text-white mb-3">
                             {tString('projects.technologies')}:
                           </h4>
                           <div className="flex flex-wrap gap-2">

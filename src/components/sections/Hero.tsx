@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { personalInfo } from '../../data/portfolio';
 import DoomAscii from '../common/DoomAscii';
+import { MapPin, Mail } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const { t } = useLanguage();
@@ -95,7 +96,7 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold font-dev tracking-tight text-gray-900 dark:text-white mb-6"
             >
               <span className="gradient-text">{personalInfo.name}</span>
               {!o7Failed ? (
@@ -113,7 +114,7 @@ const Hero: React.FC = () => {
                   animate={{ rotate: [0, 18, 0, 18, 0] }}
                   transition={{ duration: 1.6, repeat: Infinity, repeatDelay: 1.4 }}
                   className="inline-block ml-3 align-middle font-mono text-2xl md:text-4xl lg:text-5xl text-primary-500 origin-bottom-left"
-                  title="o7 — salute"
+                  title="o7 â€” salute"
                 >
                   o7
                 </motion.span>
@@ -144,11 +145,11 @@ const Hero: React.FC = () => {
               transition={{ delay: 1.0 }}
               className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-8"
             >
-              <span className="px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
-                📍 {personalInfo.location}
+              <span className="px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium inline-flex items-center gap-1.5">
+                <MapPin className="w-4 h-4" /> {personalInfo.location}
               </span>
-              <span className="px-4 py-2 bg-secondary-100 dark:bg-secondary-900/30 text-secondary-700 dark:text-secondary-300 rounded-full text-sm font-medium">
-                📧 {personalInfo.email}
+              <span className="px-4 py-2 bg-secondary-100 dark:bg-secondary-900/30 text-secondary-700 dark:text-secondary-300 rounded-full text-sm font-medium inline-flex items-center gap-1.5">
+                <Mail className="w-4 h-4" /> {personalInfo.email}
               </span>
             </motion.div>
 
@@ -229,7 +230,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex justify-center lg:justify-end"
           >
-            {/* DOOMY fire — pure ASCII, no frame */}
+            {/* DOOMY fire â€” pure ASCII, no frame */}
             <div className="relative">
               {/* soft dark aura so the flames read on any theme */}
               <div className="absolute inset-0 -z-10 scale-125 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.65),transparent_70%)] blur-2xl" />

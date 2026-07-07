@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react'
 import Navigation from '../../components/common/Navigation'
@@ -27,7 +27,7 @@ export default function MinecraftPage() {
           transition={{ duration: 0.4 }}
           className="max-w-5xl mx-auto text-center"
         >
-          <h1 className="text-3xl md:text-5xl font-bold text-white">
+          <h1 className="text-3xl md:text-5xl font-bold font-dev text-white">
             {t('minecraft.title')}
           </h1>
           <p className="mt-4 text-gray-300">
@@ -41,7 +41,7 @@ export default function MinecraftPage() {
           transition={{ duration: 0.4, delay: 0.2 }}
           className="mt-12 max-w-5xl mx-auto"
         >
-          <h2 className="text-2xl font-bold text-white mb-6 text-center">
+          <h2 className="text-2xl font-bold font-dev text-white mb-6 text-center">
             {t('minecraft.technologies')}
           </h2>
           <div className="flex flex-wrap justify-center gap-6">
@@ -80,7 +80,7 @@ export default function MinecraftPage() {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="group rounded-2xl border border-white/10 bg-white/5 p-6 text-left hover:bg-white/10 transition-colors"
           >
-            <h2 className="text-2xl font-semibold text-white">
+            <h2 className="text-2xl font-semibold font-dev text-white">
               {t('minecraft.projects.townyFaith')}
             </h2>
             <p className="mt-2 text-gray-300 break-all">
@@ -100,7 +100,7 @@ export default function MinecraftPage() {
             transition={{ duration: 0.4, delay: 0.2 }}
             className="group rounded-2xl border border-white/10 bg-white/5 p-6 text-left hover:bg-white/10 transition-colors"
           >
-            <h2 className="text-2xl font-semibold text-white">
+            <h2 className="text-2xl font-semibold font-dev text-white">
               {t('minecraft.projects.hytaleChile')}
             </h2>
             <p className="mt-2 text-gray-300 break-all">
@@ -116,4 +116,5 @@ export default function MinecraftPage() {
     </div>
   )
 }
+
 

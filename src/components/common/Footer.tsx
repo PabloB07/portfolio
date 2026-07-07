@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-gray-900 dark:text-white">
+            <h3 className="font-semibold font-dev text-gray-900 dark:text-white">
               Enlaces rápidos
             </h3>
             <div className="space-y-2">
@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
 
           {/* Contact & Social */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-gray-900 dark:text-white">
+            <h3 className="font-semibold font-dev text-gray-900 dark:text-white">
               Conectemos
             </h3>
             <div className="space-y-3">
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-600 dark:text-gray-400 text-sm flex items-center">
-            © 2024 Pablo Blanco Navarro. {tString('footer.rights')}.
+            Â© 2024 Pablo Blanco Navarro. {tString('footer.rights')}.
           </p>
           
           <motion.p 

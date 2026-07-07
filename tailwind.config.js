@@ -1,14 +1,16 @@
-/** @type {import('tailwindcss').Config} */
+﻿/** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+        dev: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
       },
       colors: {
-        // Discord "Blurple" — primary brand color (#5865F2)
+        // Discord "Blurple" â€” primary brand color (#5865F2)
         primary: {
           50: '#eef0fe',
           100: '#e0e3fd',
@@ -21,7 +23,7 @@ export default {
           800: '#2f378f',
           900: '#282d63',
         },
-        // Discord fuchsia (#EB459E) — secondary accent for gradients
+        // Discord fuchsia (#EB459E) â€” secondary accent for gradients
         secondary: {
           50: '#fdeaf5',
           100: '#fbd5ec',
@@ -34,7 +36,7 @@ export default {
           800: '#8f1857',
           900: '#6d1343',
         },
-        // Discord green (#23A559 / bright #57F287) — status & success
+        // Discord green (#23A559 / bright #57F287) â€” status & success
         accent: {
           50: '#e7f9ee',
           100: '#c6f1d6',

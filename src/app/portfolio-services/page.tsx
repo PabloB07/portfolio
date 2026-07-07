@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Navigation from '../../components/common/Navigation'
 import Footer from '../../components/common/Footer'
 import { useLanguage } from '../../contexts/LanguageContext'
+import { Gamepad2, Settings, Monitor, Database, Shield, Zap, Users, Check, Star } from 'lucide-react'
 
 const technologies = [
   { name: 'Java', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg' },
@@ -94,8 +95,8 @@ export default function PortfolioServicesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="text-6xl mb-6">🎮</div>
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <Gamepad2 className="w-16 h-16 mx-auto mb-6 text-white/90" />
+            <h1 className="text-5xl md:text-6xl font-bold font-dev text-white mb-6">
               {t('services.hero.title')}
             </h1>
             <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
@@ -121,7 +122,7 @@ export default function PortfolioServicesPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-4xl font-bold font-dev text-gray-900 dark:text-white mb-4">
               {t('services.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300">
@@ -142,15 +143,15 @@ export default function PortfolioServicesPage() {
               >
                 <div className={`h-2 bg-gradient-to-r ${service.color}`} />
                 <div className="p-6">
-                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${service.color} flex items-center justify-center mb-4 text-3xl`}>
-                    {index === 0 && '⚙️'}
-                    {index === 1 && '🖥️'}
-                    {index === 2 && '💾'}
-                    {index === 3 && '🛡️'}
-                    {index === 4 && '⚡'}
-                    {index === 5 && '👥'}
+                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${service.color} flex items-center justify-center mb-4`}>
+                    {index === 0 && <Settings className="w-8 h-8 text-white" />}
+                    {index === 1 && <Monitor className="w-8 h-8 text-white" />}
+                    {index === 2 && <Database className="w-8 h-8 text-white" />}
+                    {index === 3 && <Shield className="w-8 h-8 text-white" />}
+                    {index === 4 && <Zap className="w-8 h-8 text-white" />}
+                    {index === 5 && <Users className="w-8 h-8 text-white" />}
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-2xl font-bold font-dev text-gray-900 dark:text-white mb-3">
                     {t(service.titleKey)}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -159,7 +160,7 @@ export default function PortfolioServicesPage() {
                   <ul className="space-y-2">
                     {getFeatures(service.featuresKey).map((feature, idx) => (
                       <li key={idx} className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                        <span className="w-4 h-4 mr-2 text-green-500">✓</span>
+                        <Check className="w-4 h-4 mr-2 text-green-500 shrink-0" />
                         {feature}
                       </li>
                     ))}
@@ -179,7 +180,7 @@ export default function PortfolioServicesPage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-4xl font-bold font-dev text-gray-900 dark:text-white mb-4">
               {t('services.technologies.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300">
@@ -223,7 +224,7 @@ export default function PortfolioServicesPage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-4xl font-bold font-dev text-gray-900 dark:text-white mb-4">
               {t('services.testimonials.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300">
@@ -242,14 +243,14 @@ export default function PortfolioServicesPage() {
               >
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <span key={i} className="text-yellow-400 text-lg">★</span>
+                    <Star key={i} className="text-yellow-400 w-5 h-5" fill="currentColor" />
                   ))}
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 mb-4 italic">
                   "{t(testimonial.contentKey)}"
                 </p>
                 <div>
-                  <p className="font-semibold text-gray-900 dark:text-white">
+                  <p className="font-semibold font-dev text-gray-900 dark:text-white">
                     {t(testimonial.nameKey)}
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -269,7 +270,7 @@ export default function PortfolioServicesPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold font-dev text-white mb-6">
               {t('services.cta.title')}
             </h2>
             <p className="text-xl text-white/90 mb-8">

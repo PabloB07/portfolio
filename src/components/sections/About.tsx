@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { Rocket, Lightbulb, Settings, Laptop, Smile, Globe } from 'lucide-react';
 
 const technologies = [
   { name: 'Ruby', color: '#CC342D', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/ruby/ruby-original.svg' },
@@ -33,7 +34,7 @@ const About: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold font-dev text-gray-900 dark:text-white mb-6">
             {t('about.title')}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto rounded-full" />
@@ -61,8 +62,8 @@ const About: React.FC = () => {
             className="grid md:grid-cols-2 gap-8 mb-12"
           >
             <div className="bg-white dark:bg-discord-card-dark rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
-              <div className="text-4xl mb-4">🚀</div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              <Rocket className="w-10 h-10 text-primary-500 mb-4" />
+              <h3 className="text-xl font-bold font-dev text-gray-900 dark:text-white mb-2">
                 {t('about.fastDelivery')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -71,8 +72,8 @@ const About: React.FC = () => {
             </div>
             
             <div className="bg-white dark:bg-discord-card-dark rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
-              <div className="text-4xl mb-4">💡</div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              <Lightbulb className="w-10 h-10 text-primary-500 mb-4" />
+              <h3 className="text-xl font-bold font-dev text-gray-900 dark:text-white mb-2">
                 {t('about.innovativeSolutions')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -86,7 +87,7 @@ const About: React.FC = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+            <h3 className="text-2xl font-bold font-dev text-gray-900 dark:text-white mb-6 text-center">
               {t('about.technologies') || 'Tecnologías'}
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
@@ -133,12 +134,12 @@ const About: React.FC = () => {
             transition={{ duration: 0.8, delay: 1.2 }}
             className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6"
           >
-            {[
-              { icon: '⚙️', value: '5+', label: 'Años de experiencia' },
-              { icon: '💻', value: '20+', label: 'Proyectos completados' },
-              { icon: '😊', value: '15+', label: 'Clientes satisfechos' },
-              { icon: '🌐', value: '4', label: 'Idiomas' },
-            ].map((stat, index) => (
+            {([
+              { icon: Settings, value: '5+', label: 'Años de experiencia' },
+              { icon: Laptop, value: '20+', label: 'Proyectos completados' },
+              { icon: Smile, value: '15+', label: 'Clientes satisfechos' },
+              { icon: Globe, value: '4', label: 'Idiomas' },
+            ] as { icon: React.ComponentType<{ className?: string }>; value: string; label: string }[]).map((stat, index) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -146,7 +147,7 @@ const About: React.FC = () => {
                 transition={{ duration: 0.5, delay: 1.4 + index * 0.1 }}
                 className="bg-white dark:bg-discord-card-dark rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700"
               >
-                <div className="text-3xl mb-2">{stat.icon}</div>
+                <stat.icon className="w-8 h-8 mx-auto text-primary-500 mb-2" />
                 <div className="text-2xl font-bold text-gray-900 dark:text-white">
                   {stat.value}
                 </div>

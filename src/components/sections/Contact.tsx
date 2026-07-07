@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { ContactForm } from '../../types';
 import { personalInfo } from '../../data/portfolio';
+import { Mail, MapPin, Clock, CheckCircle, XCircle } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const { t } = useLanguage();
@@ -55,10 +56,10 @@ const Contact: React.FC = () => {
     }));
   };
 
-  const contactInfo = [
-    { icon: '📧', label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
-    { icon: '📍', label: 'Ubicación', value: personalInfo.location, href: null },
-    { icon: '⏰', label: 'Disponibilidad', value: '24/7', href: null }
+  const contactInfo: { icon: React.ComponentType<{ className?: string }>; label: string; value: string; href: string | null }[] = [
+    { icon: Mail, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
+    { icon: MapPin, label: 'Ubicación', value: personalInfo.location, href: null },
+    { icon: Clock, label: 'Disponibilidad', value: '24/7', href: null }
   ];
 
   return (
@@ -71,7 +72,7 @@ const Contact: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold font-dev text-gray-900 dark:text-white mb-6">
             {t('contact.title')}
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
@@ -88,7 +89,7 @@ const Contact: React.FC = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              <h3 className="text-2xl font-bold font-dev text-gray-900 dark:text-white mb-6">
                 Información de contacto
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-lg mb-8">
@@ -106,11 +107,11 @@ const Contact: React.FC = () => {
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   className="flex items-center space-x-4"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center text-xl">
-                    {info.icon}
+                  <div className="w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
+                    <info.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">
+                    <h4 className="font-semibold font-dev text-gray-900 dark:text-white">
                       {info.label}
                     </h4>
                     {info.href ? (
@@ -134,7 +135,7 @@ const Contact: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="pt-8 border-t border-gray-200 dark:border-gray-700"
             >
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-4">
+              <h4 className="font-semibold font-dev text-gray-900 dark:text-white mb-4">
                 Sígueme en redes sociales
               </h4>
               <div className="flex space-x-4">
@@ -268,7 +269,7 @@ const Contact: React.FC = () => {
                       : 'bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300'
                   }`}
                 >
-                  <span>{submitStatus === 'success' ? '✅' : '❌'}</span>
+                  {submitStatus === 'success' ? <CheckCircle className="w-5 h-5 text-green-700 dark:text-green-300" /> : <XCircle className="w-5 h-5 text-red-700 dark:text-red-300" />}
                   <span>
                     {submitStatus === 'success' ? t('contact.success') : t('contact.error')}
                   </span>
