@@ -27,7 +27,7 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('https://formspree.io/f/your-form-id', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ const Contact: React.FC = () => {
       } else {
         setSubmitStatus('error');
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
