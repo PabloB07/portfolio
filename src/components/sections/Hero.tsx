@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { personalInfo } from '../../data/portfolio';
-import ParrotLive from '../common/ParrotLive';
 import { MapPin, Mail } from 'lucide-react';
 
 const Hero: React.FC = () => {
@@ -224,19 +223,6 @@ const Hero: React.FC = () => {
             </motion.div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex justify-center lg:justify-end"
-          >
-            {/* Parrot ASCII — subtle animation (head turn) */}
-            <div className="relative">
-              {/* soft aura so the art reads on both light and dark themes */}
-              <div className="absolute inset-0 -z-10 scale-110 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.08),transparent_60%)] dark:bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.6),transparent_60%)] blur-2xl" />
-              <ParrotLive className="text-center mx-auto" size={220} />
-            </div>
-          </motion.div>
         </div>
         
         <motion.div
