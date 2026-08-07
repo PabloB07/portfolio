@@ -85,7 +85,11 @@ export default function PortfolioServicesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="relative min-h-screen bg-discord-bg dark:bg-discord-bg-darkest text-gray-900 dark:text-gray-100 overflow-x-hidden">
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <div className="aurora-bg" />
+        <div className="absolute inset-0 grid-overlay" />
+      </div>
       <Navigation />
       
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary-600 via-secondary-600 to-accent-600">

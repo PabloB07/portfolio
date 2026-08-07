@@ -18,7 +18,11 @@ export default function MinecraftPage() {
   const { t } = useLanguage()
   
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="relative min-h-screen bg-discord-bg dark:bg-discord-bg-darkest text-gray-900 dark:text-gray-100 overflow-x-hidden">
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <div className="aurora-bg" />
+        <div className="absolute inset-0 grid-overlay" />
+      </div>
       <Navigation />
       <main className="px-6 py-16 md:py-24">
         <motion.div
