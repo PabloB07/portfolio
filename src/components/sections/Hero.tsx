@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { personalInfo } from '../../data/portfolio';
-import ParrotAscii from '../common/ParrotAscii';
+import ParrotLive from '../common/ParrotLive';
 import { MapPin, Mail } from 'lucide-react';
 
 const Hero: React.FC = () => {
@@ -234,7 +234,7 @@ const Hero: React.FC = () => {
             <div className="relative">
               {/* soft aura so the art reads on both light and dark themes */}
               <div className="absolute inset-0 -z-10 scale-110 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.08),transparent_60%)] dark:bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.6),transparent_60%)] blur-2xl" />
-              <ParrotAscii className="text-center mx-auto" />
+              <ParrotLive className="text-center mx-auto" size={220} />
             </div>
           </motion.div>
         </div>
