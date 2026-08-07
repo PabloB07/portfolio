@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { personalInfo } from '../../data/portfolio';
-import DoomAscii from '../common/DoomAscii';
+import ParrotAscii from '../common/ParrotAscii';
 import { MapPin, Mail } from 'lucide-react';
 
 const Hero: React.FC = () => {
@@ -230,11 +230,11 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex justify-center lg:justify-end"
           >
-            {/* DOOMY fire â€” pure ASCII, no frame */}
+            {/* Parrot ASCII — subtle animation (head turn) */}
             <div className="relative">
-              {/* soft dark aura so the flames read on any theme */}
-              <div className="absolute inset-0 -z-10 scale-125 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.65),transparent_70%)] blur-2xl" />
-              <DoomAscii className="text-center" />
+              {/* soft aura so the art reads on both light and dark themes */}
+              <div className="absolute inset-0 -z-10 scale-110 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.08),transparent_60%)] dark:bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.6),transparent_60%)] blur-2xl" />
+              <ParrotAscii className="text-center mx-auto" />
             </div>
           </motion.div>
         </div>
