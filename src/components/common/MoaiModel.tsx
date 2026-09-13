@@ -72,7 +72,7 @@ function MoaiMesh() {
   });
 
   return (
-    <group ref={group}>
+    <group ref={group} position={[0, -0.55, 0]}>
       <Center>
         <primitive object={fbx} scale={scale} />
       </Center>
@@ -104,7 +104,7 @@ const MoaiModel: React.FC = () => {
           <Float speed={1.4} rotationIntensity={0.25} floatIntensity={0.9}>
             <MoaiMesh />
           </Float>
-          <ContactShadows position={[0, -1.45, 0]} opacity={0.4} scale={6} blur={2.8} far={3} />
+          <ContactShadows position={[0, -1.85, 0]} opacity={0.4} scale={6} blur={2.8} far={3.2} />
         </Suspense>
       </Canvas>
     </div>
