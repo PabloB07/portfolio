@@ -72,7 +72,7 @@ function MoaiMesh() {
   });
 
   return (
-    <group ref={group} position={[0, -0.3, 0]}>
+    <group ref={group} position={[0, -0.55, 0]}>
       <Center>
         <primitive object={fbx} scale={scale} />
       </Center>
@@ -88,7 +88,7 @@ const MoaiModel: React.FC = () => {
 
       <Canvas
         dpr={[1, 2]}
-        camera={{ position: [0, 0.1, 5.4], fov: 40 }}
+        camera={{ position: [0, -0.15, 5.5], fov: 40 }}
         gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
       >
@@ -101,10 +101,10 @@ const MoaiModel: React.FC = () => {
         <pointLight position={[0, -1.5, 2.5]} intensity={1.4} distance={7} color="#eab308" />
 
         <Suspense fallback={null}>
-          <Float speed={1.2} rotationIntensity={0.25} floatIntensity={0.35}>
+          <Float speed={1.2} rotationIntensity={0.25} floatIntensity={0.25}>
             <MoaiMesh />
           </Float>
-          <ContactShadows position={[0, -1.65, 0]} opacity={0.4} scale={6} blur={3} far={4} />
+          <ContactShadows position={[0, -1.85, 0]} opacity={0.4} scale={6} blur={3} far={4} />
         </Suspense>
       </Canvas>
     </div>
