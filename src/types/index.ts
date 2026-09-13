@@ -34,6 +34,7 @@ export interface Project {
   image: string;
   github?: string;
   demo?: string;
+  docs?: string;
   featured?: boolean;
   published?: boolean;
   isNew?: boolean;

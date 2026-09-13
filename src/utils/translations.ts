@@ -39,6 +39,7 @@ export const translations = {
       viewProject: 'Ver proyecto',
       sourceCode: 'Código fuente',
       liveDemo: 'Demo en vivo',
+      docs: 'Docs',
       new: 'NUEVO',
       technologies: 'Tecnologías',
       filters: {
@@ -209,10 +210,15 @@ export const translations = {
         description: 'Panel de administración para gestionar plugins de Minecraft con interfaz moderna y funcionalidades avanzadas.',
         fullDescription: 'Plataforma web moderna para la gestión y administración de plugins de Minecraft. Permite a los administradores de servidores gestionar sus plugins, ver estadísticas de uso, configurar ajustes y monitorear el rendimiento de manera intuitiva y eficiente.'
       },
+      npcPro: {
+        title: 'NPCPro',
+        description: 'Plugin premium de NPCs para servidores y networks de Minecraft 1.21.x-1.26.2, con diálogos, comandos y skins personalizables.',
+        fullDescription: 'Plugin premium de NPCs para Minecraft pensado para networks profesionales. Permite crear NPCs interactivos con diálogos animados, comandos al hacer clic, skins personalizadas, hologramas y configuración completa vía YAML. Compatible de 1.21.x a 1.26.2 y optimizado para Paper y Purpur. Documentación completa en npcpro.blancocl.dev.'
+      },
       simonSays: {
         title: 'SimonSays MultiArena',
         description: 'Minijuego de Minecraft "Simon Says" con soporte multi-arena, totalmente configurable y listo para servidores.',
-        fullDescription: 'Plugin de minijuego para Minecraft basado en el clásico "Simon Says" con soporte para múltiples arenas simultáneas. Incluye sistema de salas, rondas progresivas de dificultad, recompensas configurables, mensajes y scoreboard personalizables vía YAML, y una API limpia para integraciones. Disponible en BuiltByBit.'
+        fullDescription: 'Plugin de minijuego para Minecraft basado en el clásico "Simon Says" con soporte para múltiples arenas simultáneas. Incluye sistema de salas, rondas progresivas de dificultad, recompensas configurables, mensajes y scoreboard personalizables vía YAML, y una API limpia para integraciones. Disponible en SpigotMC. Documentación: simonsays.blancocl.dev'
       }
     },
     certificatesData: {
@@ -270,6 +276,7 @@ export const translations = {
       viewProject: 'View project',
       sourceCode: 'Source code',
       liveDemo: 'Live demo',
+      docs: 'Docs',
       new: 'NEW',
       technologies: 'Technologies',
       filters: {
@@ -440,10 +447,15 @@ export const translations = {
         description: 'Administration panel for managing Minecraft plugins with modern interface and advanced features.',
         fullDescription: 'Modern web platform for managing and administering Minecraft plugins. Allows server administrators to manage their plugins, view usage statistics, configure settings and monitor performance in an intuitive and efficient way.'
       },
+      npcPro: {
+        title: 'NPCPro',
+        description: 'Premium NPCs plugin for Minecraft servers and networks 1.21.x-1.26.2, with dialogues, click commands and custom skins.',
+        fullDescription: 'Premium NPCs plugin for Minecraft, designed for professional networks. Create interactive NPCs with animated dialogues, click commands, custom skins, holograms and full YAML configuration. Compatible from 1.21.x to 1.26.2, optimized for Paper and Purpur. Full documentation at npcpro.blancocl.dev.'
+      },
       simonSays: {
         title: 'SimonSays MultiArena',
         description: 'Minecraft "Simon Says" minigame with multi-arena support, fully configurable and server-ready.',
-        fullDescription: 'Minecraft minigame plugin based on the classic "Simon Says" with support for multiple simultaneous arenas. Includes a lobby system, progressively harder rounds, configurable rewards, customizable messages and scoreboard via YAML, and a clean API for integrations. Available on BuiltByBit.'
+        fullDescription: 'Minecraft minigame plugin based on the classic "Simon Says" with support for multiple simultaneous arenas. Includes a lobby system, progressively harder rounds, configurable rewards, customizable messages and scoreboard via YAML, and a clean API for integrations. Available on SpigotMC. Documentation: simonsays.blancocl.dev'
       }
     },
     certificatesData: {
@@ -501,6 +513,7 @@ export const translations = {
       viewProject: 'Ver projeto',
       sourceCode: 'Código fonte',
       liveDemo: 'Demo ao vivo',
+      docs: 'Docs',
       new: 'NOVO',
       technologies: 'Tecnologias',
       filters: {
@@ -671,10 +684,15 @@ export const translations = {
         description: 'Painel de administração para gerenciar plugins de Minecraft com interface moderna e funcionalidades avançadas.',
         fullDescription: 'Plataforma web moderna para gestão e administração de plugins de Minecraft. Permite que administradores de servidores gerenciem seus plugins, visualizem estatísticas de uso, configurem ajustes e monitorem o desempenho de maneira intuitiva e eficiente.'
       },
+      npcPro: {
+        title: 'NPCPro',
+        description: 'Plugin premium de NPCs para servidores e networks Minecraft 1.21.x-1.26.2, com diálogos, comandos e skins customizáveis.',
+        fullDescription: 'Plugin premium de NPCs para Minecraft projetado para networks profissionais. Crie NPCs interativos com diálogos animados, comandos ao clicar, skins personalizadas, hologramas e configuração completa via YAML. Compatível de 1.21.x a 1.26.2, otimizado para Paper e Purpur. Documentação completa em npcpro.blancocl.dev.'
+      },
       simonSays: {
         title: 'SimonSays MultiArena',
         description: 'Minigame de Minecraft "Simon Says" com suporte a múltiplas arenas, totalmente configurável e pronto para servidores.',
-        fullDescription: 'Plugin de minigame para Minecraft baseado no clássico "Simon Says" com suporte a múltiplas arenas simultâneas. Inclui sistema de lobby, rodadas com dificuldade progressiva, recompensas configuráveis, mensagens e scoreboard personalizáveis via YAML, e uma API limpa para integrações. Disponível no BuiltByBit.'
+        fullDescription: 'Plugin de minigame para Minecraft baseado no clássico "Simon Says" com suporte a múltiplas arenas simultâneas. Inclui sistema de lobby, rodadas com dificuldade progressiva, recompensas configuráveis, mensagens e scoreboard personalizáveis via YAML, e uma API limpa para integrações. Disponível no SpigotMC. Documentação: simonsays.blancocl.dev'
       }
     },
     certificatesData: {
@@ -732,6 +750,7 @@ export const translations = {
       viewProject: 'Projekt ansehen',
       sourceCode: 'Quellcode',
       liveDemo: 'Live-Demo',
+      docs: 'Docs',
       new: 'NEU',
       technologies: 'Technologien',
       filters: {
@@ -902,10 +921,15 @@ export const translations = {
         description: 'Verwaltungspanel für die Verwaltung von Minecraft-Plugins mit moderner Benutzeroberfläche und erweiterten Funktionen.',
         fullDescription: 'Moderne Webplattform zur Verwaltung und Administration von Minecraft-Plugins. Ermöglicht Server-Administratoren die Verwaltung ihrer Plugins, die Anzeige von Nutzungsstatistiken, die Konfiguration von Einstellungen und die Überwachung der Leistung auf intuitive und effiziente Weise.'
       },
+      npcPro: {
+        title: 'NPCPro',
+        description: 'Premium-NPC-Plugin für Minecraft-Server und Netzwerke 1.21.x-1.26.2, mit Dialogen, Klick-Befehlen und Custom-Skins.',
+        fullDescription: 'Premium-NPC-Plugin für Minecraft, entwickelt für professionelle Netzwerke. Erstelle interaktive NPCs mit animierten Dialogen, Klick-Befehlen, benutzerdefinierten Skins, Hologrammen und vollständiger YAML-Konfiguration. Kompatibel von 1.21.x bis 1.26.2, optimiert für Paper und Purpur. Vollständige Dokumentation auf npcpro.blancocl.dev.'
+      },
       simonSays: {
         title: 'SimonSays MultiArena',
         description: 'Minecraft-Minispiel "Simon Says" mit Multi-Arena-Unterstützung, vollständig konfigurierbar und serverbereit.',
-        fullDescription: 'Minecraft-Minispiel-Plugin nach dem Klassiker "Simon Says" mit Unterstützung für mehrere gleichzeitige Arenen. Enthält ein Lobby-System, progressiv schwierigere Runden, konfigurierbare Belohnungen, anpassbare Nachrichten und Scoreboard via YAML sowie eine saubere API für Integrationen. Verfügbar auf BuiltByBit.'
+        fullDescription: 'Minecraft-Minispiel-Plugin nach dem Klassiker "Simon Says" mit Unterstützung für mehrere gleichzeitige Arenen. Enthält ein Lobby-System, progressiv schwierigere Runden, konfigurierbare Belohnungen, anpassbare Nachrichten und Scoreboard via YAML sowie eine saubere API für Integrationen. Verfügbar auf SpigotMC. Dokumentation: simonsays.blancocl.dev'
       }
     },
     certificatesData: {
@@ -930,7 +954,7 @@ export type NestedTranslationKey =
   | 'nav.home' | 'nav.about' | 'nav.projects' | 'nav.experience' | 'nav.contact'
   | 'hero.greeting' | 'hero.name' | 'hero.title' | 'hero.subtitle' | 'hero.cta' | 'hero.contact' | 'hero.downloadCV'
   | 'about.title' | 'about.description' | 'about.additionalText' | 'about.whyWorkWithMe' | 'about.fastDelivery' | 'about.fastDeliveryDesc' | 'about.innovativeSolutions' | 'about.innovativeSolutionsDesc'
-  | 'projects.title' | 'projects.subtitle' | 'projects.viewAll' | 'projects.viewProject' | 'projects.sourceCode' | 'projects.liveDemo' | 'projects.technologies'
+  | 'projects.title' | 'projects.subtitle' | 'projects.viewAll' | 'projects.viewProject' | 'projects.sourceCode' | 'projects.liveDemo' | 'projects.docs' | 'projects.technologies'
   | 'experience.title'
   | 'contact.title' | 'contact.subtitle' | 'contact.name' | 'contact.email' | 'contact.subject' | 'contact.message' | 'contact.send' | 'contact.sending' | 'contact.success' | 'contact.error'
   | 'footer.rights' | 'footer.madeWith' | 'footer.and';
