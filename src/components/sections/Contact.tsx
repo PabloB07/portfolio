@@ -72,13 +72,13 @@ const Contact: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-dev text-gray-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold font-dev text-ink mb-6">
             {t('contact.title')}
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
+          <p className="text-xl text-ink-muted mb-8">
             {t('contact.subtitle')}
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto rounded-full" />
+          <div className="section-divider" />
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -89,10 +89,10 @@ const Contact: React.FC = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold font-dev text-gray-900 dark:text-white mb-6">
+              <h3 className="text-2xl font-bold font-dev text-ink mb-6">
                 Información de contacto
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-lg mb-8">
+              <p className="text-ink-muted text-lg mb-8">
                 ¿Tienes un proyecto en mente o quieres colaborar? No dudes en contactarme. 
                 Respondo a todos los mensajes en menos de 24 horas.
               </p>
@@ -107,22 +107,22 @@ const Contact: React.FC = () => {
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   className="flex items-center space-x-4"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center shadow-glow">
                     <info.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold font-dev text-gray-900 dark:text-white">
+                    <h4 className="font-semibold font-dev text-ink">
                       {info.label}
                     </h4>
                     {info.href ? (
                       <a
                         href={info.href}
-                        className="text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors duration-200"
+                        className="text-ink-muted hover:text-primary-500 transition-colors duration-200"
                       >
                         {info.value}
                       </a>
                     ) : (
-                      <p className="text-gray-600 dark:text-gray-400">{info.value}</p>
+                      <p className="text-ink-muted">{info.value}</p>
                     )}
                   </div>
                 </motion.div>
@@ -133,9 +133,9 @@ const Contact: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="pt-8 border-t border-gray-200 dark:border-gray-700"
+              className="pt-8 border-t border-subtle"
             >
-              <h4 className="font-semibold font-dev text-gray-900 dark:text-white mb-4">
+              <h4 className="font-semibold font-dev text-ink mb-4">
                 Sígueme en redes sociales
               </h4>
               <div className="flex space-x-4">
@@ -144,7 +144,7 @@ const Contact: React.FC = () => {
                   href={personalInfo.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-gray-900 hover:text-white transition-all duration-300"
+                  className="w-10 h-10 bg-elevated rounded-lg flex items-center justify-center text-ink-muted hover:bg-gray-900 hover:text-white transition-all duration-300"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
@@ -155,7 +155,7 @@ const Contact: React.FC = () => {
                   href={personalInfo.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-[#0077b5] hover:text-white transition-all duration-300"
+                  className="w-10 h-10 bg-elevated rounded-lg flex items-center justify-center text-ink-muted hover:bg-[#0077b5] hover:text-white transition-all duration-300"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
@@ -170,10 +170,10 @@ const Contact: React.FC = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <form onSubmit={handleSubmit} className="bg-white dark:bg-discord-card-dark rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+            <form onSubmit={handleSubmit} className="card p-8 shadow-card">
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-ink-muted mb-2">
                     {t('contact.name')}
                   </label>
                   <input
@@ -183,13 +183,13 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+                    className="field"
                     placeholder="Tu nombre"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-ink-muted mb-2">
                     {t('contact.email')}
                   </label>
                   <input
@@ -199,14 +199,14 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+                    className="field"
                     placeholder="tu@email.com"
                   />
                 </div>
               </div>
 
               <div className="mb-6">
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-ink-muted mb-2">
                   {t('contact.subject')}
                 </label>
                 <input
@@ -216,13 +216,13 @@ const Contact: React.FC = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
-                  placeholder="Asunto del mensaje"
+className="field"
+                    placeholder="Asunto del mensaje"
                 />
               </div>
 
               <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-ink-muted mb-2">
                   {t('contact.message')}
                 </label>
                 <textarea
@@ -232,21 +232,19 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200 resize-vertical"
-                  placeholder="Cuéntame sobre tu proyecto..."
+className="field resize-y"
+                    placeholder="Cuéntame sobre tu proyecto..."
                 />
               </div>
 
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center justify-center space-x-3 py-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-semibold rounded-lg hover:from-primary-600 hover:to-secondary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                className="btn-press btn-press-primary w-full py-4"
               >
                 {isSubmitting ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
                     <span>{t('contact.sending')}</span>
                   </>
                 ) : (
@@ -263,13 +261,13 @@ const Contact: React.FC = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`mt-4 p-4 rounded-lg flex items-center space-x-2 ${
+                  className={`mt-4 p-4 rounded-xl flex items-center space-x-2 ring-1 ${
                     submitStatus === 'success'
-                      ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300'
-                      : 'bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300'
+                      ? 'bg-success-500/15 text-success-600 dark:text-success-300 ring-success-500/30'
+                      : 'bg-danger-500/15 text-danger-600 dark:text-danger-300 ring-danger-500/30'
                   }`}
                 >
-                  {submitStatus === 'success' ? <CheckCircle className="w-5 h-5 text-green-700 dark:text-green-300" /> : <XCircle className="w-5 h-5 text-red-700 dark:text-red-300" />}
+                  {submitStatus === 'success' ? <CheckCircle className="w-5 h-5 text-success-500" /> : <XCircle className="w-5 h-5 text-danger-500" />}
                   <span>
                     {submitStatus === 'success' ? t('contact.success') : t('contact.error')}
                   </span>

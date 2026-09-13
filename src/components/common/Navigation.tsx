@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { Gamepad2, Briefcase } from 'lucide-react';
+import { Gamepad2, Briefcase, Palette } from 'lucide-react';
+import { PALETTES, PaletteId } from '../../types';
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showLanguages, setShowLanguages] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const [showPalettes, setShowPalettes] = useState(false);
+  const { theme, toggleTheme, setPalette } = useTheme();
   const { currentLanguage, setLanguage, t, languages } = useLanguage();
 
   useEffect(() => {
@@ -34,6 +36,13 @@ const Navigation: React.FC = () => {
     { href: '/portfolio-services', label: t('nav.services'), icon: Briefcase },
     { href: '#contact', label: t('nav.contact') },
   ];
+
+  const currentPalette = PALETTES.find(p => p.id === theme.palette) ?? PALETTES[0];
+
+  const handlePalette = (id: PaletteId) => {
+    setPalette(id);
+    setShowPalettes(false);
+  };
 
   const handleNavClick = (href: string) => {
     setIsOpen(false);
@@ -67,7 +76,7 @@ const Navigation: React.FC = () => {
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 text-white font-bold shadow-glow">
               P
             </span>
-            <span className="font-bold text-xl text-gray-900 dark:text-white tracking-tight">
+            <span className="font-bold text-xl text-ink tracking-tight">
               Pablo<span className="gradient-text">.</span>
             </span>
           </motion.div>
@@ -79,7 +88,7 @@ const Navigation: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleNavClick(item.href)}
-                className="px-3 py-1.5 rounded-full text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-white hover:bg-primary-500/10 dark:hover:bg-primary-500/20 transition-colors duration-200 text-sm font-medium"
+                className="px-3 py-1.5 rounded-full text-ink-muted hover:text-primary-500 dark:hover:text-white hover:bg-primary-500/10 transition-colors duration-200 text-sm font-medium"
               >
                 {item.icon && <item.icon className="w-4 h-4 inline-block mr-1" />}
                 {item.label}
@@ -93,7 +102,7 @@ const Navigation: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowLanguages(!showLanguages)}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/50 dark:bg-white/5 border border-white/40 dark:border-white/10 backdrop-blur-md text-gray-700 dark:text-gray-200 hover:bg-primary-500/10 hover:text-primary-600 dark:hover:text-white hover:border-primary-500/40 transition-all duration-200"
+                className="nav-icon-btn flex items-center gap-1.5 px-3 py-2"
               >
                 <span className="text-base leading-none">{currentLanguage.flag}</span>
                 <svg className="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,25 +116,66 @@ const Navigation: React.FC = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full right-0 mt-2 bg-white/90 dark:bg-discord-card-dark/90 backdrop-blur-xl rounded-xl shadow-card border border-gray-200/70 dark:border-white/10 overflow-hidden min-w-[150px]"
+                    className="nav-dropdown absolute top-full right-0 mt-2 min-w-[160px]"
                   >
                     {languages.map((language) => (
-                      <motion.button
+                      <button
                         key={language.code}
-                        whileHover={{ backgroundColor: 'rgba(88, 101, 242, 0.12)' }}
                         onClick={() => {
                           setLanguage(language);
                           setShowLanguages(false);
                         }}
-                        className={`flex items-center space-x-2 w-full px-4 py-2.5 text-left transition-colors duration-200 ${
-                          currentLanguage.code === language.code
-                            ? 'text-primary-600 dark:text-primary-300 font-semibold bg-primary-500/10'
-                            : 'text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400'
-                        }`}
+                        className={`dropdown-item ${currentLanguage.code === language.code ? 'dropdown-item-active' : ''}`}
                       >
                         <span>{language.flag}</span>
                         <span className="text-sm">{language.name}</span>
-                      </motion.button>
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <div className="relative">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setShowPalettes(!showPalettes)}
+                className="nav-icon-btn flex items-center gap-1.5 px-3 py-2"
+                title="Color theme"
+              >
+                <span
+                  className="h-4 w-4 rounded-full border border-black/10"
+                  style={{ backgroundColor: currentPalette.color }}
+                />
+                <Palette className="w-4 h-4" />
+              </motion.button>
+
+              <AnimatePresence>
+                {showPalettes && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="nav-dropdown absolute top-full right-0 mt-2 min-w-[170px]"
+                  >
+                    {PALETTES.map((palette) => (
+                      <button
+                        key={palette.id}
+                        onClick={() => handlePalette(palette.id)}
+                        className={`dropdown-item ${currentPalette.id === palette.id ? 'dropdown-item-active' : ''}`}
+                      >
+                        <span
+                          className="h-3.5 w-3.5 rounded-full border border-black/10 shrink-0"
+                          style={{ backgroundColor: palette.color }}
+                        />
+                        <span className="text-sm">{palette.label}</span>
+                        {currentPalette.id === palette.id && (
+                          <svg className="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </button>
                     ))}
                   </motion.div>
                 )}
@@ -136,7 +186,7 @@ const Navigation: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={toggleTheme}
-              className="p-2.5 rounded-xl bg-white/50 dark:bg-white/5 border border-white/40 dark:border-white/10 backdrop-blur-md text-gray-700 dark:text-gray-200 hover:bg-primary-500/10 hover:border-primary-500/40 transition-all duration-200"
+              className="nav-icon-btn p-2.5"
             >
               {theme.mode === 'light' ? (
                 <svg className="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -153,7 +203,7 @@ const Navigation: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2.5 rounded-xl bg-white/50 dark:bg-white/5 border border-white/40 dark:border-white/10 backdrop-blur-md text-gray-700 dark:text-gray-200 hover:bg-primary-500/10 hover:border-primary-500/40 transition-all duration-200"
+              className="nav-icon-btn md:hidden p-2.5"
             >
               {isOpen ? (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -182,7 +232,7 @@ const Navigation: React.FC = () => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="md:hidden bg-white/90 dark:bg-discord-bg-darkest/90 backdrop-blur-xl border-t border-primary-500/10 dark:border-white/5 relative rounded-b-2xl"
+                className="md:hidden bg-elevated border-t border-subtle relative rounded-b-2xl"
               >
                 <div className="py-4 space-y-2">
                   {navItems.map((item) => (
@@ -190,7 +240,7 @@ const Navigation: React.FC = () => {
                       key={item.href}
                       whileHover={{ x: 10 }}
                       onClick={() => handleNavClick(item.href)}
-                      className="block w-full text-left px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-white hover:bg-primary-500/10 dark:hover:bg-primary-500/20 transition-colors duration-200"
+                      className="block w-full text-left px-4 py-3 mx-2 rounded-xl text-ink-muted hover:text-primary-500 dark:hover:text-white hover:bg-primary-500/10 transition-colors duration-200"
                     >
                       {item.icon && <item.icon className="w-4 h-4 inline-block mr-1" />}
                       {item.label}

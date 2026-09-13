@@ -34,10 +34,10 @@ const About: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-dev text-gray-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold font-dev text-ink mb-6">
             {t('about.title')}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto rounded-full" />
+          <div className="section-divider" />
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
@@ -47,10 +47,10 @@ const About: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-center mb-12"
           >
-            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
+            <p className="text-ink-muted text-lg leading-relaxed mb-6">
               {t('about.description')}
             </p>
-            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-8">
+            <p className="text-ink-muted text-lg leading-relaxed mb-8">
               {t('about.additionalText')}
             </p>
           </motion.div>
@@ -61,22 +61,26 @@ const About: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="grid md:grid-cols-2 gap-8 mb-12"
           >
-            <div className="bg-white dark:bg-discord-card-dark rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
-              <Rocket className="w-10 h-10 text-primary-500 mb-4" />
-              <h3 className="text-xl font-bold font-dev text-gray-900 dark:text-white mb-2">
+            <div className="card p-6 shadow-card">
+              <Rocket
+                className="w-10 h-10 text-primary-500 mb-4"
+              />
+              <h3 className="text-xl font-bold font-dev text-ink mb-2">
                 {t('about.fastDelivery')}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
+              <p className="text-ink-muted text-sm">
                 {t('about.fastDeliveryDesc')}
               </p>
             </div>
             
-            <div className="bg-white dark:bg-discord-card-dark rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
-              <Lightbulb className="w-10 h-10 text-primary-500 mb-4" />
-              <h3 className="text-xl font-bold font-dev text-gray-900 dark:text-white mb-2">
+            <div className="card p-6 shadow-card">
+              <Lightbulb
+                className="w-10 h-10 text-primary-500 mb-4"
+              />
+              <h3 className="text-xl font-bold font-dev text-ink mb-2">
                 {t('about.innovativeSolutions')}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
+              <p className="text-ink-muted text-sm">
                 {t('about.innovativeSolutionsDesc')}
               </p>
             </div>
@@ -87,18 +91,17 @@ const About: React.FC = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <h3 className="text-2xl font-bold font-dev text-gray-900 dark:text-white mb-6 text-center">
+            <h3 className="text-2xl font-bold font-dev text-ink mb-6 text-center">
               {t('about.technologies') || 'Tecnologías'}
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
               {technologies.map((tech, index) => (
                 <motion.div
                   key={tech.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
+                  initial={{ opacity: 0 }}
+                  animate={inView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  whileHover={{ scale: 1.1 }}
-                  className="flex flex-col items-center justify-center p-4 bg-white dark:bg-discord-card-dark rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
+                  className="card-press flex flex-col items-center justify-center p-4 h-full"
                 >
                   <div className="flex items-center justify-center mb-2 h-12">
                     <img 
@@ -120,7 +123,7 @@ const About: React.FC = () => {
                       />
                     )}
                   </div>
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">
+                  <span className="text-sm font-medium text-ink-muted text-center">
                     {tech.name}
                   </span>
                 </motion.div>
@@ -145,13 +148,13 @@ const About: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 1.4 + index * 0.1 }}
-                className="bg-white dark:bg-discord-card-dark rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700"
+                className="card p-6 text-center shadow-card"
               >
                 <stat.icon className="w-8 h-8 mx-auto text-primary-500 mb-2" />
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-2xl font-bold text-ink">
                   {stat.value}
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-sm text-ink-muted">
                   {stat.label}
                 </div>
               </motion.div>

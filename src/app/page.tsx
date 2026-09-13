@@ -10,7 +10,7 @@ import Contact from '../components/sections/Contact';
 import Footer from '../components/common/Footer';
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-discord-bg dark:bg-discord-bg-darkest text-gray-900 dark:text-gray-100 overflow-x-hidden">
+    <div className="relative min-h-screen bg-base text-ink overflow-x-hidden">
       {/* Ambient background layers */}
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="aurora-bg" />

@@ -21,42 +21,42 @@ const services = [
     titleKey: 'services.serviceItems.pluginDevelopment.title',
     descriptionKey: 'services.serviceItems.pluginDevelopment.description',
     featuresKey: 'services.serviceItems.pluginDevelopment.features',
-    color: 'from-blue-500 to-cyan-500',
+    color: 'from-primary-500 to-secondary-500',
     key: 'pluginDevelopment'
   },
   {
     titleKey: 'services.serviceItems.serverSetup.title',
     descriptionKey: 'services.serviceItems.serverSetup.description',
     featuresKey: 'services.serviceItems.serverSetup.features',
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-secondary-500 to-danger-500',
     key: 'serverSetup'
   },
   {
     titleKey: 'services.serviceItems.database.title',
     descriptionKey: 'services.serviceItems.database.description',
     featuresKey: 'services.serviceItems.database.features',
-    color: 'from-green-500 to-emerald-500',
+    color: 'from-success-500 to-accent-600',
     key: 'database'
   },
   {
     titleKey: 'services.serviceItems.security.title',
     descriptionKey: 'services.serviceItems.security.description',
     featuresKey: 'services.serviceItems.security.features',
-    color: 'from-red-500 to-orange-500',
+    color: 'from-danger-500 to-warning-500',
     key: 'security'
   },
   {
     titleKey: 'services.serviceItems.optimization.title',
     descriptionKey: 'services.serviceItems.optimization.description',
     featuresKey: 'services.serviceItems.optimization.features',
-    color: 'from-yellow-500 to-amber-500',
+    color: 'from-warning-500 to-accent-500',
     key: 'optimization'
   },
   {
     titleKey: 'services.serviceItems.multiplayer.title',
     descriptionKey: 'services.serviceItems.multiplayer.description',
     featuresKey: 'services.serviceItems.multiplayer.features',
-    color: 'from-indigo-500 to-purple-500',
+    color: 'from-primary-600 to-accent-500',
     key: 'multiplayer'
   }
 ]
@@ -85,7 +85,7 @@ export default function PortfolioServicesPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-discord-bg dark:bg-discord-bg-darkest text-gray-900 dark:text-gray-100 overflow-x-hidden">
+    <div className="relative min-h-screen bg-base text-ink overflow-x-hidden">
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="aurora-bg" />
         <div className="absolute inset-0 grid-overlay" />
@@ -108,9 +108,7 @@ export default function PortfolioServicesPage() {
             </p>
             <motion.a
               href="#services"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow"
+              className="btn-press btn-press-dark px-8 py-4 text-lg"
             >
               {t('services.hero.cta')}
             </motion.a>
@@ -118,7 +116,7 @@ export default function PortfolioServicesPage() {
         </div>
       </section>
 
-      <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+      <section id="services" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -126,10 +124,10 @@ export default function PortfolioServicesPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold font-dev text-gray-900 dark:text-white mb-4">
+            <h2 className="text-4xl font-bold font-dev text-ink mb-4">
               {t('services.title')}
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
+            <p className="text-xl text-ink-muted">
               {t('services.subtitle')}
             </p>
           </motion.div>
@@ -142,8 +140,7 @@ export default function PortfolioServicesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
+                className="card-press-elevated overflow-hidden h-full"
               >
                 <div className={`h-2 bg-gradient-to-r ${service.color}`} />
                 <div className="p-6">
@@ -155,16 +152,16 @@ export default function PortfolioServicesPage() {
                     {index === 4 && <Zap className="w-8 h-8 text-white" />}
                     {index === 5 && <Users className="w-8 h-8 text-white" />}
                   </div>
-                  <h3 className="text-2xl font-bold font-dev text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-2xl font-bold font-dev text-ink mb-3">
                     {t(service.titleKey)}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  <p className="text-ink-muted mb-4">
                     {t(service.descriptionKey)}
                   </p>
                   <ul className="space-y-2">
                     {getFeatures(service.featuresKey).map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                        <Check className="w-4 h-4 mr-2 text-green-500 shrink-0" />
+                      <li key={idx} className="flex items-center text-sm text-ink-muted">
+                        <Check className="w-4 h-4 mr-2 text-accent-500 shrink-0" />
                         {feature}
                       </li>
                     ))}
@@ -176,7 +173,7 @@ export default function PortfolioServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -184,10 +181,10 @@ export default function PortfolioServicesPage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold font-dev text-gray-900 dark:text-white mb-4">
+            <h2 className="text-4xl font-bold font-dev text-ink mb-4">
               {t('services.technologies.title')}
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
+            <p className="text-xl text-ink-muted">
               {t('services.technologies.subtitle')}
             </p>
           </motion.div>
@@ -196,12 +193,11 @@ export default function PortfolioServicesPage() {
             {technologies.map((tech, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.1 }}
-                className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all"
+                className="card-press flex flex-col items-center p-4 h-full"
               >
                 <img 
                   src={tech.icon} 
@@ -211,7 +207,7 @@ export default function PortfolioServicesPage() {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
                 />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <span className="text-sm font-medium text-ink-muted">
                   {tech.name}
                 </span>
               </motion.div>
@@ -220,7 +216,7 @@ export default function PortfolioServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-base">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -228,10 +224,10 @@ export default function PortfolioServicesPage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold font-dev text-gray-900 dark:text-white mb-4">
+            <h2 className="text-4xl font-bold font-dev text-ink mb-4">
               {t('services.testimonials.title')}
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
+            <p className="text-xl text-ink-muted">
               {t('services.testimonials.subtitle')}
             </p>
           </motion.div>
@@ -243,21 +239,21 @@ export default function PortfolioServicesPage() {
                 initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg"
+                className="card p-6 shadow-card"
               >
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="text-yellow-400 w-5 h-5" fill="currentColor" />
+                    <Star key={i} className="text-warning-500 w-5 h-5" fill="currentColor" />
                   ))}
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 italic">
+                <p className="text-ink-muted mb-4 italic">
                   "{t(testimonial.contentKey)}"
                 </p>
                 <div>
-                  <p className="font-semibold font-dev text-gray-900 dark:text-white">
+                  <p className="font-semibold font-dev text-ink">
                     {t(testimonial.nameKey)}
                   </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-sm text-ink-faint">
                     {t(testimonial.roleKey)}
                   </p>
                 </div>
@@ -282,9 +278,7 @@ export default function PortfolioServicesPage() {
             </p>
             <motion.a
               href="/#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow"
+              className="btn-press btn-press-dark px-8 py-4 text-lg"
             >
               {t('services.cta.button')}
             </motion.a>
