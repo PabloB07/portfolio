@@ -72,7 +72,7 @@ function MoaiMesh() {
   });
 
   return (
-    <group ref={group} position={[0, -0.55, 0]}>
+    <group ref={group} position={[0, -0.3, 0]}>
       <Center>
         <primitive object={fbx} scale={scale} />
       </Center>
@@ -82,13 +82,13 @@ function MoaiMesh() {
 
 const MoaiModel: React.FC = () => {
   return (
-    <div className="relative w-full h-[380px] md:h-[500px] lg:h-[560px]">
+    <div className="relative w-full h-[430px] md:h-[560px] lg:h-[640px]">
       {/* cyber-glow backdrop pod */}
       <div className="absolute inset-8 -z-10 rounded-full bg-[radial-gradient(ellipse_at_center,var(--glow),transparent_65%)] blur-3xl opacity-70" />
 
       <Canvas
         dpr={[1, 2]}
-        camera={{ position: [0, 0.4, 4.6], fov: 42 }}
+        camera={{ position: [0, 0.1, 5.4], fov: 40 }}
         gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
       >
@@ -101,10 +101,10 @@ const MoaiModel: React.FC = () => {
         <pointLight position={[0, -1.5, 2.5]} intensity={1.4} distance={7} color="#eab308" />
 
         <Suspense fallback={null}>
-          <Float speed={1.4} rotationIntensity={0.25} floatIntensity={0.9}>
+          <Float speed={1.2} rotationIntensity={0.25} floatIntensity={0.35}>
             <MoaiMesh />
           </Float>
-          <ContactShadows position={[0, -1.85, 0]} opacity={0.4} scale={6} blur={2.8} far={3.2} />
+          <ContactShadows position={[0, -1.65, 0]} opacity={0.4} scale={6} blur={3} far={4} />
         </Suspense>
       </Canvas>
     </div>
