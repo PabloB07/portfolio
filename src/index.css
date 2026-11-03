@@ -15,7 +15,7 @@
   --inset: #eaeae7;
   --subtle: #d4d4d4;
   --ink: #1c1917;
-  --ink-muted: #57534e;
+  --ink-muted: #44403c;
   --ink-faint: #a8a29e;
 }
 
@@ -262,7 +262,7 @@
 
   .btn-press-primary {
     --btn-bg: rgb(var(--primary-100));
-    --btn-text: rgb(var(--primary-700));
+    --btn-text: rgb(var(--primary-800));
     --btn-shadow: rgb(var(--primary-500));
   }
 
@@ -391,7 +391,7 @@
    Brand helpers
    ===================================================== */
 .gradient-text {
-  color: rgb(var(--primary-600));
+  color: rgb(var(--primary-700));
 }
 
 /* Ambient aurora blobs */
