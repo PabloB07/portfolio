@@ -50,6 +50,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     } else {
       root.classList.remove('dark');
     }
+    root.dataset.theme = theme.mode;
     root.dataset.palette = theme.palette;
 
     localStorage.setItem('theme', theme.mode);
@@ -57,10 +58,15 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   }, [theme, mounted]);
 
   const toggleTheme = () => {
-    setTheme(prev => ({
-      ...prev,
-      mode: prev.mode === 'light' ? 'dark' : 'light'
-    }));
+    setTheme(prev => {
+      const nextMode = prev.mode === 'light' ? 'dark' : 'light';
+      // Apply immediately to avoid flash / stuck dark styles
+      const root = window.document.documentElement;
+      if (nextMode === 'dark') root.classList.add('dark');
+      else root.classList.remove('dark');
+      root.dataset.theme = nextMode;
+      return { ...prev, mode: nextMode };
+    });
   };
 
   const setPalette = (palette: PaletteId) => {
