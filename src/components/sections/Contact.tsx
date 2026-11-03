@@ -170,7 +170,7 @@ const Contact: React.FC = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <form onSubmit={handleSubmit} className="card p-8 ">
+            <form onSubmit={handleSubmit} className="card p-8 shadow-card ">
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-ink-muted mb-2">

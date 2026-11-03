@@ -61,7 +61,7 @@ const About: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="grid md:grid-cols-2 gap-8 mb-12"
           >
-            <div className="card p-6 ">
+            <div className="card p-6 shadow-card ">
               <Rocket
                 className="w-10 h-10 text-primary-500 mb-4"
               />
@@ -73,7 +73,7 @@ const About: React.FC = () => {
               </p>
             </div>
             
-            <div className="card p-6 ">
+            <div className="card p-6 shadow-card ">
               <Lightbulb
                 className="w-10 h-10 text-primary-500 mb-4"
               />
@@ -148,7 +148,7 @@ const About: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 1.4 + index * 0.1 }}
-                className="card p-6 text-center "
+                className="card p-6 shadow-card text-center "
               >
                 <stat.icon className="w-8 h-8 mx-auto text-primary-500 mb-2" />
                 <div className="text-2xl font-bold text-ink">
