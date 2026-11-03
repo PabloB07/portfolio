@@ -115,7 +115,7 @@ const Projects: React.FC = () => {
                     
                     <div className="absolute top-3 left-3 flex flex-col gap-2">
                       {project.isNew && (
-                        <span className="bg-success-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg shadow-success-500/30 ">
+                        <span className="bg-success-500 text-white px-3 py-1 rounded-full text-xs font-bold  ">
                           <Sparkles className="w-3.5 h-3.5 inline-block mr-1" />{tString('projects.new')}
                         </span>
                       )}

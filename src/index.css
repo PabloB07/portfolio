@@ -184,9 +184,7 @@
 
   .card-press:hover,
   .card-press-elevated:hover {
-    border-color: var(--ink);
-    transform: translate(-2px, -2px);
-    box-shadow: 4px 4px 0 0 var(--ink);
+    border-color: rgb(var(--primary-500));
   }
 
   /* Press card with colored accent bar on the left edge */
@@ -212,9 +210,7 @@
   }
 
   .card-accent:hover {
-    border-color: var(--ink);
-    transform: translate(-2px, -2px);
-    box-shadow: 4px 4px 0 0 var(--ink);
+    border-color: rgb(var(--primary-500));
   }
 
   .card-accent:hover::before {
@@ -238,13 +234,11 @@
   }
 
   .btn-press:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--ink));
+    background: rgb(var(--primary-500) / 0.08);
   }
 
   .btn-press:active {
-    transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0 0 var(--ink);
+    transform: scale(0.98);
   }
 
   .btn-press:disabled {

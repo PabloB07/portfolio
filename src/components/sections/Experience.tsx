@@ -91,7 +91,7 @@ const Experience: React.FC = () => {
                             key={tech}
                             whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.95 }}
-                            className="px-3 py-1.5 rounded-lg border border-primary-500/20 bg-primary-500/10 text-primary-600 dark:text-primary-300 text-xs font-medium hover:shadow-md transition-all duration-200"
+                            className="px-3 py-1.5 rounded-lg border border-primary-500/20 bg-primary-500/10 text-primary-600 dark:text-primary-300 text-xs font-medium transition-colors duration-200"
                           >
                             {tech}
                           </motion.span>
