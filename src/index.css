@@ -332,7 +332,7 @@
   .nav-icon-btn:hover {
     background: rgb(var(--primary-500) / 0.1);
     border-color: rgb(var(--primary-500) / 0.4);
-    color: rgb(var(--primary-500));
+    color: rgb(var(--primary-700));
   }
 
   /* Nav dropdown panel — opaque, no blur */
@@ -341,7 +341,6 @@
     border: 1px solid var(--subtle);
     background: var(--elevated);
     overflow: hidden;
-    box-shadow: 0 18px 45px -12px rgba(0, 0, 0, 0.25);
   }
 
   .dropdown-item {
@@ -351,13 +350,21 @@
 
   .dropdown-item:hover {
     background: rgb(var(--primary-500) / 0.1);
-    color: rgb(var(--primary-500));
+    color: rgb(var(--primary-700));
+  }
+
+  .dark .dropdown-item:hover {
+    color: rgb(var(--primary-300));
   }
 
   .dropdown-item-active {
     background: rgb(var(--primary-500) / 0.1);
-    color: rgb(var(--primary-600));
+    color: rgb(var(--primary-700));
     font-weight: 600;
+  }
+
+  .dark .dropdown-item-active {
+    color: rgb(var(--primary-300));
   }
 
   .dark .dropdown-item-active {

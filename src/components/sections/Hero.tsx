@@ -17,20 +17,6 @@ const Hero: React.FC = () => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [profileImage, setProfileImage] = useState(personalInfo.avatar || '');
-  const [o7Failed, setO7Failed] = useState(false);
-  
-  useEffect(() => {
-    const handleAvatarUpdate = (event: CustomEvent) => {
-      setProfileImage(event.detail);
-    };
-
-    window.addEventListener('avatarUpdated', handleAvatarUpdate as EventListener);
-
-    return () => {
-      window.removeEventListener('avatarUpdated', handleAvatarUpdate as EventListener);
-    };
-  }, []);
 
   const texts = ['Full Stack Developer', 'Game Scripter'];
 
@@ -97,26 +83,7 @@ const Hero: React.FC = () => {
               className="text-4xl md:text-6xl lg:text-7xl font-bold font-dev tracking-tight text-ink mb-6"
             >
               <span className="gradient-text">{personalInfo.name}</span>
-              {!o7Failed ? (
-                <motion.img
-                  src="/o7.png"
-                  alt="o7 salute"
-                  onError={() => setO7Failed(true)}
-                  animate={{ rotate: [0, -8, 0, -8, 0] }}
-                  transition={{ duration: 1.6, repeat: Infinity, repeatDelay: 1.4 }}
-                  className="inline-block ml-3 align-middle h-10 md:h-14 lg:h-16 w-auto origin-bottom-left "
-                  title="o7"
-                />
-              ) : (
-                <motion.span
-                  animate={{ rotate: [0, 18, 0, 18, 0] }}
-                  transition={{ duration: 1.6, repeat: Infinity, repeatDelay: 1.4 }}
-                  className="inline-block ml-3 align-middle font-mono text-2xl md:text-4xl lg:text-5xl text-primary-500 origin-bottom-left"
-                  title="o7 — salute"
-                >
-                  o7
-                </motion.span>
-              )}
+
             </motion.h1>
 
             <motion.div
