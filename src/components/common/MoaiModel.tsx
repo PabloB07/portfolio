@@ -83,8 +83,6 @@ function MoaiMesh() {
 const MoaiModel: React.FC = () => {
   return (
     <div className="relative w-full h-[430px] md:h-[560px] lg:h-[640px]">
-      {/* cyber-glow backdrop pod */}
-      <div className="absolute inset-8 -z-10 rounded-full bg-[radial-gradient(ellipse_at_center,var(--glow),transparent_65%)] blur-3xl opacity-70" />
 
       <Canvas
         dpr={[1, 2]}
@@ -95,10 +93,10 @@ const MoaiModel: React.FC = () => {
         <ambientLight intensity={0.65} />
         {/* key light — warm white */}
         <directionalLight position={[3, 5, 4]} intensity={1.5} />
-        {/* cyan rim light (theme secondary) */}
-        <directionalLight position={[-5, 2, -3]} intensity={1.1} color="#22d3ee" />
+        {/* neutral rim light */}
+        <directionalLight position={[-5, 2, -3]} intensity={0.9} color="#a8a29e" />
         {/* yellow under-glow (theme primary) */}
-        <pointLight position={[0, -1.5, 2.5]} intensity={1.4} distance={7} color="#eab308" />
+        <pointLight position={[0, -1.5, 2.5]} intensity={1.2} distance={7} color="#f59e0b" />
 
         <Suspense fallback={null}>
           <Float speed={1.2} rotationIntensity={0.25} floatIntensity={0.25}>

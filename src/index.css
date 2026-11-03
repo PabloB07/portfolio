@@ -8,27 +8,27 @@
    Surfaces & text tokens (flip with light/dark)
    ===================================================== */
 :root {
-  /* Light theme */
-  --base: #f2f3f5;
+  /* Light theme — warm stone neutrals */
+  --base: #fafaf9;
   --surface: #ffffff;
   --elevated: #ffffff;
-  --inset: #f2f3f5;
-  --subtle: #e3e5e8;
-  --ink: #2e3338;
-  --ink-muted: #5c6068;
-  --ink-faint: #858a91;
+  --inset: #f5f5f4;
+  --subtle: #e7e5e4;
+  --ink: #1c1917;
+  --ink-muted: #57534e;
+  --ink-faint: #a8a29e;
 }
 
 .dark {
-  /* Dark theme (Discord palette) */
-  --base: #1e1f22;
-  --surface: #2b2d31;
-  --elevated: #313338;
-  --inset: #1e1f22;
-  --subtle: #3f4147;
-  --ink: #dbdee1;
-  --ink-muted: #b5bac1;
-  --ink-faint: #949ba4;
+  /* Dark theme — warm stone neutrals */
+  --base: #1c1917;
+  --surface: #292524;
+  --elevated: #33302e;
+  --inset: #1c1917;
+  --subtle: #44403c;
+  --ink: #fafaf9;
+  --ink-muted: #d6d3d1;
+  --ink-faint: #a8a29e;
 }
 
 /* =====================================================
@@ -37,142 +37,29 @@
    rgb(var(--primary-500) / 0.15)
    ===================================================== */
 
-/* Default — "Cyber" (yellow / cyan / fuchsia) */
-:root,
-[data-palette='cyber'] {
-  --primary-50: 254 252 232;
-  --primary-100: 254 249 195;
-  --primary-200: 254 240 138;
-  --primary-300: 253 224 71;
-  --primary-400: 250 204 21;
-  --primary-500: 234 179 8;
-  --primary-600: 202 138 4;
-  --primary-700: 161 98 7;
-  --primary-800: 133 77 14;
-  --primary-900: 113 63 18;
+/* Single palette — warm amber accent on stone neutrals */
+:root {
+  --primary-50: 255 251 235;
+  --primary-100: 254 243 199;
+  --primary-200: 253 230 138;
+  --primary-300: 252 211 77;
+  --primary-400: 251 191 36;
+  --primary-500: 245 158 11;
+  --primary-600: 217 119 6;
+  --primary-700: 180 83 9;
+  --primary-800: 146 64 14;
+  --primary-900: 120 53 15;
 
-  --secondary-50: 236 254 255;
-  --secondary-100: 207 250 254;
-  --secondary-200: 165 243 252;
-  --secondary-300: 103 232 249;
-  --secondary-400: 34 211 238;
-  --secondary-500: 6 182 212;
-  --secondary-600: 8 145 178;
-  --secondary-700: 14 116 144;
-  --secondary-800: 21 94 117;
-  --secondary-900: 22 78 99;
-
-  --accent-50: 253 244 255;
-  --accent-100: 250 232 255;
-  --accent-200: 245 208 254;
-  --accent-300: 240 171 252;
-  --accent-400: 232 121 249;
-  --accent-500: 217 70 239;
-  --accent-600: 192 38 211;
-  --accent-700: 162 28 175;
-  --accent-800: 134 25 143;
-  --accent-900: 112 26 117;
-
-  /* Status colors stay Discord-semantic across all themes */
-  --success-50: 234 249 240;
-  --success-100: 199 240 215;
-  --success-200: 148 227 180;
-  --success-300: 87 217 138;
-  --success-400: 62 214 115;
-  --success-500: 35 165 90;
-  --success-600: 31 148 80;
-  --success-700: 26 122 66;
-  --success-800: 21 95 52;
-  --success-900: 17 77 42;
-
-  --danger-50: 253 234 234;
-  --danger-100: 251 195 196;
-  --danger-200: 247 143 145;
-  --danger-300: 242 90 93;
-  --danger-400: 245 68 71;
-  --danger-500: 242 63 66;
-  --danger-600: 214 47 49;
-  --danger-700: 165 29 31;
-  --danger-800: 122 22 24;
-  --danger-900: 79 14 15;
-
-  --warning-50: 253 243 215;
-  --warning-100: 250 230 168;
-  --warning-200: 246 208 106;
-  --warning-300: 242 189 62;
-  --warning-400: 240 178 50;
-  --warning-500: 217 154 38;
-  --warning-600: 181 124 28;
-  --warning-700: 138 92 20;
-  --warning-800: 99 66 14;
-  --warning-900: 66 43 9;
-
-  --glow: rgba(234, 179, 8, 0.4);
-  --glow-secondary: rgba(34, 211, 238, 0.45);
-}
-
-/* Ocean — sky / teal / emerald */
-[data-palette='ocean'] {
-  --primary-50: 240 249 255;
-  --primary-100: 224 242 254;
-  --primary-200: 186 230 253;
-  --primary-300: 125 211 252;
-  --primary-400: 56 189 248;
-  --primary-500: 14 165 233;
-  --primary-600: 2 132 199;
-  --primary-700: 3 105 161;
-  --primary-800: 7 89 133;
-  --primary-900: 12 74 110;
-
-  --secondary-50: 240 253 250;
-  --secondary-100: 204 251 241;
-  --secondary-200: 153 246 228;
-  --secondary-300: 94 234 212;
-  --secondary-400: 45 212 191;
-  --secondary-500: 20 184 166;
-  --secondary-600: 13 148 136;
-  --secondary-700: 15 118 110;
-  --secondary-800: 17 94 89;
-  --secondary-900: 19 78 74;
-
-  --accent-50: 236 253 245;
-  --accent-100: 209 250 229;
-  --accent-200: 167 243 208;
-  --accent-300: 110 231 183;
-  --accent-400: 52 211 153;
-  --accent-500: 16 185 129;
-  --accent-600: 5 150 105;
-  --accent-700: 4 120 87;
-  --accent-800: 6 95 70;
-  --accent-900: 6 78 59;
-
-  --glow: rgba(14, 165, 233, 0.35);
-  --glow-secondary: rgba(20, 184, 166, 0.4);
-}
-
-/* Sunset — orange / rose / amber */
-[data-palette='sunset'] {
-  --primary-50: 255 247 237;
-  --primary-100: 255 237 213;
-  --primary-200: 254 215 170;
-  --primary-300: 253 186 116;
-  --primary-400: 251 146 60;
-  --primary-500: 249 115 22;
-  --primary-600: 234 88 12;
-  --primary-700: 194 65 12;
-  --primary-800: 154 52 18;
-  --primary-900: 124 45 18;
-
-  --secondary-50: 255 241 242;
-  --secondary-100: 255 228 230;
-  --secondary-200: 254 205 211;
-  --secondary-300: 253 164 175;
-  --secondary-400: 251 113 133;
-  --secondary-500: 244 63 94;
-  --secondary-600: 225 29 72;
-  --secondary-700: 190 18 60;
-  --secondary-800: 159 18 57;
-  --secondary-900: 136 19 55;
+  --secondary-50: 250 250 249;
+  --secondary-100: 245 245 244;
+  --secondary-200: 231 229 228;
+  --secondary-300: 214 211 209;
+  --secondary-400: 168 162 158;
+  --secondary-500: 120 113 108;
+  --secondary-600: 87 83 78;
+  --secondary-700: 68 64 60;
+  --secondary-800: 41 37 36;
+  --secondary-900: 28 25 23;
 
   --accent-50: 255 251 235;
   --accent-100: 254 243 199;
@@ -185,86 +72,42 @@
   --accent-800: 146 64 14;
   --accent-900: 120 53 15;
 
-  --glow: rgba(249, 115, 22, 0.35);
-  --glow-secondary: rgba(244, 63, 94, 0.4);
-}
+  /* Status colors */
+  --success-50: 240 253 244;
+  --success-100: 220 252 231;
+  --success-200: 187 247 208;
+  --success-300: 134 239 172;
+  --success-400: 74 222 128;
+  --success-500: 34 197 94;
+  --success-600: 22 163 74;
+  --success-700: 21 128 61;
+  --success-800: 22 101 52;
+  --success-900: 20 83 45;
 
-/* Emerald — green / lime / cyan */
-[data-palette='emerald'] {
-  --primary-50: 240 253 244;
-  --primary-100: 220 252 231;
-  --primary-200: 187 247 208;
-  --primary-300: 134 239 172;
-  --primary-400: 74 222 128;
-  --primary-500: 34 197 94;
-  --primary-600: 22 163 74;
-  --primary-700: 21 128 61;
-  --primary-800: 22 101 52;
-  --primary-900: 20 83 45;
+  --danger-50: 254 242 242;
+  --danger-100: 254 226 226;
+  --danger-200: 254 202 202;
+  --danger-300: 252 165 165;
+  --danger-400: 248 113 113;
+  --danger-500: 239 68 68;
+  --danger-600: 220 38 38;
+  --danger-700: 185 28 28;
+  --danger-800: 153 27 27;
+  --danger-900: 127 29 29;
 
-  --secondary-50: 247 254 231;
-  --secondary-100: 236 252 203;
-  --secondary-200: 217 249 157;
-  --secondary-300: 190 242 100;
-  --secondary-400: 163 230 53;
-  --secondary-500: 132 204 22;
-  --secondary-600: 101 163 13;
-  --secondary-700: 77 124 15;
-  --secondary-800: 63 98 18;
-  --secondary-900: 54 83 20;
+  --warning-50: 255 251 235;
+  --warning-100: 254 243 199;
+  --warning-200: 253 230 138;
+  --warning-300: 252 211 77;
+  --warning-400: 251 191 36;
+  --warning-500: 245 158 11;
+  --warning-600: 217 119 6;
+  --warning-700: 180 83 9;
+  --warning-800: 146 64 14;
+  --warning-900: 120 53 15;
 
-  --accent-50: 236 254 255;
-  --accent-100: 207 250 254;
-  --accent-200: 165 243 252;
-  --accent-300: 103 232 249;
-  --accent-400: 34 211 238;
-  --accent-500: 6 182 212;
-  --accent-600: 8 145 178;
-  --accent-700: 14 116 144;
-  --accent-800: 21 94 117;
-  --accent-900: 22 78 99;
-
-  --glow: rgba(34, 197, 94, 0.35);
-  --glow-secondary: rgba(132, 204, 22, 0.4);
-}
-
-/* Midnight — violet / pink / fuchsia */
-[data-palette='midnight'] {
-  --primary-50: 245 243 255;
-  --primary-100: 237 233 254;
-  --primary-200: 221 214 254;
-  --primary-300: 196 181 253;
-  --primary-400: 167 139 250;
-  --primary-500: 139 92 246;
-  --primary-600: 124 58 237;
-  --primary-700: 109 40 217;
-  --primary-800: 91 33 182;
-  --primary-900: 76 29 149;
-
-  --secondary-50: 253 242 248;
-  --secondary-100: 252 231 243;
-  --secondary-200: 251 207 232;
-  --secondary-300: 249 168 212;
-  --secondary-400: 244 114 182;
-  --secondary-500: 236 72 153;
-  --secondary-600: 219 39 119;
-  --secondary-700: 190 24 93;
-  --secondary-800: 157 23 77;
-  --secondary-900: 131 24 67;
-
-  --accent-50: 253 244 255;
-  --accent-100: 250 232 255;
-  --accent-200: 245 208 254;
-  --accent-300: 240 171 252;
-  --accent-400: 232 121 249;
-  --accent-500: 217 70 239;
-  --accent-600: 192 38 211;
-  --accent-700: 162 28 175;
-  --accent-800: 134 25 143;
-  --accent-900: 112 26 117;
-
-  --glow: rgba(139, 92, 246, 0.35);
-  --glow-secondary: rgba(236, 72, 153, 0.4);
+  --glow: rgba(245, 158, 11, 0.35);
+  --glow-secondary: rgba(120, 113, 108, 0.35);
 }
 
 /* =====================================================
@@ -300,12 +143,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgb(var(--primary-500)), rgb(var(--secondary-500)));
+  background: rgb(var(--primary-500));
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, rgb(var(--primary-600)), rgb(var(--secondary-600)));
+  background: rgb(var(--primary-600));
 }
 
 /* =====================================================
@@ -533,7 +376,7 @@
 
   /* Section heading underline */
   .section-divider {
-    @apply mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500;
+    @apply mx-auto h-1 w-24 rounded-full bg-primary-500;
   }
 }
 
@@ -541,17 +384,7 @@
    Brand helpers
    ===================================================== */
 .gradient-text {
-  background: linear-gradient(135deg, rgb(var(--primary-500)) 0%, rgb(var(--primary-300)) 40%, rgb(var(--secondary-500)) 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 6s ease infinite;
-}
-
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  color: rgb(var(--primary-600));
 }
 
 /* Ambient aurora blobs */

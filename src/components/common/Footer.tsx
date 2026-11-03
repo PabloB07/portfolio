@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">PB</span>
               </div>
               <span className="font-bold text-xl text-ink">
@@ -107,13 +107,9 @@ const Footer: React.FC = () => {
             className="text-ink-muted text-sm flex items-center space-x-1 mt-4 md:mt-0"
           >
             <span>{tString('footer.madeWith')}</span>
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-              className="text-danger-500"
-            >
+            <span className="text-danger-500">
               <Heart size={16} fill="currentColor" />
-            </motion.span>
+            </span>
             <span>{tString('footer.and')} Pablo Blanco Navarro</span>
           </motion.p>
         </div>

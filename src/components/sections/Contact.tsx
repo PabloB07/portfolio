@@ -107,7 +107,7 @@ const Contact: React.FC = () => {
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   className="flex items-center space-x-4"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center shadow-glow">
+                  <div className="w-12 h-12 bg-primary-500 rounded-xl flex items-center justify-center">
                     <info.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>

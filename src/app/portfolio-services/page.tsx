@@ -21,42 +21,42 @@ const services = [
     titleKey: 'services.serviceItems.pluginDevelopment.title',
     descriptionKey: 'services.serviceItems.pluginDevelopment.description',
     featuresKey: 'services.serviceItems.pluginDevelopment.features',
-    color: 'from-primary-500 to-secondary-500',
+    color: 'bg-primary-500',
     key: 'pluginDevelopment'
   },
   {
     titleKey: 'services.serviceItems.serverSetup.title',
     descriptionKey: 'services.serviceItems.serverSetup.description',
     featuresKey: 'services.serviceItems.serverSetup.features',
-    color: 'from-secondary-500 to-danger-500',
+    color: 'bg-secondary-500',
     key: 'serverSetup'
   },
   {
     titleKey: 'services.serviceItems.database.title',
     descriptionKey: 'services.serviceItems.database.description',
     featuresKey: 'services.serviceItems.database.features',
-    color: 'from-success-500 to-accent-600',
+    color: 'bg-success-500',
     key: 'database'
   },
   {
     titleKey: 'services.serviceItems.security.title',
     descriptionKey: 'services.serviceItems.security.description',
     featuresKey: 'services.serviceItems.security.features',
-    color: 'from-danger-500 to-warning-500',
+    color: 'bg-danger-500',
     key: 'security'
   },
   {
     titleKey: 'services.serviceItems.optimization.title',
     descriptionKey: 'services.serviceItems.optimization.description',
     featuresKey: 'services.serviceItems.optimization.features',
-    color: 'from-warning-500 to-accent-500',
+    color: 'bg-warning-500',
     key: 'optimization'
   },
   {
     titleKey: 'services.serviceItems.multiplayer.title',
     descriptionKey: 'services.serviceItems.multiplayer.description',
     featuresKey: 'services.serviceItems.multiplayer.features',
-    color: 'from-primary-600 to-accent-500',
+    color: 'bg-accent-500',
     key: 'multiplayer'
   }
 ]
@@ -86,13 +86,10 @@ export default function PortfolioServicesPage() {
 
   return (
     <div className="relative min-h-screen bg-base text-ink overflow-x-hidden">
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="aurora-bg" />
-        <div className="absolute inset-0 grid-overlay" />
-      </div>
+
       <Navigation />
       
-      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary-600 via-secondary-600 to-accent-600">
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-primary-600">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -142,9 +139,9 @@ export default function PortfolioServicesPage() {
                 transition={{ delay: index * 0.1 }}
                 className="card-press-elevated overflow-hidden h-full"
               >
-                <div className={`h-2 bg-gradient-to-r ${service.color}`} />
+                <div className={`h-2 ${service.color}`} />
                 <div className="p-6">
-                  <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${service.color} flex items-center justify-center mb-4`}>
+                  <div className={`w-16 h-16 rounded-lg ${service.color} flex items-center justify-center mb-4`}>
                     {index === 0 && <Settings className="w-8 h-8 text-white" />}
                     {index === 1 && <Monitor className="w-8 h-8 text-white" />}
                     {index === 2 && <Database className="w-8 h-8 text-white" />}
@@ -263,7 +260,7 @@ export default function PortfolioServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-primary-600 to-secondary-600">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-primary-600">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

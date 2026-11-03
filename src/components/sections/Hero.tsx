@@ -61,11 +61,7 @@ const Hero: React.FC = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary-500/20 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-accent-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
-      </div>
+      <div className="absolute inset-0 -z-10 bg-base" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -79,12 +75,9 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full bg-accent-500/10 border border-accent-500/30 text-accent-600 dark:text-accent-300 text-sm font-medium backdrop-blur-sm"
+              className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full bg-primary-500/10 border border-primary-500/30 text-primary-700 dark:text-primary-300 text-sm font-medium"
             >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75 animate-ping" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent-500" />
-              </span>
+              <span className="inline-flex h-2 w-2 rounded-full bg-primary-500" />
               {t('hero.available')}
             </motion.div>
 
@@ -111,7 +104,7 @@ const Hero: React.FC = () => {
                   onError={() => setO7Failed(true)}
                   animate={{ rotate: [0, -8, 0, -8, 0] }}
                   transition={{ duration: 1.6, repeat: Infinity, repeatDelay: 1.4 }}
-                  className="inline-block ml-3 align-middle h-10 md:h-14 lg:h-16 w-auto origin-bottom-left drop-shadow-[0_0_12px_rgba(88,101,242,0.5)]"
+                  className="inline-block ml-3 align-middle h-10 md:h-14 lg:h-16 w-auto origin-bottom-left "
                   title="o7"
                 />
               ) : (

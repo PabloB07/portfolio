@@ -19,10 +19,7 @@ export default function MinecraftPage() {
   
   return (
     <div className="relative min-h-screen bg-base text-ink overflow-x-hidden">
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="aurora-bg" />
-        <div className="absolute inset-0 grid-overlay" />
-      </div>
+
       <Navigation />
       <main className="px-6 py-16 md:py-24">
         <motion.div

@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { Gamepad2, Briefcase, Palette } from 'lucide-react';
-import { PALETTES, PaletteId } from '../../types';
+import { Gamepad2, Briefcase } from 'lucide-react';
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showLanguages, setShowLanguages] = useState(false);
-  const [showPalettes, setShowPalettes] = useState(false);
-  const { theme, toggleTheme, setPalette } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const { currentLanguage, setLanguage, t, languages } = useLanguage();
 
   useEffect(() => {
@@ -37,13 +35,6 @@ const Navigation: React.FC = () => {
     { href: '#contact', label: t('nav.contact') },
   ];
 
-  const currentPalette = PALETTES.find(p => p.id === theme.palette) ?? PALETTES[0];
-
-  const handlePalette = (id: PaletteId) => {
-    setPalette(id);
-    setShowPalettes(false);
-  };
-
   const handleNavClick = (href: string) => {
     setIsOpen(false);
     if (href === '/') {
@@ -62,7 +53,7 @@ const Navigation: React.FC = () => {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/70 dark:bg-discord-bg-darkest/70 backdrop-blur-xl backdrop-saturate-150 shadow-lg border-b border-primary-500/10'
+          ? 'bg-surface border-b border-subtle shadow-sm'
           : 'bg-transparent'
       }`}
     >
@@ -73,15 +64,15 @@ const Navigation: React.FC = () => {
             className="flex items-center gap-2.5 cursor-pointer"
             onClick={() => window.location.href = '/'}
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 text-white font-bold shadow-glow">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-500 text-white font-bold">
               P
             </span>
             <span className="font-bold text-xl text-ink tracking-tight">
-              Pablo<span className="gradient-text">.</span>
+              Pablo<span className="text-primary-500">.</span>
             </span>
           </motion.div>
 
-          <div className="hidden md:flex items-center gap-1 rounded-full px-2 py-1 bg-white/40 dark:bg-white/5 border border-white/30 dark:border-white/10 backdrop-blur-md">
+          <div className="hidden md:flex items-center gap-1 rounded-full px-2 py-1 bg-inset border border-subtle">
             {navItems.map((item) => (
               <motion.button
                 key={item.href}
@@ -129,52 +120,6 @@ const Navigation: React.FC = () => {
                       >
                         <span>{language.flag}</span>
                         <span className="text-sm">{language.name}</span>
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <div className="relative">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setShowPalettes(!showPalettes)}
-                className="nav-icon-btn flex items-center gap-1.5 px-3 py-2"
-                title="Color theme"
-              >
-                <span
-                  className="h-4 w-4 rounded-full border border-black/10"
-                  style={{ backgroundColor: currentPalette.color }}
-                />
-                <Palette className="w-4 h-4" />
-              </motion.button>
-
-              <AnimatePresence>
-                {showPalettes && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="nav-dropdown absolute top-full right-0 mt-2 min-w-[170px]"
-                  >
-                    {PALETTES.map((palette) => (
-                      <button
-                        key={palette.id}
-                        onClick={() => handlePalette(palette.id)}
-                        className={`dropdown-item ${currentPalette.id === palette.id ? 'dropdown-item-active' : ''}`}
-                      >
-                        <span
-                          className="h-3.5 w-3.5 rounded-full border border-black/10 shrink-0"
-                          style={{ backgroundColor: palette.color }}
-                        />
-                        <span className="text-sm">{palette.label}</span>
-                        {currentPalette.id === palette.id && (
-                          <svg className="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                        )}
                       </button>
                     ))}
                   </motion.div>
