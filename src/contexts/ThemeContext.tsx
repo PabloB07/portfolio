@@ -26,19 +26,16 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>({ mode: 'light', palette: 'cyber' });
+  const [theme, setTheme] = useState<Theme>({ mode: 'dark', palette: 'cyber' });
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const savedMode = localStorage.getItem('theme');
+    // Light theme disabled: always dark
     const savedPalette = localStorage.getItem('theme-palette');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    const mode = savedMode ? (savedMode as 'light' | 'dark') : (prefersDark ? 'dark' : 'light');
     const palette = PALETTE_IDS.includes(savedPalette as PaletteId) ? savedPalette as PaletteId : 'cyber';
-
-    setTheme({ mode, palette });
+    
+    setTheme({ mode: 'dark', palette });
   }, []);
 
   useEffect(() => {
@@ -58,15 +55,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   }, [theme, mounted]);
 
   const toggleTheme = () => {
-    setTheme(prev => {
-      const nextMode = prev.mode === 'light' ? 'dark' : 'light';
-      // Apply immediately to avoid flash / stuck dark styles
-      const root = window.document.documentElement;
-      if (nextMode === 'dark') root.classList.add('dark');
-      else root.classList.remove('dark');
-      root.dataset.theme = nextMode;
-      return { ...prev, mode: nextMode };
-    });
+    // Light theme disabled: no-op
   };
 
   const setPalette = (palette: PaletteId) => {
