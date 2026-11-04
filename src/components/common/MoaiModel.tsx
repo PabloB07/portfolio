@@ -59,20 +59,20 @@ function MoaiMesh() {
     const box = new THREE.Box3().setFromObject(fbx);
     const size = box.getSize(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z) || 1;
-    return 2.6 / maxDim;
+    return 2.4 / maxDim;
   }, [fbx]);
 
   useFrame((state, delta) => {
     const t = state.clock.getElapsedTime();
     if (group.current) {
       // Gentle inspection-style spin plus slight "breathing" tilt
-      group.current.rotation.y += delta * 0.35;
+      group.current.rotation.y += delta * 0.25;
       group.current.rotation.x = Math.sin(t * 0.4) * 0.05;
     }
   });
 
   return (
-    <group ref={group} position={[0, -0.55, 0]}>
+    <group ref={group} position={[0, -0.35, 0]}>
       <Center>
         <primitive object={fbx} scale={scale} />
       </Center>
@@ -86,23 +86,23 @@ const MoaiModel: React.FC = () => {
 
       <Canvas
         dpr={[1, 2]}
-        camera={{ position: [0, -0.15, 5.5], fov: 40 }}
+        camera={{ position: [0, 0, 6], fov: 38 }}
         gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
       >
-        <ambientLight intensity={0.65} />
+        <ambientLight intensity={0.7} />
         {/* key light — warm white */}
-        <directionalLight position={[3, 5, 4]} intensity={1.5} />
+        <directionalLight position={[4, 6, 5]} intensity={1.4} />
         {/* neutral rim light */}
-        <directionalLight position={[-5, 2, -3]} intensity={0.9} color="#a8a29e" />
-        {/* yellow under-glow (theme primary) */}
-        <pointLight position={[0, -1.5, 2.5]} intensity={1.2} distance={7} color="#f59e0b" />
+        <directionalLight position={[-5, 2, -3]} intensity={0.8} color="#a8a29e" />
+        {/* amber under-glow (theme primary) */}
+        <pointLight position={[0, -1.5, 2.5]} intensity={1.0} distance={7} color="#f59e0b" />
 
         <Suspense fallback={null}>
-          <Float speed={1.2} rotationIntensity={0.25} floatIntensity={0.25}>
+          <Float speed={1.0} rotationIntensity={0.2} floatIntensity={0.2}>
             <MoaiMesh />
           </Float>
-          <ContactShadows position={[0, -1.85, 0]} opacity={0.4} scale={6} blur={3} far={4} />
+          <ContactShadows position={[0, -1.6, 0]} opacity={0.35} scale={5} blur={2.5} far={4} />
         </Suspense>
       </Canvas>
     </div>
